@@ -8,6 +8,12 @@ class ProductsController < ApplicationController
     end
 
     def create
+        @product = Product.new(product_params)
+        @product.store_id = 1
+        # @product.store_id = current_user.store.id
+ 
+        @product.save
+        redirect_to @product
     end
 
     def show
@@ -22,4 +28,9 @@ class ProductsController < ApplicationController
 
     def destroy
     end
+
+    private
+        def product_params
+            params.require(:product).permit(:title, :description, :price, :quantity, :category_id, :brand_id)
+        end
 end

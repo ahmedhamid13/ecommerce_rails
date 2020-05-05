@@ -1,4 +1,4 @@
-<%= form_with model: @product, local: true do |form| %>
+<%= form_with scope: :product, url: products_path, local: true do |form| %>
   <p>
     <%= form.label :title %><br>
     <%= form.text_field :title %>
@@ -21,12 +21,12 @@
 
   <p>
     <%= form.label :category %><br>
-    <%= form.collection_select(:category, Category.all, :id, :name) %>
+    <%= form.collection_select(:category_id, Category.all, :id, :name) %>
   </p>
 
   <p>
     <%= form.label :brand %><br>
-    <%= form.collection_select(:brand, Brand.all, :id, :name) %>
+    <%= form.collection_select(:brand_id, Brand.all, :id, :name) %>
   </p>
  
   <p>
