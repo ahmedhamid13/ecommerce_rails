@@ -2,7 +2,6 @@
 
 class AddDeviseToUsers < ActiveRecord::Migration[6.0]
   def self.up
-    remove_column :users, :email
     change_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""

@@ -8,8 +8,11 @@ class ProductsController < ApplicationController
     end
 
     def create
+        # render plain: product_params.inspect
         @product = Product.new(product_params)
         @product.store_id = 1
+        # @product.price = params[:product]
+        # render plain: params[:product].inspect
         # @product.store_id = current_user.store.id
  
         @product.save
