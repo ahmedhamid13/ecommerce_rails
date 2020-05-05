@@ -1,6 +1,13 @@
-<p>Name: <%= @product.title %></p>
-<p>Description: <%= @product.description %></p>
-<p>Price: <%= @product.price %></p>
-<p>Quantity: <%= @product.quantity %></p>
+<div>
+    <h2><%= @product.title %></h2>
+    
+    <p><%= @product.description %></p>
+    <p>Price: <%= @product.price %></p>
+    <p>Quantity: <%= @product.quantity %></p>
+    <p>Category: <%= @product.category.name %></p>
+    <p>Brand: <%= @product.brand.name %></p>
+    <p>Store: <%= @product.store.name %></p>
+
+</div>
 
 <%= link_to "Home", products_path %>
