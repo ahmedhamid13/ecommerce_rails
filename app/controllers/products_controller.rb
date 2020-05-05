@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
     end
 
     def show
+        @product = Product.find(params[:id])
     end
 
     def edit
@@ -20,4 +21,9 @@ class ProductsController < ApplicationController
 
     def destroy
     end
+
+    private
+        def product_params
+            params.require(:product).permit(:title, :description, :price, :quantity)
+        end
 end
