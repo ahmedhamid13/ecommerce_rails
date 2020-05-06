@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
     end
 
     def create
-        # render plain: product_params.inspect
         @product = Product.new(product_params)
         @product.store_id = 1
         # @product.price = params[:product]
@@ -26,6 +25,7 @@ class ProductsController < ApplicationController
     end
 
     def edit
+        @product = Product.find(params[:id])
     end
 
     def update

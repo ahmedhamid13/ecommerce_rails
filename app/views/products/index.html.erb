@@ -21,6 +21,7 @@
             <td><%= product.brand.name %></td>
             <td><%= product.store.name %></td>
             <td><%= link_to "Show", product_path(product.id) %></td>
+            <td><%= link_to "Edit", edit_product_path(product.id) %></td>
         </tr>
     <% end %>
 
