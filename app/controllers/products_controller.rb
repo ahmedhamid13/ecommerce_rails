@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
     before_action :authenticate_user!, :except => [:show, :index]
 
     def index
-        @products = Product.all
+        @products = Product.search(params[:search])
     end
 
     def new
@@ -51,6 +51,6 @@ class ProductsController < ApplicationController
 
     private
         def product_params
-            params.require(:product).permit(:title, :description, :price, :quantity, :category_id, :brand_id, :image)
+            params.require(:product).permit(:title, :description, :price, :quantity, :category_id, :brand_id, :image, :search)
         end
 end
