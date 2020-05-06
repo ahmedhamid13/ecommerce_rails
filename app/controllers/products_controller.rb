@@ -16,8 +16,11 @@ class ProductsController < ApplicationController
         # render plain: params[:product].inspect
         # @product.store_id = current_user.store.id
  
-        @product.save
-        redirect_to @product
+        if @product.save
+            redirect_to @product
+        else
+            render 'new'
+        end
     end
 
     def show
@@ -39,6 +42,10 @@ class ProductsController < ApplicationController
     end
 
     def destroy
+        @product = Product.find(params[:id])
+        @product.destroy
+
+        redirect_to products_path
     end
 
     private
