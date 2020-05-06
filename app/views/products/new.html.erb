@@ -25,6 +25,11 @@
   </p>
 
   <p>
+    <%= form.label :image %><br>
+    <%= form.file_field :image %>
+  </p>
+
+  <p>
     <%= form.label :brand %><br>
     <%= form.collection_select(:brand_id, Brand.all, :id, :name) %>
   </p>

@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
     def create
         @product = Product.new(product_params)
         @product.store_id = 1
+        # @product.images.attach(params[:images])
         # @product.price = params[:product]
         # render plain: params[:product].inspect
         # @product.store_id = current_user.store.id
@@ -50,6 +51,6 @@ class ProductsController < ApplicationController
 
     private
         def product_params
-            params.require(:product).permit(:title, :description, :price, :quantity, :category_id, :brand_id)
+            params.require(:product).permit(:title, :description, :price, :quantity, :category_id, :brand_id, :image)
         end
 end
