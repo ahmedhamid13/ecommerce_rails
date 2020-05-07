@@ -57,3 +57,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #devise gem for auth
 gem 'devise'
+
+#Rails Admin gem
+gem 'rails_admin'
+
+#cancancan
+gem 'cancancan'

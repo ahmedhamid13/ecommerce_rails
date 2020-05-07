@@ -5,6 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates_presence_of :name # required
-  validates_presence_of :avatar # required
   has_many :orders
+
+  after_create :send_admin_mail
+    def send_admin_mail
+      UserMailer.send_welcome_email(self).deliver_later
+    end
 end

@@ -22,7 +22,8 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
-    @product = Product.find(@order.id)
+    @orderprod = OrderProduct.find_by(order_id: @order.id)
+    @product = Product.find(@orderprod.product_id)
   end
 
   # POST /orders
@@ -45,22 +46,18 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1.json
   def update
     @order = Order.find(params[:id])
+    @orderprod = OrderProduct.find_by(order_id: @order.id)
+    @product = Product.find(@orderprod.product_id)
+
     @order.update(order_params)
+    @product.update(quantity: @product.quantity-@order.quantity)
     
     if @order.update(state: "Inorder")
         redirect_to @order
     else
         render 'edit'
     end
-    # respond_to do |format|
-    #   if @order.update(order_params)
-    #     format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-    #     format.json { render :show, status: :ok, location: @order }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @order.errors, status: :unprocessable_entity }
-    #   end
-    # end
+
   end
 
   # DELETE /orders/1
@@ -81,6 +78,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.fetch(:order, {}).permit(:search)
+      params.fetch(:order).permit(:quantity, :search)
     end
 end
