@@ -1,3 +1,4 @@
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -200,10 +201,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.7.0)
-<<<<<<< Updated upstream
     remotipart (1.4.4)
-=======
->>>>>>> Stashed changes
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
