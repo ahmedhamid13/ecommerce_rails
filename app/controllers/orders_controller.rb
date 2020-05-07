@@ -22,7 +22,8 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
-    @product = Product.find(@order.id)
+    @orderprod = OrderProduct.find_by(order_id: @order.id)
+    @product = Product.find(@orderprod.product_id)
   end
 
   # POST /orders
@@ -45,7 +46,11 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1.json
   def update
     @order = Order.find(params[:id])
+    @orderprod = OrderProduct.find_by(order_id: @order.id)
+    @product = Product.find(@orderprod.product_id)
+
     @order.update(order_params)
+    @product.update(quantity: @product.quantity-@order.quantity)
     
     if @order.update(state: "Inorder")
         redirect_to @order
