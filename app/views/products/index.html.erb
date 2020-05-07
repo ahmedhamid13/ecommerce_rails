@@ -23,7 +23,7 @@
         <% @products.each do |product| %>
             <tr>
                 <td><%= product.title %></td>
-                <%# <td><%= (product.image.attached?) ? image_tag(product.image, size: "100x100") : "No Image"</td> %> %>
+                <td><%= (product.image.attached?) ? image_tag(product.image, size: "100x100") : "No Image"</td> %>
                 <td><%= product.description %></td>
                 <td><%= product.quantity %></td>
                 <td><%= product.price %></td>
