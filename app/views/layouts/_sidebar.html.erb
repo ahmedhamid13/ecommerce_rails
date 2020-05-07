@@ -1,0 +1,42 @@
+<aside class="d-flex flex-column col-md-2 pt-3" id="sidebar-wrapper">
+    <%# Search %>
+    <%= form_tag products_path, :method => "get", class: 'form-inline justofy-content-around mb-3' do %>
+        <%= text_field_tag :search, params[:search], class: 'form-control mx-2', placeholder: 'Search' %>
+        <%= submit_tag "Search", class: 'btn btn-dark' %>
+    <% end %>
+
+    <%# Filter %>
+    <div class="filter">
+        <h3>Categories</h3>
+        <% @categories.each do |category| %>
+            <div><%= link_to category.name, products_path(filter: category.name, filterby: "category") %><div>
+        <%end%>
+
+        <h3>Brands</h3>
+        <% @brands.each do |brand| %>
+            <div><%= link_to brand.name, products_path(filter: brand.name, filterby: "brand") %><div>
+        <%end%>
+
+        <h3>Stores</h3>
+        <% @stores.each do |store| %>
+            <div><%= link_to store.name, products_path(filter: store.name, filterby: "store") %><div>
+        <%end%>
+    </div>
+
+</aside>
+
+    <%# <%= form_tag products_path, :method => "get", class: 'form-inline filter-form' do %>
+        <%# <%= label_tag :category %>
+        <%# <%= text_field_tag :filter, nil, class: 'form-control mx-2' %>
+        <%# <%= select_tag :filterby, raw("
+            <option value='price'>Price</option>
+            <option value='category'>Category</option>
+            <option value='brand'>Brand</option>
+            <option value='store'>Store</option>
+        "), class: 'custom-select mx-2' %>
+        <%# <% @categories.each do |category| %>
+            <%# <%= check_box_tag "category", category.name, false %>
+            <%# <%= label "category", category.name %>
+        <%# <% end %> 
+            <%# <%= submit_tag "Filter", class: 'btn btn-dark' %>
+    <%# <% end %>
