@@ -13,7 +13,8 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-    <div class="container">
+     <%= render 'layouts/messages' %>
+    <div class="container mt-4">
       <%= yield %>
     </div>
     <footer>
@@ -21,3 +22,4 @@
     </footer>
   </body>
 </html>
+
