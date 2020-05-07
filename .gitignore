@@ -30,4 +30,4 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-./config/database.yml
+/config/local_env.yml

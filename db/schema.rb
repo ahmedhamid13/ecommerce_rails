@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_102837) do
+ActiveRecord::Schema.define(version: 2020_05_07_015747) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -95,6 +95,12 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+<<<<<<< Updated upstream
+    t.boolean "superadmin_role", default: false
+    t.boolean "supervisor_role", default: false
+    t.boolean "user_role", default: true
+=======
+>>>>>>> Stashed changes
     t.index ["email"], name: "index_users_on_email", unique: true, length: 191
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, length: 191
   end

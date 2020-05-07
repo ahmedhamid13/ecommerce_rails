@@ -5,6 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates_presence_of :name # required
-  validates_presence_of :avatar # required
   has_many :orders
 end
