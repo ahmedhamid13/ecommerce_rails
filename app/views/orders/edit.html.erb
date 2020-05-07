@@ -1,29 +1,46 @@
 <h1>Editing Order</h1>
 
 <%= form_with(model: @order, local: true) do |form| %>
-  <p>
-    title <span><%= @product.title %></span>
-  </p>
-  <p>
-    description <span><%= @product.description %></span>
-  </p>
-  <p>
-    Total price <span><%= @order.quantity*@product.price %></span>
-  </p>
-  <p>
-    <%= form.label :quantity %><br>
-    <%= form.number_field :quantity, max: @product.quantity, min: "0" %>
-  </p>
-  <p>
-    category <span><%= Category.find(@product.category_id).name %></span>
-  </p>
-  <p>
-    brand <span><%= Brand.find(@product.brand_id).name %></span>
-  </p> 
-  <p>
-    <%= form.submit %>
-  </p>
+<table class="table table-striped shadow rounded m-2">
+  <thead class="thead-dark">
+    <tr>
+        <th>Product</th>
+        <th>Product description</th>
+        <th>Total Price</th>
+        <th>quantity</th>
+        <th>category</th>
+        <th>Brand</th>
+    </tr>
+</thead>
+<tbody>
+    <% @order.order_products.each do |ordprod| %>
+    <tr>
+        <td>
+            <%= ordprod.product.title %>
+        </td>
+        <td>
+            <%= ordprod.product.description %>
+        </td>
+        <td>
+          <%= ordprod.quantity*ordprod.product.price %>
+        </td>
+        <td>
+          <%= form.number_field :quantity, value: ordprod.quantity, max: ordprod.product.quantity, min: "0" %>
+        </td>
+        <td>
+          <%= ordprod.product.category.name %>
+        </td>
+        <td>
+          <%= ordprod.product.brand.name %>
+        </td> 
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+      <p>
+        <%= form.submit :Submit, class: 'btn btn-primary' %>
+      </p>
 <% end %>
 
-<%= link_to 'Show', @order %> 
-<%= link_to 'Back', orders_path %>
+<%= link_to 'Show', @order , class: 'btn btn-outline-primary' %> |
+<%= link_to 'Back', orders_path , class: 'btn btn-outline-dark' %>

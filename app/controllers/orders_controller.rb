@@ -21,8 +21,6 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
-    @orderprod = OrderProduct.find_by(order_id: @order.id)
-    @product = Product.find(@orderprod.product_id)
   end
 
   # POST /orders
@@ -59,18 +57,19 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
-    @order = Order.find(params[:id])
-    @orderprod = OrderProduct.find_by(order_id: @order.id)
-    @product = Product.find(@orderprod.product_id)
+    # @order = Order.find(params[:id])
+    # @orderprod = OrderProduct.where(order_id: @order.id)
+    # render plain: params["quant2".to_sym].inspect
+    # @orderprod.each do |ordprod|
+    #   ordprod.update(quantity: [:quantity])
+    #   (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
+    # end
 
-    @order.update(order_params)
-    @product.update(quantity: @product.quantity-@order.quantity)
-    
-    if @order.update(state: "Inorder")
-        redirect_to @order
-    else
-        render 'edit'
-    end
+    # if @order.update(state: "Inorder")
+    #     redirect_to @order
+    # else
+    #     render 'edit'
+    # end
 
   end
 
