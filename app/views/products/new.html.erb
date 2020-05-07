@@ -1,3 +1,4 @@
+<div class="m-5 p-1 border">
 <%= form_with scope: :product, url: products_path, local: true do |form| %>
   <p>
     <%= form.label :title %><br>
@@ -38,5 +39,6 @@
     <%= form.submit %>
   </p>
 <% end %>
+</div>
 
 <%= link_to "Back to Products", products_path %>
