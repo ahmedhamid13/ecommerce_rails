@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
+    @product = Product.find(@order.id)
   end
 
   # POST /orders
@@ -43,15 +44,23 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    @order = Order.find(params[:id])
+    @order.update(order_params)
+    
+    if @order.update(state: "Inorder")
+        redirect_to @order
+    else
+        render 'edit'
     end
+    # respond_to do |format|
+    #   if @order.update(order_params)
+    #     format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @order }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @order.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /orders/1
