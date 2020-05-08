@@ -10,6 +10,7 @@
                         <h5 class="card-title"><%= product.title %></h5>
                         <p class="card-text"><%= product.price %> EGP</p>
                         <%= link_to "Add To Cart", new_add_to_cart_path(product.id), class: 'btn btn-dark'%>
+                        <%= link_to "Add Cart", add_cart_path(product.id), class: 'btn btn-dark'%>
                     </div>
                 </div>
             <% end %>

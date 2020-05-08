@@ -8,7 +8,6 @@
         <th>Product</th>
         <th>Total Price</th>
         <th>User</th>
-        <th colspan="3">Actions</th>
     </tr>
 </thead>
 <tbody>
@@ -26,13 +25,16 @@
 
                   <td><%= order.user_id %></td>
 
+            </tr>
+                <% end %>
+            <tr>
+              <td colspan="2" class="bg-dark text-white">Action</td>
                 <td><%= link_to 'Show', order, class: 'btn btn-primary' %></td>
                 <td><%= link_to 'Order', edit_order_path(order), class: 'btn btn-success' %></td>
                 <% if order.state == "inCart"%>
                   <td><%= link_to 'Destroy', order, method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></td>
                 <% end %>
             </tr>
-            <% end %>
             </tbody>
         <% end %>
     <% else %>
