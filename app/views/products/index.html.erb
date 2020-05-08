@@ -9,12 +9,13 @@
                     <th>Title</th>
                     <th>Image</th>
                     <th>Description</th>
+                    <th>Available Quantity</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Category</th>
                     <th>Brand</th>
                     <th>Store</th>
-                    <th colspan="4">Actions</th>
+                    <th colspan="5">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,7 @@
                             <td><%= product.store.name %></td>
                             <td><%= link_to "Show", product_path(product.id) %></td>
                             <td><%= link_to "Edit", edit_product_path(product.id) %></td>
+                            <td><%= link_to "Add Cart", add_cart_path(product.id)%></td>
                             <td><%= link_to "Add To Cart", new_add_to_cart_path(product.id)%></td>
                             <td><%= link_to 'Delete', product_path(product),
                             method: :delete,
