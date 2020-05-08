@@ -38,15 +38,7 @@ class OrdersController < ApplicationController
     end
   end
 
-  def showCart 
-    @items = Array.new
-    @total_payment = 0
-    @products = Order.where(state: "inCart").collect(&:products).flatten
-    @products.each do |product|
-       @items.push(product)
-       @total_payment += (product.price * product.quantity)
-    end 
-  end
+  
 
   # def editCart 
   #   @orderprod = OrderProduct.find(params[:id])

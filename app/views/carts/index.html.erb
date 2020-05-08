@@ -1,38 +1,35 @@
-<h1>carts</h1>
-
-<table class="table table-striped shadow rounded m-2">
+<h1>Cart</h1>
+</div class="col-xs-6 col-xs-offset-3">
+<table class="table">
   <thead class="thead-dark">
     <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Total Price</th>
-        <th colspan="3">Actions</th>
+      <th  scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th  scope="col">quantity</th>
+      <th  scope="col">Price</th>
+      <th  scope="col">Total</th>
+      <th  scope="col">State</th>
     </tr>
-</thead>
-<tbody>
-    <% if ! @carts.empty? %>
-        <% @carts.each do |cart| %>
-          <% cart.cart_products.each do |ordprod| %>
-            <tr>
-            
-                <td><%= cart.product.title %></td>
+  </thead>
 
-                <td><%= cart.quantity %></td>
-
-                <td><%= cart.quantity*cart.product.price %></td>
-
-                <td><%= link_to 'Show', cart, class: 'btn btn-primary' %></td>
-                <td><%= link_to 'Edit', edit_cart_path(cart), class: 'btn btn-success' %></td>
-                <td><%= link_to 'Remove', cart, method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-            <% end %>
-            </tbody>
-        <% end %>
-    <% else %>
-        <td colspan="11" style="text-align: center">No carts Found</td>
+  <tbody>
+    <% @items.uniq.each do |item| %>
+      <tr>
+        <td scope="row"><%= item.title  %></td>
+        <td scope="row"><%= item.description %></td>
+        <td scope="row"><%= item.quantity %></td>
+        <td scope="row"><%= item.price %></td>
+        <td scope="row"><%= item.quantity*item.price %></td>
+        <td scope="row"><%= item.orders.collect(&:state).flatten.uniq[0] %></td>
+      </tr>
     <% end %>
-
+  </tbody>
 </table>
 
-<%= link_to 'New cart', new_cart_path, class: 'btn btn-outline-primary' %>
-<%= link_to "Show Cart", show_cart_path, class: 'btn btn-outline-primary' %>
+<div>
+<h4>Your bill:</h4>
+    <h4><%= @total_payment%></h4>
+</div>
+
+<%= link_to 'back', products_path %>
+<%# <%= link_to 'checkout', order_index_path, method: :post %> %>
