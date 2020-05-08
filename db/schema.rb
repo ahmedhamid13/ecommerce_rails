@@ -109,7 +109,6 @@ ActiveRecord::Schema.define(version: 2020_05_07_074250) do
     t.string "name"
     t.string "avatar"
     t.string "password"
-    t.string "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email", default: "", null: false
@@ -118,8 +117,8 @@ ActiveRecord::Schema.define(version: 2020_05_07_074250) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.boolean "superadmin_role", default: false
-    t.boolean "supervisor_role", default: false
-    t.boolean "user_role", default: true
+    t.boolean "seller_role", default: false
+    t.boolean "buyer_role", default: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
