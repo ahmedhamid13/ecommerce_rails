@@ -1,0 +1,20 @@
+<%# Products %>
+<div class="row products-container">
+    <% if @products.present? %>
+        <% @products.each do |product| %>
+            <%= link_to product_path(product.id) do %>
+                <div class="card col-md-4">
+                    <%= (product.image.attached?) ? image_tag(product.image, size: "250x250", class: 'card-img-top') : "No Image" %>
+
+                    <div class="card-body">
+                        <h5 class="card-title"><%= product.title %></h5>
+                        <p class="card-text"><%= product.price %> EGP</p>
+                        <%= link_to "Add To Cart", new_add_to_cart_path(product.id), class: 'btn btn-dark'%>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    <% else %>
+        <p style="text-align: center">No Products Found</p>
+    <% end %>
+</div>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :carts
   # get 'tocart/:id', to: 'carts#create', as: 'to_cart'
+  get "/fetch_products" => 'products#filter_products', as: 'fetch_products'
 
   root 'welcome#index'
 end
