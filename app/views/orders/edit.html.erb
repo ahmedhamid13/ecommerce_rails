@@ -25,7 +25,7 @@
           <%= ordprod.quantity*ordprod.product.price %>
         </td>
         <td>
-          <%= form.number_field :quantity, value: ordprod.quantity, max: ordprod.product.quantity, min: "0" %>
+          <%= ordprod.quantity %>
         </td>
         <td>
           <%= ordprod.product.category.name %>
@@ -38,7 +38,7 @@
   </tbody>
 </table>
       <p>
-        <%= form.submit :Submit, class: 'btn btn-primary' %>
+        <%= form.submit :Inorder, class: 'btn btn-primary' %>
       </p>
 <% end %>
 

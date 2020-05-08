@@ -18,16 +18,11 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
-  # GET /orders/1/edit
-  def edit
-    @order = Order.find(params[:id])
-  end
-
   # POST /orders
   # POST /orders.json
   def create
     @order = Order.new()
-    @order.state = "pending"
+    @order.state = "inCart"
     @order.user_id = 1 #current_user_id
     @product = Product.find(params[:id])
     @order.products << @product
@@ -46,40 +41,52 @@ class OrdersController < ApplicationController
   def showCart 
     @items = Array.new
     @total_payment = 0
-    @products = Order.where(state: "pending").collect(&:products).flatten
+    @products = Order.where(state: "inCart").collect(&:products).flatten
     @products.each do |product|
        @items.push(product)
        @total_payment += (product.price * product.quantity)
     end 
   end
 
+  # def editCart 
+  #   @orderprod = OrderProduct.find(params[:id])
+  # end
 
-  # PATCH/PUT /orders/1
-  # PATCH/PUT /orders/1.json
-  def update
-    # @order = Order.find(params[:id])
-    # @orderprod = OrderProduct.where(order_id: @order.id)
-    # render plain: params["quant2".to_sym].inspect
-    # @orderprod.each do |ordprod|
-    #   ordprod.update(quantity: [:quantity])
-    #   (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
-    # end
+  # def updateCart
+  #   @orderprod = OrderProduct.find(params[:id])
+  #   @orderprod.update(order_products_params)
+    
+  #   if (@orderprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
+  #     redirect_to @orderprod
+  #   else
+  #       render 'editCart'
+  #   end
+  # end
 
-    # if @order.update(state: "Inorder")
-    #     redirect_to @order
-    # else
-    #     render 'edit'
-    # end
 
+  def edit
+    @orderprod = OrderProduct.where(order_id: @order.id, state: "inCart")
   end
 
-  # DELETE /orders/1
-  # DELETE /orders/1.json
+  def update
+    @order = Order.find(params[:id])
+    @orderprod = OrderProduct.find(order_id: @order.id)
+
+    @orderprod.each do |ordprod|
+      (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
+    end
+
+    if @order.update(state: "pending")
+        redirect_to @order
+    else
+        render 'edit'
+    end
+  end
+
   def destroy
     @order.destroy
     respond_to do |format|
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

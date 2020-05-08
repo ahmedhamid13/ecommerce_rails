@@ -12,14 +12,14 @@
   </head>
 
   <body>
-    <header>
+    <header class="mb-2">
       <%= render 'layouts/navigation' %>
     </header>
      <%= render 'layouts/messages' %>
-    <div class="container-fluid mt-3">
+    <div class="container border shadow">
       <%= yield %>
     </div>
-    <footer>
+    <footer class="mt-2">
       <%= render 'layouts/foot' %>
     </footer>
   </body>

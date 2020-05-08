@@ -1,0 +1,44 @@
+<h1>Editing Item</h1>
+
+<%= form_with(model: @orderprod, url:update_cart_path) do |form| %>
+<table class="table table-striped shadow rounded m-2">
+  <thead class="thead-dark">
+    <tr>
+        <th>Product</th>
+        <th>Product description</th>
+        <th>Total Price</th>
+        <th>quantity</th>
+        <th>category</th>
+        <th>Brand</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>
+            <%= @orderprod.product.title %>
+        </td>
+        <td>
+            <%= @orderprod.product.description %>
+        </td>
+        <td>
+          <%= @orderprod.quantity*@orderprod.product.price %>
+        </td>
+        <td>
+        <%= form.number_field :quantity, value: @orderprod.quantity, max: @orderprod.product.quantity, min: "0" %>        
+        </td>
+        <td>
+          <%= @orderprod.product.category.name %>
+        </td>
+        <td>
+          <%= @orderprod.product.brand.name %>
+        </td> 
+    </tr>
+  </tbody>
+</table>
+      <p>
+        <%= form.submit :Update, class: 'btn btn-primary' %>
+      </p>
+<% end %>
+
+<%= link_to 'Show', @order , class: 'btn btn-outline-primary' %> |
+<%= link_to 'Back', orders_path , class: 'btn btn-outline-dark' %>
