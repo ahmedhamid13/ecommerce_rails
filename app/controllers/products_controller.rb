@@ -3,7 +3,11 @@ class ProductsController < ApplicationController
     before_action :authenticate_user!, :except => [:show, :index]
 
     def index
-        @products = Product.search(params[:search])
+        if(params[:filter])
+            @products = Product.filter(params[:filter], params[:filterby])
+        else
+            @products = Product.search(params[:search])
+        end
     end
 
     def new
@@ -13,10 +17,8 @@ class ProductsController < ApplicationController
     def create
         @product = Product.new(product_params)
         @product.store_id = 1
-        # @product.images.attach(params[:images])
-        # @product.price = params[:product]
-        # render plain: params[:product].inspect
-        # @product.store_id = current_user.store.id
+        # @store = Store.find_by(user_id: current_user.id)
+        # @product.store_id = @store.id
  
         if @product.save
             redirect_to @product
@@ -52,6 +54,6 @@ class ProductsController < ApplicationController
 
     private
         def product_params
-            params.require(:product).permit(:title, :description, :price, :quantity, :category_id, :brand_id, :image, :search)
+            params.require(:product).permit(:title, :description, :price, :quantity, :category_id, :brand_id, :image)
         end
 end

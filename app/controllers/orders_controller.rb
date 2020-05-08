@@ -21,15 +21,17 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
-    @orderprod = OrderProduct.find_by(order_id: @order.id)
-    @product = Product.find(@orderprod.product_id)
   end
 
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
-
+    @order = Order.new()
+    @order.state = "pending"
+    @order.user_id = 1 #current_user_id
+    @product = Product.find(params[:id])
+    @order.products << @product
+  
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
@@ -41,21 +43,33 @@ class OrdersController < ApplicationController
     end
   end
 
+  def showCart 
+    @items = Array.new
+    @total_payment = 0
+    @products = Order.where(state: "pending").collect(&:products).flatten
+    @products.each do |product|
+       @items.push(product)
+       @total_payment += (product.price * product.quantity)
+    end 
+  end
+
+
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
-    @order = Order.find(params[:id])
-    @orderprod = OrderProduct.find_by(order_id: @order.id)
-    @product = Product.find(@orderprod.product_id)
+    # @order = Order.find(params[:id])
+    # @orderprod = OrderProduct.where(order_id: @order.id)
+    # render plain: params["quant2".to_sym].inspect
+    # @orderprod.each do |ordprod|
+    #   ordprod.update(quantity: [:quantity])
+    #   (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
+    # end
 
-    @order.update(order_params)
-    @product.update(quantity: @product.quantity-@order.quantity)
-    
-    if @order.update(state: "Inorder")
-        redirect_to @order
-    else
-        render 'edit'
-    end
+    # if @order.update(state: "Inorder")
+    #     redirect_to @order
+    # else
+    #     render 'edit'
+    # end
 
   end
 
@@ -77,6 +91,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.fetch(:order).permit(:quantity, :search)
+      params.fetch(:order, {}).permit(:id,:quantity)
     end
 end
