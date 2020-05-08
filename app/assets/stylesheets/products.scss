@@ -3,18 +3,14 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 #sidebar-wrapper {
     min-height: 100vh;
-    // margin-left: -15rem;
-    // position: fixed;
-    // top: 0;
-    // left: 0;
     background-color: #eee;
-    // position: fixed;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
     -o-transition: margin .25s ease-out;
     transition: margin .25s ease-out;
 }
 
-.products-container {
-    overflow: hidden;
-}
+.card-body > a:first-of-type {
+    color: black;
+    text-decoration: none;
+} 

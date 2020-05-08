@@ -18,6 +18,8 @@ class Ability
       #Seller
       elsif user.seller_role?  
         #write the seller permissions
+        can :create, Product
+        can [:edit, :destroy], Product, store_id: user.store.id
       ########################################################
       #Buyer
       else
