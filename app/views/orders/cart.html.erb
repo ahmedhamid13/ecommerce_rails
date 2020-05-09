@@ -1,12 +1,11 @@
 <div class="row justify-content-center">
-<div class="col-9 border p-1 m-2">
+<div class="col-9 border p-1 m-5">
 <h1 class="text-center mt-3 m-2 bg-warning rounded shadow">My Cart</h1>
 <hr />
 <div class="m-3">
-<table class="table table-striped shadow rounded">
+<table class="table table-sm table-striped shadow rounded text-center">
   <thead class="thead-dark">
     <tr>
-        <th>State</th>
         <th>Quantity</th>
         <th>Product</th>
         <th>Image</th>
@@ -18,7 +17,6 @@
     <% if ! @order.nil? %>
           <% @order.order_products.each do |ordprod| %>
             <tr>
-                  <td><%= @order.state %></td>
 
                   <td><%= ordprod.quantity %></td>
 
@@ -30,20 +28,21 @@
 
                   <td><%= @order.user.name %></td>
             </tr>
-                <% end %>
-            <tr>
-              <td colspan="2" class="bg-dark text-white">Action</td>
-                <td><%= link_to 'Order', edit_order_path(@order), class: 'btn btn-success' %></td>
-                <% if @order.state == "inCart"%>
-                  <td><%= link_to 'Remove', order_path(@order), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></td>
-                <% end %>
-            </tr>
+          <% end %>
             </tbody>
+            </table>
+            <div class="text-center">
+                <%= link_to 'put in Order', edit_order_path(@order), class: 'btn btn-success' %> |
+                <% if @order.state == "inCart"%>
+                  <%= link_to 'Remove', order_path(@order), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></p>
+                <% end %>
+            </div>
     <% else %>
         <td colspan="11" style="text-align: center">No Products Found</td>
+        </tbody>
+        </table>
     <% end %>
 
-</table>
 
 </div>
 </div>

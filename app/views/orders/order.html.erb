@@ -1,24 +1,23 @@
 <div class="row justify-content-center">
-<div class="col-9 border p-1 m-2">
+<div class="col-9 border p-1 m-5">
 <h1 class="text-center mt-3 m-2 bg-success rounded shadow">My Orders</h1>
 <hr />
 <div class="m-3">
-<table class="table table-striped shadow rounded">
+    <% if ! @orders.empty? %>
+        <% @orders.each do |order| %>
+<table class="table table-sm table-striped shadow rounded text-center">
   <thead class="thead-dark">
+    <tr><th colspan="4" class="text-warning h4">Order #<%= order.id %></th></tr>
     <tr>
         <th>Product</th>
         <th>Image</th>
         <th>Total Price</th>
         <th>quantity</th>
-        <th>Category</th>
-        <th>Brand</th>
     </tr>
 </thead>
 <tbody>
-    <% if ! @orders.empty? %>
-        <% @orders.each do |order| %>
           <% order.order_products.each do |ordprod| %>
-        <tr>
+        <tr class="">
             <td>
                 <%= ordprod.product.title %>
             </td>
@@ -31,26 +30,26 @@
             <td>
               <%= ordprod.quantity %>
             </td>
-            <td>
-              <%= ordprod.product.category.name %>
-            </td>
-            <td>
-              <%= ordprod.product.brand.name %>
-            </td> 
+
         </tr>
         <% end %>
-      <tr>
-        <td colspan="2" class="bg-dark text-center text-white h5">State</td>
-        <td colspan="4" class="text-center h5"><%= order.state %></td>
-      </tr> 
+        <tr class="table-info">
+          <td class="bg-secondary text-center text-white h5">State</td>
+          <td colspan="3" class="text-center h5"><%= order.state %></td>
+        </tr> 
       <% end %>
+        </tbody>
+      </table>
     <% else %>
-      <tr>
-        <td colspan="6" class="text-center h5">No Orders</td>
-      </tr>
+      <table class="table table-sm table-striped shadow rounded text-center">
+        <thead class="thead-dark">
+          <tr>
+            <td colspan="4" class="text-center h5">No Orders</td>
+          </tr>
+        </thead>
+      </table>
     <% end %>
-  </tbody>
-</table>
+
 </div>
 </div>
 </div>

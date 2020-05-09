@@ -1,17 +1,16 @@
 <div class="row justify-content-center">
-<div class="col-9 border p-1 m-2">
+<div class="col-9 border p-1 m-5">
 <h1 class="text-center mt-3 m-2 bg-primary rounded shadow">In Order</h1>
 <hr />
 <div class="m-3">
-<table class="table table-striped shadow rounded">
+<table class="table table-sm table-striped shadow rounded text-center">
   <thead class="thead-dark">
     <tr>
         <th>Product</th>
         <th>Image</th>
         <th>Total Price</th>
         <th>quantity</th>
-        <th>Category</th>
-        <th>Brand</th>
+        <th>Category | Brand</th>
     </tr>
 </thead>
 <tbody>
@@ -31,30 +30,28 @@
               <%= ordprod.quantity %>
             </td>
             <td>
-              <%= ordprod.product.category.name %>
+              <%= ordprod.product.category.name %> | <%= ordprod.product.brand.name %>
             </td>
-            <td>
-              <%= ordprod.product.brand.name %>
-            </td> 
         </tr>
         <% end %>
-      <tr>
+      <tr class="table-warning">
         <td colspan="2" class="bg-dark text-center text-white h5">State</td>
-        <td colspan="4" class="text-center h5"><%= @order.state %></td>
+        <td colspan="3" class="text-center h5"><%= @order.state %></td>
       </tr>
-      <tr>
-        <td colspan="2" class="bg-dark text-center text-white h5">Action</td>
-        <td colspan="4" class="text-center h5"><%= link_to 'checkout', inorder_path(@order) , method: :put, class: 'btn btn-outline-primary' %></td>
-      </tr>
+
+      </tbody>
+    </table>
+            <div class="text-center h5">
+                <%= link_to 'checkout', inorder_path(@order) , method: :put, class: 'btn btn-outline-primary' %>
+            </div>
     <% else %>
       <tr>
         <td colspan="6" class="text-center h5">No Orders</td>
       </tr>
+      </tbody>
+    </table>
     <% end %>
-  </tbody>
-</table>
 </div>
-
 
 <div class="text-center mt-5 mb-1">
 <%= link_to 'Show', mycart_path , class: 'btn btn-outline-primary' %> |
