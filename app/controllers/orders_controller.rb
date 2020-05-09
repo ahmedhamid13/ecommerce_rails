@@ -10,27 +10,33 @@ class OrdersController < ApplicationController
   end
 
   ## Add To Cart
-  def create
-    @order = Order.find_by(user_id: current_user.id, state: "inCart")
-    if @order.nil?
-      @order =Order.new
-      @order.user_id = current_user.id
-      @order.state = "inCart"
-      @order.save
+  def addToCart
+    if Product.find(params[:id]).quantity == 0
+    # if params[:quantity].to_i > 0
+      redirect_to products_path, alert: 'Cannot add it, no available items for your order'
+    else
+      @order = Order.find_by(user_id: current_user.id, state: "inCart")
+      if @order.nil?
+        @order =Order.new
+        @order.user_id = current_user.id
+        @order.state = "inCart"
+        @order.save
+      end
+      if params[:quantity].nil?
+        ordprd(@order.id, params[:id])
+      else
+        ordprd(@order.id, params[:id],params[:quantity].to_i)
+      end
+      redirect_to mycart_path, notice: 'added to cart successfully'
     end
-
-    ordprd(@order.id, params[:id])
+  end
     
-    redirect_to :action => 'cart'
-
-  end
-
-  def edit
-    @order = Order.find(params[:id])
-  end
-
-  ## Put in Order
-  def update
+    def edit
+      @order = Order.find(params[:id])
+    end
+    
+    ## Put in Order
+    def update
     @order = Order.find(params[:id])
     @orderprod = OrderProduct.where(order_id: @order.id)
 
@@ -50,7 +56,7 @@ class OrdersController < ApplicationController
       @orderprod = OrderProduct.find_by(order_id: @order.id)
       @orderprod.destroy
       @order.destroy
-      redirect_to :action => 'cart'
+      redirect_to mycart_path, notice: 'Removed successfully'
     else
       redirect_to orders_url, notice: 'Order didnt destroy.'
     end
@@ -67,14 +73,16 @@ class OrdersController < ApplicationController
       params.fetch(:order, {}).permit(:id,:quantity)
     end
 
-    def ordprd (ord_id, prd_id)
+    def ordprd (ord_id, prd_id, quantity = 1)
       @orderprod = OrderProduct.find_by(order_id: ord_id, product_id: prd_id)
+      @order = Order.find(ord_id)
+      @product = Product.find(prd_id)
       if @orderprod.nil?
-        @product = Product.find(prd_id)
         @order.products << @product
-        @order.order_products.update(quantity: 1)
+        OrderProduct.find_by(order_id: ord_id, product_id: prd_id).update(quantity: quantity)
       else
-        @orderprod.update(quantity: @orderprod.quantity+1)
+        @orderprod.update(quantity: @orderprod.quantity+quantity)
       end
+      @product.update(quantity: @product.quantity-quantity)
     end
 end
