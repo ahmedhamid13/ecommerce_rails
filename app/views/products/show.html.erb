@@ -14,7 +14,7 @@
     <div class="border rounded p-3 m-2 text-center">
         <% if @product.quantity > 0 %>
             <%= form_with(url: add_cart_path(@product.id), method: "post") do |form| %>
-                <div>
+                <div class="mb-4">
                     <%= form.number_field :quantity ,value: 1, min: 1, max: @product.quantity %>
                     <%= form.submit "Add to Cart", :class => 'btn btn-sm btn-warning text-dark shadow', data: { confirm: 'Do you want to add ( ' + @product.title + ' ) to your cart?'} %>
                 </div>
@@ -23,7 +23,7 @@
                 <h5 class="bg-secondary m-4">No Product available now</h5>
         <% end %>
         <% if can? :edit, @product %>
-            | <%= link_to "Edit", edit_product_path(@product.id), class: 'btn btn-primary shadow' %>
+            <%= link_to "Edit", edit_product_path(@product.id), class: 'btn btn-primary shadow' %>
         <% end %>
         <% if can? :destroy, @product %>
             | <%= link_to 'Delete', product_path(@product),
