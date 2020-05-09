@@ -1,11 +1,13 @@
-<h1 class="text-center mt-4 m-2 bg-primary rounded shadow">Order</h1>
+<div class="row justify-content-center">
+<div class="col-9 border p-1 m-2">
+<h1 class="text-center mt-3 m-2 bg-primary rounded shadow">In Order</h1>
 <hr />
 <div class="m-3">
 <table class="table table-striped shadow rounded">
   <thead class="thead-dark">
     <tr>
         <th>Product</th>
-        <th>Description</th>
+        <th>Image</th>
         <th>Total Price</th>
         <th>quantity</th>
         <th>Category</th>
@@ -20,7 +22,7 @@
                 <%= ordprod.product.title %>
             </td>
             <td>
-                <%= ordprod.product.description %>
+                  <%= (ordprod.product.image.attached?) ? image_tag(ordprod.product.image, size: "120x100") : "No Image" %>
             </td>
             <td>
               <%= ordprod.quantity*ordprod.product.price %>
@@ -57,4 +59,6 @@
 <div class="text-center mt-5 mb-1">
 <%= link_to 'Show', mycart_path , class: 'btn btn-outline-primary' %> |
 <%= link_to 'Back', myorder_path , class: 'btn btn-outline-dark' %>
+</div>
+</div>
 </div>

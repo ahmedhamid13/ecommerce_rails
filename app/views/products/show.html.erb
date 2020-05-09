@@ -7,7 +7,7 @@
     <p>Category: <%= @product.category.name %></p>
     <p>Brand: <%= @product.brand.name %></p>
     <p>Store: <%= @product.store.name %></p>
-    <%= link_to "Add To Cart", new_add_to_cart_path(@product.id), class: 'btn btn-dark'%>
+    <p><%= link_to "Add Cart", add_cart_path(@product.id),method: :post, class: 'btn btn-dark', data: { confirm: 'Do you want to add ( ' + @product.title + ' ) to your cart?'} %></p>
     <% if can? :edit, @product %>
         <%= link_to "Edit", edit_product_path(@product.id), class: 'btn btn-dark' %>
     <% end %>
@@ -20,5 +20,3 @@
 </div>
 
 <%= link_to "Home", products_path %>
-<%= link_to "Add To Cart", add_to_cart_path(@product.id)%>
-<%= link_to "Add Cart", add_cart_path(@product.id) %>

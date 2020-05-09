@@ -1,18 +1,23 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row m-1">
         <%= render 'layouts/sidebar'%>
-        <div class="main-content col-md-10 mt-5">
+        <div class="main-content col-md-10">
             <div class="container">
+                <div class="d-flex justify-content-center">
+                    <%# <% if can? :create, Product %>
+                    <div class="mr-3 mt-2">
+                        <%= link_to "Add Product", new_product_path, class: 'd-inline btn btn-outline-primary' %>
+                    </div>
+                    <%# <% end %>
+                    <%# Search %>
+                    <%= form_tag products_path, :method => "get", class: 'form-inline justofy-content-around' do %>
+                        <%= text_field_tag :search, params[:search], class: 'form-control mx-1', placeholder: 'Search' %>
+                        <%= submit_tag "Search", class: 'btn btn-dark' %>
+                    <% end %>
+                </div>
+                <hr>
                 <div class="products">
                     <%= render partial: 'products_list', locals: { products: @products }%>
-                </div>
-                <div>
-                    <%# <% if can? :create, Product %>
-                        <p><%= link_to "New Product", new_product_path %></p>
-                    <%# <% end %>
-                    <p><%= link_to "Show Cart", mycart_path%></p>
-                    <p><%= link_to "Show Order", myorder_path%></p>
-
                 </div>
             </div>
         </div>
