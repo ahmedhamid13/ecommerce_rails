@@ -10,12 +10,13 @@
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
 default: &default
+  adapter: mysql2
   encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
   username: root
-  password:  3323321z
+  password: 3323321z
   socket: /var/run/mysqld/mysqld.sock
-  host: localhost
+  # host: localhost
 
 
 development:
