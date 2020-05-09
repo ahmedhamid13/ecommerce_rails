@@ -9,8 +9,8 @@ class Ability
       user ||= User.new # guest user (not logged in)
       #Admin
       if user.superadmin_role?
-        can :manage, :all
-        # can :manage, [Brand, Category, Store] #admin can manage only these models
+        # can :manage, :all
+        can :manage, [Brand, Category, Store] #admin can manage only these models
         can :access, :rails_admin       # only allow admin users to access Rails Admin
         can :manage, :dashboard         # allow access to dashboard
         can :read, [User,Product] #admin can read these models
