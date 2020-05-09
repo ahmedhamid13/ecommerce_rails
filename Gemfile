@@ -66,3 +66,4 @@ gem 'cancancan'
 
 #font awesome
 gem "font-awesome-rails"
+
