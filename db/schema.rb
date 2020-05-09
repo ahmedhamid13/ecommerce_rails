@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2020_05_08_135127) do
     t.string "title"
     t.text "description"
     t.decimal "price", precision: 30, scale: 2
-    t.integer "quantity"
+    t.integer "quantity", default: 1
     t.bigint "category_id"
     t.bigint "brand_id"
     t.bigint "store_id"

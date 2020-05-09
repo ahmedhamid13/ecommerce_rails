@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.string :title
       t.text :description
       t.decimal :price
-      t.integer :quantity
+      t.integer :quantity , default: 1
       t.references :category
       t.references :brand
       t.references :store
