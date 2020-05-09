@@ -67,4 +67,3 @@ gem 'cancancan'
 #font awesome
 gem "font-awesome-rails"
 
-gem 'activerecord-mysql2-adapter'
