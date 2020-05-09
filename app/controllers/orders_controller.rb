@@ -2,25 +2,31 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def cart
-    @order = Order.find_by(user_id: current_user.id, state: "inCart")
+    @orders = Order.where(user_id: current_user.id, state: "inCart")
   end
 
-  def order
+  def store_order
+    @orders = Order.where(store_id: current_user.store.id, state: "pending")
+  end
+
+  def buyer_order
     @orders = Order.where(user_id: current_user.id).where.not(state: "inCart").order(created_at: :desc)
   end
-
   ## Add To Cart
   def addToCart
-    if Product.find(params[:id]).quantity == 0
+    @product = Product.find(params[:id])
+    if @product.quantity == 0
       redirect_to products_path, alert: 'Cannot add it, no available items for your order'
     else
-      @order = Order.find_by(user_id: current_user.id, state: "inCart")
+      @order = Order.find_by(user_id: current_user.id, state: "inCart", store_id: (@product.store).id )
       if @order.nil?
         @order =Order.new
         @order.user_id = current_user.id
+        @order.store_id = (@product.store).id
         @order.state = "inCart"
         @order.save
       end
+
       if params[:quantity].nil?
         ordprd(@order.id, params[:id])
       else
@@ -30,35 +36,43 @@ class OrdersController < ApplicationController
     end
   end
     
-    def edit
-      @order = Order.find(params[:id])
+    def set
+      @orders = Order.where(user_id: current_user, state: "inCart")
     end
     
     ## Put in Order
-    def update
+    def putorder
+      @orders = Order.where(user_id: current_user, state: "inCart")
+      @orders.each do |order|
+        @orderprod = OrderProduct.where(order_id: order.id)
+        @orderprod.each do |ordprod|
+          (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
+        end
+        order.update(state: "pending")
+      end
+        redirect_to myorder_path, notice: 'in Order'
+    end
+
+    def approve
       @order = Order.find(params[:id])
-      @orderprod = OrderProduct.where(order_id: @order.id)
+      @order.update(state: "approved")
+      redirect_to request.referrer, notice: 'Approved'
+    end
 
-      @orderprod.each do |ordprod|
-        (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
-      end
-
-      if @order.update(state: "pending")
-        redirect_to :action => 'order'
-      else
-          render 'edit'
-      end
+    def cancel
+      @order = Order.find(params[:id])
+      @order.update(state: "cancelled")
+      redirect_to request.referrer, notice: 'Canceled'
     end
 
   def destroy
-    if @order.state == "inCart"
-      @orderprod = OrderProduct.find_by(order_id: @order.id)
-      @orderprod.destroy
-      @order.destroy
+      @orders = Order.where(user_id: current_user, state: "inCart")
+      @orders.each do |order|
+        @orderprod = OrderProduct.find_by(order_id: order.id)
+        @orderprod.destroy
+        order.destroy
+      end
       redirect_to request.referrer, notice: 'Deleted successfully'
-    else
-      redirect_to request.referrer, notice: 'Order didnt destroy.'
-    end
   end
 
   def remove
@@ -70,6 +84,7 @@ class OrdersController < ApplicationController
       end
       redirect_to request.referrer, notice: 'Removed successfully'
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -96,4 +111,5 @@ class OrdersController < ApplicationController
         end
       end
     end
+
 end

@@ -3,7 +3,7 @@
 <h1 class="text-center mt-3 m-2 bg-warning rounded shadow">My Cart</h1>
 <hr />
 <div class="m-3">
-      <% if ! @order.nil? %>
+      <% if ! @orders.empty? %>
         <table class="table table-sm table-striped shadow rounded text-center">
           <thead class="thead-dark">
             <tr>
@@ -15,7 +15,8 @@
             </tr>
         </thead>
         <tbody>
-          <% @order.order_products.each do |ordprod| %>
+        <% @orders.each do |order| %>
+          <% order.order_products.each do |ordprod| %>
             <tr>
 
                   <td><%= ordprod.quantity %></td>
@@ -26,7 +27,7 @@
 
                   <td><%= ordprod.quantity * ordprod.product.price %></td>
 
-                  <td><%= link_to 'X', remorder_path(ordprod.id), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></p></td>
+                  <td><%= link_to 'X', rem_product_path(ordprod.id), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></p></td>
                   <td><%= link_to '++', add_cart_path(ordprod.product.id), class: 'btn btn-success', data: { confirm: 'Do you want to one item of ( ' + ordprod.product.title + ' ) to your cart?'}, method: :post %></p></td>
 
                 <td>
@@ -37,15 +38,14 @@
                 </td>
                   
             </tr>
+            <% end %>
           <% end %>
           </tbody>
           </table>
 
             <div class="text-center">
-                <%= link_to 'put in Order', edit_order_path(@order), class: 'btn btn-success' %> |
-                <% if @order.state == "inCart"%>
-                  <%= link_to 'Remove', delorder_path(@order), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></p>
-                <% end %>
+                <%= link_to 'put in Order', set_order_path, class: 'btn btn-success' %> |
+                  <%= link_to 'Remove', del_order_path(1), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></p>
             </div>
     <% else %>
         <table class="table table table-striped shadow rounded text-center mb-4">
