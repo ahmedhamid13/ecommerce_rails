@@ -4,11 +4,7 @@ class ProductsController < ApplicationController
     before_action :filter_parameters
 
     def index
-        if(params[:filterby])
-            @products = Product.filter(params[:filterValue], params[:filterby])
-        else
-            @products = Product.search(params[:search])
-        end
+        @products = Product.search(params[:search])
     end
 
     def new
@@ -18,8 +14,7 @@ class ProductsController < ApplicationController
     def create
         @product = Product.new(product_params)
         @product.store_id = 1
-        # @store = Store.find_by(user_id: current_user.id)
-        # @product.store_id = @store.id
+        @product.store_id = current_user.store.id
  
         if @product.save
             redirect_to @product

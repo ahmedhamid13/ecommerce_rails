@@ -1,7 +1,7 @@
 <aside class="d-flex flex-column col-md-2 pt-2" id="sidebar-wrapper">
 
     <%# Filter %>
-    <div class="filter text-center">
+    <div class="filter">
         <%= form_tag fetch_products_path ,method: 'get', :remote => true, id: 'category-form' do %>
             <h4 class="bg-info p-1 rounded">Categories</h4>
             <%= hidden_field_tag(:filter, "category")%>
