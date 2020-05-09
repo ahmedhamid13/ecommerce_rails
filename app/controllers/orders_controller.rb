@@ -1,22 +1,15 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @orders = Order.where(user_id: current_user.id, state: "inCart")
+  def cart
+    @order = Order.find_by(user_id: current_user.id, state: "inCart")
   end
 
-  def show
-    @order = Order.find(params[:id])
-    @orderprod = OrderProduct.find_by(order_id: @order.id)
+  def order
+    @orders = Order.where(user_id: current_user.id).where.not(state: "inCart").order(created_at: :desc)
   end
 
-  # def new
-  #   @order = Order.where(user_id: current_user.id, state: "inCart")
-  #   if @order.empty?
-  #     @order =Order.new
-  #   end
-  # end
-
+  ## Add To Cart
   def create
     @order = Order.find_by(user_id: current_user.id, state: "inCart")
     if @order.nil?
@@ -28,17 +21,15 @@ class OrdersController < ApplicationController
 
     ordprd(@order.id, params[:id])
     
-    redirect_to @order, notice: 'Order was successfully created.'    
-      # if 
-      # else
-      #   render :new
-      # end
+    redirect_to :action => 'cart'
+
   end
 
   def edit
-    @orderprod = OrderProduct.where(order_id: @order.id, state: "inCart")
+    @order = Order.find(params[:id])
   end
 
+  ## Put in Order
   def update
     @order = Order.find(params[:id])
     @orderprod = OrderProduct.where(order_id: @order.id)
@@ -48,7 +39,7 @@ class OrdersController < ApplicationController
     end
 
     if @order.update(state: "pending")
-        redirect_to @order
+      redirect_to :action => 'order'
     else
         render 'edit'
     end
@@ -56,8 +47,10 @@ class OrdersController < ApplicationController
 
   def destroy
     if @order.state == "inCart"
+      @orderprod = OrderProduct.find_by(order_id: @order.id)
+      @orderprod.destroy
       @order.destroy
-        redirect_to orders_url, notice: 'Order was successfully destroyed.'
+      redirect_to :action => 'cart'
     else
       redirect_to orders_url, notice: 'Order didnt destroy.'
     end
@@ -81,7 +74,7 @@ class OrdersController < ApplicationController
         @order.products << @product
         @order.order_products.update(quantity: 1)
       else
-        @orderprod.update(quantity: 2)
+        @orderprod.update(quantity: @orderprod.quantity+1)
       end
     end
 end

@@ -1,0 +1,57 @@
+<h1 class="text-center mt-4 m-2 bg-primary rounded shadow">Order</h1>
+<hr />
+<div class="m-3">
+<table class="table table-striped shadow rounded">
+  <thead class="thead-dark">
+    <tr>
+        <th>Product</th>
+        <th>Description</th>
+        <th>Total Price</th>
+        <th>quantity</th>
+        <th>Category</th>
+        <th>Brand</th>
+    </tr>
+</thead>
+<tbody>
+    <% if ! @orders.empty? %>
+        <% @orders.each do |order| %>
+          <% order.order_products.each do |ordprod| %>
+        <tr>
+            <td>
+                <%= ordprod.product.title %>
+            </td>
+            <td>
+                <%= ordprod.product.description %>
+            </td>
+            <td>
+              <%= ordprod.quantity*ordprod.product.price %>
+            </td>
+            <td>
+              <%= ordprod.quantity %>
+            </td>
+            <td>
+              <%= ordprod.product.category.name %>
+            </td>
+            <td>
+              <%= ordprod.product.brand.name %>
+            </td> 
+        </tr>
+        <% end %>
+      <tr>
+        <td colspan="2" class="bg-dark text-center text-white h5">State</td>
+        <td colspan="4" class="text-center h5"><%= order.state %></td>
+      </tr> 
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6" class="text-center h5">No Orders</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<div class="text-center mt-5 mb-1">
+  <%= link_to 'Cart', mycart_path, class: 'btn btn-outline-primary' %>
+</div>

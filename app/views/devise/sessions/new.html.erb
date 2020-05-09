@@ -1,5 +1,5 @@
-<div class="border-form-div">
-  <h2>Sign in</h2>
+<div class="border-form-div text-center">
+  <h2 class="bg-dark text-white shadow rounded mb-4 p-1">Sign in</h2>
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
     <%= f.email_field :email, :autofocus => true %>
     <%= f.password_field :password %>
@@ -9,6 +9,7 @@
       <%= f.label :remember_me %>
     </div>
   <% end %>
+    <hr>
     <%= f.submit "Sign in", :class=>'btn btn-primary mb-2' %>
   <% end %>
   <p class="mb-4"> Not a member?<%= render "devise/shared/links" %></p>

@@ -12,14 +12,15 @@
   </head>
 
   <body>
-    <header class="">
+    <header class="mb-5">
       <%= render 'layouts/navigation' %>
+      <%= render 'layouts/messages' %>
     </header>
-     <%= render 'layouts/messages' %>
-    <div class="border shadow">
+    <div class="container border shadow rounded mb-5 p-2">
       <%= yield %>
     </div>
-    <footer class="">
+    <footer class="mt-5">
+      <br>
       <%= render 'layouts/foot' %>
     </footer>
   </body>

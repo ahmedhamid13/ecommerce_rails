@@ -1,0 +1,47 @@
+<h1 class="text-center mt-4 m-2 bg-primary rounded shadow">Cart</h1>
+<hr />
+<div class="m-3">
+<table class="table table-striped shadow rounded">
+  <thead class="thead-dark">
+    <tr>
+        <th>State</th>
+        <th>Quantity</th>
+        <th>Product</th>
+        <th>Total Price</th>
+        <th>User</th>
+    </tr>
+</thead>
+<tbody>
+    <% if ! @order.nil? %>
+          <% @order.order_products.each do |ordprod| %>
+            <tr>
+                  <td><%= @order.state %></td>
+
+                  <td><%= ordprod.quantity %></td>
+
+                  <td><%= ordprod.product.title %></td>
+
+                  <td><%= ordprod.quantity * ordprod.product.price %></td>
+
+                  <td><%= @order.user_id %></td>
+            </tr>
+                <% end %>
+            <tr>
+              <td colspan="2" class="bg-dark text-white">Action</td>
+                <td><%= link_to 'Order', edit_order_path(@order), class: 'btn btn-success' %></td>
+                <% if @order.state == "inCart"%>
+                  <td><%= link_to 'Remove', order_path(@order), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></td>
+                <% end %>
+            </tr>
+            </tbody>
+    <% else %>
+        <td colspan="11" style="text-align: center">No Products Found</td>
+    <% end %>
+
+</table>
+
+</div>
+<hr />
+<div class="text-center mt-5 mb-1">
+  <%= link_to "Order", myorder_path, class: 'btn btn-outline-primary' %>
+</div>
