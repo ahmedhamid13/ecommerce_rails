@@ -12,13 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2020_05_05_102837) do
 
-  create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "quantity"
     t.bigint "product_id"
     t.bigint "user_id"
@@ -28,13 +28,13 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "source"
     t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.index ["product_id"], name: "index_images_on_product_id"
   end
 
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "state"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "orders_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "orders_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.index ["product_id"], name: "index_orders_products_on_product_id"
   end
 
-  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.decimal "price", precision: 10
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
-  create_table "stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "summary"
     t.bigint "user_id"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "avatar"
     t.string "password"
