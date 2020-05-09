@@ -55,7 +55,8 @@ class ProductsController < ApplicationController
     end
 
     def filter_products
-        if params[:categories].present? || params[:brands].present? || params[:stores].present?
+        if params[:categories].present? || params[:brands].present? || params[:stores].present? || params[:price_min].present? || params[:price_max].present?
+
             if params[:categories].present?
                 @products = (@products.nil?) ? Product.where(category_id: params[:categories]) : @products.where(category_id: params[:categories])
             end
@@ -67,6 +68,14 @@ class ProductsController < ApplicationController
 
             if params[:stores].present?
                 @products = (@products.nil?) ? Product.where(store_id: params[:stores]) : @products.where(store_id: params[:stores])
+            end
+
+            if params[:price_min].present?
+                @products = (@products.nil?) ? Product.where("price >= ?", params[:price_min]) : @products.where("price >= ?", params[:price_min])
+            end
+
+            if params[:price_max].present?
+                @products = (@products.nil?) ? Product.where("price <= ?", params[:price_max]) : @products.where("price <= ?", params[:price_max])
             end
 
         else

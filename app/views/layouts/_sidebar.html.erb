@@ -4,9 +4,7 @@
     <div class="filter">
         <%= form_tag fetch_products_path ,method: 'get', :remote => true, id: 'category-form' do %>
             <h4 class="bg-info p-1 rounded">Categories</h4>
-            <%= hidden_field_tag(:filter, "category")%>
             <% @categories.each do |category| %>
-                <!--<div><%= link_to category.name, products_path(filter: category.name, filterby: "category") %><div>-->
                 <div>
                     <%= check_box_tag "categories[]", category.id %>
                     <%= category.name %>
@@ -14,7 +12,6 @@
             <%end%>
             <hr>
             <h4 class="bg-info p-1 rounded">Brands</h4>
-            <%= hidden_field_tag(:filter, "brand")%>
             <% @brands.each do |brand| %>
                 <div>
                     <%= check_box_tag "brands[]", brand.id %>
@@ -23,13 +20,21 @@
             <%end%>
             <hr>
             <h4 class="bg-info p-1 rounded">Stores</h4>
-            <%= hidden_field_tag(:filter, "store")%>
             <% @stores.each do |store| %>
                 <div>
                     <%= check_box_tag "stores[]", store.id %>
                     <%= store.name %>
                 </div>
             <%end%>
+
+            <h4 class="bg-info p-1 rounded">Prices</h4>
+            <div>
+                <%= label_tag 'Min: '%>
+                <%= number_field_tag 'price_min' %>
+
+                <%= label_tag 'Max: '%>
+                <%= number_field_tag 'price_max' %>
+            </div>
             <%= submit_tag "Filter", class: 'btn btn-sm btn-success mt-4 shadow' %>
         <% end %>
 
