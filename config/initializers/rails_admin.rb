@@ -1,11 +1,11 @@
 RailsAdmin.config do |config|
 
 
-  RailsAdmin.config do |config|
-    config.model 'Product' do 
-      visible false
-    end
-  end
+  # RailsAdmin.config do |config|
+  #   config.model 'Product' do 
+  #     visible false
+  #   end
+  # end
   ### Popular gems integration
   # config.authorize_with do
   #   unless current_user.admin?

@@ -3,7 +3,7 @@
         <%= render 'layouts/sidebar'%>
         <div class="main-content col-md-10">
             <div class="container">
-                <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center">
                     <%# <% if can? :create, Product %>
                     <div class="mr-3 mt-2">
                         <%= link_to "Add Product", new_product_path, class: 'd-inline btn btn-outline-primary' %>
@@ -17,7 +17,7 @@
                 </div>
                 <hr>
                 <div class="products">
-                    <%= render partial: 'products_list', locals: { products: @products }%>
+                       <%= render @products %>
                 </div>
             </div>
         </div>

@@ -63,3 +63,6 @@ gem 'rails_admin'
 
 #cancancan
 gem 'cancancan'
+
+#font awesome
+gem "font-awesome-rails"
