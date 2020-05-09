@@ -46,12 +46,12 @@ test:
 #
 # You can use this database configuration with:
 #
-  production:
-    url: <%= ENV['DATABASE_URL'] %>
+  # production:
+  #   url: <%= ENV['DATABASE_URL'] %>
 
-# production:
-#   <<: *default
-#   database: ecommerce_rails_production
-#   username: ecommerce_rails
-#   password: <%= ENV['ECOMMERCE_RAILS_DATABASE_PASSWORD'] %>
-#   url: <%= ENV['DATABASE_URL'] %>
+production:
+  <<: *default
+  database: ecommerce_rails_production
+  username: ecommerce_rails
+  password: <%= ENV['ECOMMERCE_RAILS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
