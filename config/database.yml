@@ -15,7 +15,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:  3323321z
-  # socket: /var/run/mysqld/mysqld.sock
+  socket: /var/run/mysqld/mysqld.sock
   host: localhost
 
 
@@ -46,12 +46,12 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
-production:
-  <<: *default
-  database: ecommerce_rails_production
-  username: ecommerce_rails
-  password: <%= ENV['ECOMMERCE_RAILS_DATABASE_PASSWORD'] %>
-  url: <%= ENV['DATABASE_URL'] %>
+  production:
+    url: <%= ENV['DATABASE_URL'] %>
+
+# production:
+#   <<: *default
+#   database: ecommerce_rails_production
+#   username: ecommerce_rails
+#   password: <%= ENV['ECOMMERCE_RAILS_DATABASE_PASSWORD'] %>
+#   url: <%= ENV['DATABASE_URL'] %>
