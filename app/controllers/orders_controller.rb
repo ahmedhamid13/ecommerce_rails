@@ -12,7 +12,6 @@ class OrdersController < ApplicationController
   ## Add To Cart
   def addToCart
     if Product.find(params[:id]).quantity == 0
-    # if params[:quantity].to_i > 0
       redirect_to products_path, alert: 'Cannot add it, no available items for your order'
     else
       @order = Order.find_by(user_id: current_user.id, state: "inCart")
@@ -27,7 +26,7 @@ class OrdersController < ApplicationController
       else
         ordprd(@order.id, params[:id],params[:quantity].to_i)
       end
-      redirect_to mycart_path, notice: 'added to cart successfully'
+      redirect_to request.referrer, notice: 'Cart Changed successfully'
     end
   end
     
@@ -37,29 +36,39 @@ class OrdersController < ApplicationController
     
     ## Put in Order
     def update
-    @order = Order.find(params[:id])
-    @orderprod = OrderProduct.where(order_id: @order.id)
+      @order = Order.find(params[:id])
+      @orderprod = OrderProduct.where(order_id: @order.id)
 
-    @orderprod.each do |ordprod|
-      (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
-    end
+      @orderprod.each do |ordprod|
+        (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
+      end
 
-    if @order.update(state: "pending")
-      redirect_to :action => 'order'
-    else
-        render 'edit'
+      if @order.update(state: "pending")
+        redirect_to :action => 'order'
+      else
+          render 'edit'
+      end
     end
-  end
 
   def destroy
     if @order.state == "inCart"
       @orderprod = OrderProduct.find_by(order_id: @order.id)
       @orderprod.destroy
       @order.destroy
-      redirect_to mycart_path, notice: 'Removed successfully'
+      redirect_to request.referrer, notice: 'Deleted successfully'
     else
-      redirect_to orders_url, notice: 'Order didnt destroy.'
+      redirect_to request.referrer, notice: 'Order didnt destroy.'
     end
+  end
+
+  def remove
+      @orderprod = OrderProduct.find(params[:id])
+      orderid = @orderprod.order_id
+      @orderprod.destroy
+      if OrderProduct.where(order_id: orderid).empty?
+        Order.find_by(id: orderid, state: "inCart").destroy
+      end
+      redirect_to request.referrer, notice: 'Removed successfully'
   end
 
   private
@@ -80,9 +89,11 @@ class OrdersController < ApplicationController
       if @orderprod.nil?
         @order.products << @product
         OrderProduct.find_by(order_id: ord_id, product_id: prd_id).update(quantity: quantity)
-      else
-        @orderprod.update(quantity: @orderprod.quantity+quantity)
+      elsif @orderprod.quantity > 0
+        unless @orderprod.quantity == 1 && quantity == -1
+          @orderprod.update(quantity: @orderprod.quantity+quantity)
+          @product.update(quantity: @product.quantity-quantity)
+        end
       end
-      @product.update(quantity: @product.quantity-quantity)
     end
 end
