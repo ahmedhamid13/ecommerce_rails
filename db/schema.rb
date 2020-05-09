@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_05_102837) do
+ActiveRecord::Schema.define(version: 2020_05_08_135127) do
+
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -18,13 +39,10 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "quantity"
-    t.bigint "product_id"
-    t.bigint "user_id"
+  create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_carts_on_product_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
@@ -42,7 +60,37 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.index ["product_id"], name: "index_images_on_product_id"
   end
 
+<<<<<<< HEAD
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "state"
+    t.bigint "user_id"
+=======
+  create_table "listed_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "quantity", default: 1
+    t.bigint "cart_id", null: false
+    t.bigint "product_id", null: false
+>>>>>>> bc43f69aca1cf7532f03526fc0050fadb7fc7974
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cart_id"], name: "index_listed_items_on_cart_id"
+    t.index ["product_id"], name: "index_listed_items_on_product_id"
+  end
+
+<<<<<<< HEAD
+  create_table "orders_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+=======
+  create_table "order_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "quantity"
+>>>>>>> bc43f69aca1cf7532f03526fc0050fadb7fc7974
+    t.bigint "order_id"
+    t.bigint "product_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_products_on_order_id"
+    t.index ["product_id"], name: "index_order_products_on_product_id"
+  end
+
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "state"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -50,20 +98,11 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "orders_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "order_id"
-    t.bigint "product_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_orders_products_on_order_id"
-    t.index ["product_id"], name: "index_orders_products_on_product_id"
-  end
-
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.decimal "price", precision: 10
-    t.integer "quantity"
+    t.decimal "price", precision: 30, scale: 2
+    t.integer "quantity", default: 1
     t.bigint "category_id"
     t.bigint "brand_id"
     t.bigint "store_id"
@@ -87,7 +126,6 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.string "name"
     t.string "avatar"
     t.string "password"
-    t.string "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email", default: "", null: false
@@ -95,8 +133,15 @@ ActiveRecord::Schema.define(version: 2020_05_05_102837) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.index ["email"], name: "index_users_on_email", unique: true, length: 191
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, length: 191
+    t.boolean "superadmin_role", default: false
+    t.boolean "seller_role", default: false
+    t.boolean "buyer_role", default: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "carts", "users"
+  add_foreign_key "listed_items", "carts"
+  add_foreign_key "listed_items", "products"
 end

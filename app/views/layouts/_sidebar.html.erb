@@ -1,0 +1,38 @@
+<aside class="d-flex flex-column col-md-2 pt-2" id="sidebar-wrapper">
+
+    <%# Filter %>
+    <div class="filter text-center">
+        <%= form_tag fetch_products_path ,method: 'get', :remote => true, id: 'category-form' do %>
+            <h4 class="bg-info p-1 rounded">Categories</h4>
+            <%= hidden_field_tag(:filter, "category")%>
+            <% @categories.each do |category| %>
+                <!--<div><%= link_to category.name, products_path(filter: category.name, filterby: "category") %><div>-->
+                <div>
+                    <%= check_box_tag "categories[]", category.id %>
+                    <%= category.name %>
+                </div>
+            <%end%>
+            <hr>
+            <h4 class="bg-info p-1 rounded">Brands</h4>
+            <%= hidden_field_tag(:filter, "brand")%>
+            <% @brands.each do |brand| %>
+                <div>
+                    <%= check_box_tag "brands[]", brand.id %>
+                    <%= brand.name %>
+                </div>
+            <%end%>
+            <hr>
+            <h4 class="bg-info p-1 rounded">Stores</h4>
+            <%= hidden_field_tag(:filter, "store")%>
+            <% @stores.each do |store| %>
+                <div>
+                    <%= check_box_tag "stores[]", store.id %>
+                    <%= store.name %>
+                </div>
+            <%end%>
+            <%= submit_tag "Filter", class: 'btn btn-sm btn-success mt-4 shadow' %>
+        <% end %>
+
+    </div>
+
+</aside>

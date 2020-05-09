@@ -1,0 +1,13 @@
+<%= form_with(model: @cart, local: true) do |form| %>
+
+  <p>
+    <h4> Select Quantity Please.. </h4>
+    <%= form.label :quantity %><br>
+    <%= form.number_field :quantity , min: 0%>
+  </p>
+  
+    <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+

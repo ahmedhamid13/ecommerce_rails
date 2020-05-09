@@ -2,6 +2,10 @@
 
 one:
   quantity: 1
+  product: one
+  user: one
 
 two:
   quantity: 1
+  product: two
+  user: two

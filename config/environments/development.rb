@@ -45,6 +45,8 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  config.active_storage.service = :local
+
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
@@ -61,5 +63,26 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
+  #mail config
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+config.action_mailer.perform_caching = false
+
+config.action_mailer.perform_deliveries = true
+
+config.action_mailer.raise_delivery_errors = true
+
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+  user_name:      ENV["MAIL_USERNAME"],
+  password:       ENV["MAIL_PASSWORD"],
+  domain:         'gmail.com',
+  address:       'smtp.gmail.com',
+  port:          '587',
+  authentication: :plain,
+  enable_starttls_auto: true
+}
+  
 end

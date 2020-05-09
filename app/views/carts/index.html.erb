@@ -1,0 +1,34 @@
+<h1>Cart</h1>
+</div class="col-xs-6 col-xs-offset-3">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th  scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th  scope="col">quantity</th>
+      <th  scope="col">Price</th>
+      <th  scope="col">Total</th>
+    </tr>
+  </thead>
+<%total_payment = 0%>
+  <tbody>
+    <% @items.uniq.each do |item| %>
+      <tr>
+        <td scope="row"><%= item.title  %></td>
+        <td scope="row"><%= item.description %></td>
+        <td scope="row"><%= ListedItem.find_by(product_id: item.id).quantity %></td>
+        <td scope="row"><%= item.price %></td>
+        <td scope="row"><%= ListedItem.find_by(product_id: item.id).quantity * item.price  %></td>
+        <%total_payment += ListedItem.find_by(product_id: item.id).quantity * item.price%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+<h4>Your bill:</h4>
+    <h4><%=total_payment%></h4>
+</div>
+
+<%= link_to 'back', products_path %> |
+<%= link_to 'checkout', products_path %>
