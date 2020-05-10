@@ -12,12 +12,10 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
-  pool: 5
-  username: root
-  password: 3323321z
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("DATABASE_USERNAME") %>
+  password:  <%= ENV.fetch("DATABASE_PASSWORD") %>
   socket: /var/run/mysqld/mysqld.sock
-  # host: localhost
-
 
 development:
   <<: *default
@@ -51,8 +49,7 @@ test:
 
 # production:
 #   <<: *default
-#   adapter: mysql2
 #   database: ecommerce_rails_production
 #   username: ecommerce_rails
-#   password: <%= ENV['ECOMMERCE_RAILS_DATABASE_PASSWORD'] %>
-#   url: <%= ENV['DATABASE_URL'] %>
+#   password: mysqladmin variables | grep socket
+
