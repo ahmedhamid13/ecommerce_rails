@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_160914) do
+ActiveRecord::Schema.define(version: 2020_05_10_214407) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -109,6 +109,16 @@ ActiveRecord::Schema.define(version: 2020_05_10_160914) do
     t.index ["user_id"], name: "index_rates_on_user_id"
   end
 
+  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.text "comment"
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "summary"
@@ -141,4 +151,6 @@ ActiveRecord::Schema.define(version: 2020_05_10_160914) do
   add_foreign_key "addresses", "users"
   add_foreign_key "rates", "products"
   add_foreign_key "rates", "users"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
 end

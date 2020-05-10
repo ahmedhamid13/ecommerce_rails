@@ -29,6 +29,12 @@ end
         brand_id: Faker::Number.between(from: 1, to: 6),
         store_id: 1,
     )
+
+    Rate.create(
+        rate: Faker::Number.between(from: 1, to:5),
+        user_id: 1,
+        product_id: t
+    )
     # Image.create(
     #     source: Faker::Avatar.image,
     #     product_id: t
