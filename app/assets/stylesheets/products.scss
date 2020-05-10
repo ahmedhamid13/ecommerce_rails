@@ -1,6 +1,7 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.container {padding: 0}
 #sidebar-wrapper {
     min-height: 100vh;
     background-color: #eee;
@@ -10,10 +11,14 @@
     transition: margin .25s ease-out;
 }
 
+.products-page {padding: 0;}
+
 .card-body > a:first-of-type {
     color: black;
     text-decoration: none;
 } 
+
+.price-filter input {max-width: 100%;}
 
 main section.products-index,
   .products {
@@ -24,7 +29,7 @@ main section.products-index,
 
     .product {
       // flex:      1;
-      max-width: 260px;
+      max-width: 280px;
       // so that footer within can be positioned absolutely
       position:  relative;
 
@@ -104,5 +109,22 @@ main section.products-show {
     img.main-img {
       max-width: 100%;
     }
+  }
+}
+
+@media (max-width: 767px) {
+  .products-page {
+    position: relative;
+  }
+
+  #sidebar-wrapper {
+    position: absolute;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 525px) {
+  .search-form {
+    margin-top: 1rem;
   }
 }
