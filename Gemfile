@@ -69,3 +69,5 @@ gem "font-awesome-rails"
 
 #page caching
 gem "actionpack-page_caching"
+#faker 
+gem 'faker'

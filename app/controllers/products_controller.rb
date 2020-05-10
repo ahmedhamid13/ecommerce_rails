@@ -29,6 +29,7 @@ class ProductsController < ApplicationController
 
     def show
         @product = Product.find(params[:id])
+        @rate = Rate.new
     end
 
     def edit
@@ -43,15 +44,6 @@ class ProductsController < ApplicationController
         else
             render 'edit'
         end
-    end
-
-    def rate
-        @product = Product.find(params[:id])
-
-        @product.update(reviewers: (@product.reviewers+1) )
-        @product.update(rate: ((@product.rate + params[:rate].to_i)/2))
-
-        redirect_to @product
     end
 
     def destroy

@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   validates_presence_of :name # required
   has_many :orders
+  has_many :address
   has_one :store
   after_create :send_admin_mail
     def send_admin_mail

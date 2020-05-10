@@ -27,18 +27,18 @@
                   <td><%= ordprod.quantity * ordprod.product.price %></td>
 
                   <td><%= link_to 'X', remove_product_path(ordprod.id), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></p></td>
-                  <td><%= link_to '++', add_to_cart_path(ordprod.product.id), class: 'btn btn-success', data: { confirm: 'Do you want to one item of ( ' + ordprod.product.title + ' ) to your cart?'}, method: :post %></p></td>
-
-                <td>
-            <%= form_with(url: add_to_cart_path(ordprod.product.id), method: "post") do |form| %>
-                    <%= form.hidden_field  :quantity ,value: -1, min: -1, max: -1 %>
-                    <%= form.submit "--", :class => 'btn btn-warning text-dark shadow', data: { confirm: 'Do you want to remove one item of ( ' + ordprod.product.title + ' ) to your cart?'} %>
-            <% end %>
-                </td>   
+                  <td><%= link_to '++', add_to_cart_path(ordprod.product.id), class: 'btn btn-success', method: :post %></p></td>
+                  <td>
+                    <%= form_with(url: add_to_cart_path(ordprod.product.id), method: "post") do |form| %>
+                            <%= form.hidden_field  :quantity ,value: -1, min: -1, max: -1 %>
+                            <%= form.submit "--", :class => 'btn btn-warning text-dark shadow' %>
+                    <% end %>
+                  </td>   
             </tr>
           <% end %>
           </tbody>
           </table>
+            <hr >
 
             <div class="text-center">
                 <%= link_to 'put in Order', edit_order_path(@cart.id), class: 'btn btn-success' %> |

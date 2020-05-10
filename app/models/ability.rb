@@ -25,6 +25,7 @@ class Ability
       #Buyer
       else
         #write the buyer permissions
+        # can [:edit, :update], Order
       end
 
     #
