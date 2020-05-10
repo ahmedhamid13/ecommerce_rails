@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
     # load_and_authorize_resource
     before_action :authenticate_user!, :except => [:show, :index]
     before_action :filter_parameters
+    self.page_cache_directory = :domain_cache_directory
+    caches_page :show
 
     def index
         if(params[:filterby])
@@ -94,5 +96,9 @@ class ProductsController < ApplicationController
     private
         def product_params
             params.require(:product).permit(:title, :rate, :description, :price, :quantity, :category_id, :brand_id, :image)
+        end
+
+        def domain_cache_directory
+            Rails.root.join("public", request.domain)
         end
 end
