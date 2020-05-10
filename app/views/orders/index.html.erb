@@ -4,7 +4,7 @@
 <hr />
 <div class="m-3">
     <% if ! @orders.empty? %>
-        <% @orders.each do |order| %>
+      <% @orders.each do |order| %>
 <table class="table table-sm table-striped shadow rounded text-center">
   <thead class="thead-dark">
     <tr><th colspan="4" class="text-warning h4">Order #<%= order.id %></th></tr>
@@ -30,23 +30,29 @@
             <td>
               <%= ordprod.quantity %>
             </td>
-
         </tr>
         <% end %>
-        <tr class="table-info">
-          <td class="bg-secondary text-center text-white h5">State</td>
+        
+        <tr class="
+                    <% if order.state == "approved"%>
+                        table-success
+                    <% elsif order.state == "cancelled"%>
+                        table-danger
+                    <% else %>
+                        table-info
+                    <% end %>
+        ">
+          <td class="text-center h5">State</td>
           <td colspan="3" class="text-center h5"><%= order.state %></td>
         </tr> 
-      <% end %>
         </tbody>
       </table>
+      <% end %>
     <% else %>
-      <table class="table table-sm table-striped shadow rounded text-center">
-        <thead class="thead-dark">
+      <table class="table table table-striped shadow rounded text-center mb-4">
           <tr>
-            <td colspan="4" class="text-center h5">No Orders</td>
+            <td colspan="6" class="text-center h4">No Orders</td>
           </tr>
-        </thead>
       </table>
     <% end %>
 
