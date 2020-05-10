@@ -57,6 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #devise gem for auth
 gem 'devise'
+gem 'gravtastic'
 
 #Rails Admin gem
 gem 'rails_admin'
@@ -71,3 +72,4 @@ gem "font-awesome-rails"
 gem "actionpack-page_caching"
 #faker 
 gem 'faker'
+

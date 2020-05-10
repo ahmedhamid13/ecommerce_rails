@@ -15,6 +15,7 @@ class Ability
         can :manage, :dashboard         # allow access to dashboard
         can :read, [User,Product] #admin can read these models
         # can :edit, User, id: user.id #admin can edit himself
+        # cannot :manage, Order
       ########################################################
       #Seller
       elsif user.seller_role?  

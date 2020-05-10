@@ -1,11 +1,7 @@
 RailsAdmin.config do |config|
 
 
-  # RailsAdmin.config do |config|
-  #   config.model 'Product' do 
-  #     visible false
-  #   end
-  # end
+    
   ### Popular gems integration
   # config.authorize_with do
   #   unless current_user.admin?
@@ -16,7 +12,7 @@ RailsAdmin.config do |config|
   #   end
   # end
 
-  # config.current_user_method { current_user }
+  config.current_user_method { current_user }
 
   ## == Devise ==
   config.authenticate_with do
@@ -52,4 +48,5 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
 end
