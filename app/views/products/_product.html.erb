@@ -11,10 +11,10 @@
         <%= link_to add_to_cart_path(product.id), class: 'btn btn-warning text-dark', method: :post do %>
         <%= fa_icon "shopping-cart", text: 'Add' %>
         <% end %>
-      <% end %>
     <% else %>
       <span class="text-danger">Out of stock</span>
     <% end %>
+
     <%= link_to product, class: 'btn btn-secondary pull-right' do %>
     Details &raquo;
     <% end %>
