@@ -8,7 +8,7 @@
 
   <footer class="actions">
     <% if product.quantity > 0 %>
-      <%= link_to add_cart_path(product.id), class: 'btn btn-warning text-dark', data: { confirm: 'Do you want to add ( ' + product.title + ' ) to your cart?'}, method: :post do %>
+      <%= link_to add_to_cart_path(product.id), class: 'btn btn-warning text-dark', data: { confirm: 'Do you want to add ( ' + product.title + ' ) to your cart?'}, method: :post do %>
       <%= fa_icon "shopping-cart", text: 'Add' %>
       <% end %>
     <% end %>

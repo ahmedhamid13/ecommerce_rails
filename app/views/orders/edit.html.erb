@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
 <div class="col-9 border p-1 m-5">
-<h1 class="text-center mt-3 m-2 bg-primary rounded shadow">In Order</h1>
+<h1 class="text-center mt-3 m-2 bg-primary rounded shadow">Edit Order</h1>
 <hr />
 <div class="m-3">
 <table class="table table-sm table-striped shadow rounded text-center">
@@ -14,9 +14,8 @@
     </tr>
 </thead>
 <tbody>
-    <% if !@orders.empty? %>
-        <% @orders.each do |order| %>
-        <% order.order_products.each do |ordprod| %>
+    <% if !@order.nil? %>
+        <% @order.order_products.each do |ordprod| %>
         <tr>
             <td>
                 <%= ordprod.product.title %>
@@ -35,12 +34,11 @@
             </td>
         </tr>
         <% end %>
-        <% end %>
 
       </tbody>
     </table>
             <div class="text-center h5">
-                <%= link_to 'checkout', put_order_path, method: :put, class: 'btn btn-outline-primary' %>
+                <%= link_to 'checkout', order_path(@order.id), method: :put, class: 'btn btn-outline-primary' %>
             </div>
     <% else %>
       <tr>
@@ -52,8 +50,8 @@
 </div>
 
 <div class="text-center mt-5 mb-1">
-<%= link_to 'Show', mycart_path , class: 'btn btn-outline-primary' %> |
-<%= link_to 'Back', myorder_path , class: 'btn btn-outline-dark' %>
+<%= link_to 'Order', orders_path , class: 'btn btn-outline-primary' %> |
+<%= link_to 'Back', carts_path , class: 'btn btn-outline-dark' %>
 </div>
 </div>
 </div>

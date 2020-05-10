@@ -4,10 +4,10 @@
 <hr />
 <div class="m-3">
     <% if ! @orders.empty? %>
-        <% @orders.each do |order| %>
+      <% @orders.each do |order| %>
 <table class="table table-sm table-striped shadow rounded text-center">
   <thead class="thead-dark">
-    <tr><th colspan="4" class="text-warning h4"><%= order.store.name %> Order</th></tr>
+    <tr><th colspan="4" class="text-warning h4">Order #<%= order.id %></th></tr>
     <tr>
         <th>Product</th>
         <th>Image</th>
@@ -30,7 +30,6 @@
             <td>
               <%= ordprod.quantity %>
             </td>
-
         </tr>
         <% end %>
         
@@ -46,9 +45,9 @@
           <td class="text-center h5">State</td>
           <td colspan="3" class="text-center h5"><%= order.state %></td>
         </tr> 
-      <% end %>
         </tbody>
       </table>
+      <% end %>
     <% else %>
       <table class="table table table-striped shadow rounded text-center mb-4">
           <tr>
