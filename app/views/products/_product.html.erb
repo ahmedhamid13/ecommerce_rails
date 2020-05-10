@@ -11,6 +11,8 @@
       <%= link_to add_to_cart_path(product.id), class: 'btn btn-warning text-dark', data: { confirm: 'Do you want to add ( ' + product.title + ' ) to your cart?'}, method: :post do %>
       <%= fa_icon "shopping-cart", text: 'Add' %>
       <% end %>
+    <% else %>
+      <span class="text-danger">Out of stock</span>
     <% end %>
     <%= link_to product, class: 'btn btn-secondary pull-right' do %>
     Details &raquo;

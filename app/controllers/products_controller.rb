@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
     # caches_page :show
 
     def index
+        @searched_item = params[:search]
         @products = Product.search(params[:search])
     end
 
@@ -67,6 +68,11 @@ class ProductsController < ApplicationController
     end
 
     def filter_products
+
+        unless @searched_item.nil? || @searched_item.empty?
+            @products = Product.search(@searched_item)
+        end
+
         if params[:categories].present? || params[:brands].present? || params[:stores].present? || params[:price_min].present? || params[:price_max].present?
 
             if params[:categories].present?
