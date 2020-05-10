@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
 <div class="col-9 border p-1 m-5">
-<h1 class="text-center mt-3 m-2 bg-primary rounded shadow">In Order</h1>
+<h1 class="text-center mt-3 m-2 bg-primary rounded shadow">Edit Order</h1>
 <hr />
 <div class="m-3">
 <table class="table table-sm table-striped shadow rounded text-center">
@@ -34,15 +34,11 @@
             </td>
         </tr>
         <% end %>
-      <tr class="table-warning">
-        <td colspan="2" class="bg-dark text-center text-white h5">State</td>
-        <td colspan="3" class="text-center h5"><%= @order.state %></td>
-      </tr>
 
       </tbody>
     </table>
             <div class="text-center h5">
-                <%= link_to 'checkout', inorder_path(@order) , method: :put, class: 'btn btn-outline-primary' %>
+                <%= link_to 'checkout', order_path(@order.id), method: :put, class: 'btn btn-outline-primary' %>
             </div>
     <% else %>
       <tr>
@@ -54,8 +50,8 @@
 </div>
 
 <div class="text-center mt-5 mb-1">
-<%= link_to 'Show', mycart_path , class: 'btn btn-outline-primary' %> |
-<%= link_to 'Back', myorder_path , class: 'btn btn-outline-dark' %>
+<%= link_to 'Order', orders_path , class: 'btn btn-outline-primary' %> |
+<%= link_to 'Back', carts_path , class: 'btn btn-outline-dark' %>
 </div>
 </div>
 </div>
