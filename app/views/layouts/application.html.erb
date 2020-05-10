@@ -11,32 +11,40 @@
     <%= javascript_include_tag 'jquery.min', 'data-turbolinks-track'=> true %>
   </head>
 
-  <body>
-    <header class="mb-3">
+  <body class="d-flex flex-column justify-content-between">
+    <header class="">
       <%= render 'layouts/navigation' %>
       <%= render 'layouts/messages' %>
     </header>
-    <div class="container border shadow rounded mb-5 p-2">
+    <div class="container border shadow rounded px-2 py-4">
       <%= yield %>
     </div>
-    <footer class="mt-5">
+    <footer class="bg-dark">
       <br>
       <%= render 'layouts/foot' %>
     </footer>
   </body>
 
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
   <script>
-    $('input[type=checkbox]').change(function(e) {
-      // var url = new URL('http://localhost:3000/products')
+    var x = window.matchMedia("(max-width: 767px)")
+    
+    function showSidebar(){
+      $('#sidebar-wrapper').removeClass('d-none')
+    }
 
-      // var params = {filterby:e.target.id, filterValue: e.target.value}
-      // url.search = new URLSearchParams(params).toString();
+    function closeSidebar(){
+      $('#sidebar-wrapper').addClass('d-none')
+    }
 
-      // // console.log(e)
-      // window.location.href = url
-      // e.target.checked = true;
-      // $('#category-form').submit();
-    });
+    function checkDimensions(){
+      if(x.matches) {
+        closeSidebar()
+      }
+    }
   </script>
 </html>
 
