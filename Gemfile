@@ -66,3 +66,6 @@ gem 'cancancan'
 
 #font awesome
 gem "font-awesome-rails"
+
+#page caching
+gem "actionpack-page_caching"
