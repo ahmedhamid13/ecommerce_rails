@@ -37,8 +37,8 @@ class AddDeviseToUsers < ActiveRecord::Migration[6.0]
       # t.timestamps null: false
     end
 
-    # add_index :users, :email,                unique: true, length: {"email"=>191}
-    # add_index :users, :reset_password_token, unique: true, length: {"reset_password_token"=>191}
+    add_index :users, :email,                unique: true, length: {"email"=>191}
+    add_index :users, :reset_password_token, unique: true, length: {"reset_password_token"=>191}
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end
