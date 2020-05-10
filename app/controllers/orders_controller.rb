@@ -2,65 +2,89 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def cart
-    @order = Order.find_by(user_id: current_user.id, state: "inCart")
+    @orders = Order.where(user_id: current_user.id, state: "inCart")
   end
 
-  def order
+  def store_order
+    @orders = Order.where(store_id: current_user.store.id, state: "pending")
+  end
+
+  def buyer_order
     @orders = Order.where(user_id: current_user.id).where.not(state: "inCart").order(created_at: :desc)
   end
-
   ## Add To Cart
   def addToCart
-    if Product.find(params[:id]).quantity == 0
-    # if params[:quantity].to_i > 0
+    @product = Product.find(params[:id])
+    if @product.quantity == 0
       redirect_to products_path, alert: 'Cannot add it, no available items for your order'
     else
-      @order = Order.find_by(user_id: current_user.id, state: "inCart")
+      @order = Order.find_by(user_id: current_user.id, state: "inCart", store_id: (@product.store).id )
       if @order.nil?
         @order =Order.new
         @order.user_id = current_user.id
+        @order.store_id = (@product.store).id
         @order.state = "inCart"
         @order.save
       end
+
       if params[:quantity].nil?
         ordprd(@order.id, params[:id])
       else
         ordprd(@order.id, params[:id],params[:quantity].to_i)
       end
-      redirect_to mycart_path, notice: 'added to cart successfully'
+      redirect_to request.referrer, notice: 'Cart Changed successfully'
     end
   end
     
-    def edit
-      @order = Order.find(params[:id])
+    def set
+      @orders = Order.where(user_id: current_user, state: "inCart")
     end
     
     ## Put in Order
-    def update
-    @order = Order.find(params[:id])
-    @orderprod = OrderProduct.where(order_id: @order.id)
-
-    @orderprod.each do |ordprod|
-      (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
+    def putorder
+      @orders = Order.where(user_id: current_user, state: "inCart")
+      @orders.each do |order|
+        @orderprod = OrderProduct.where(order_id: order.id)
+        @orderprod.each do |ordprod|
+          (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
+        end
+        order.update(state: "pending")
+      end
+        redirect_to myorder_path, notice: 'in Order'
     end
 
-    if @order.update(state: "pending")
-      redirect_to :action => 'order'
-    else
-        render 'edit'
+    def approve
+      @order = Order.find(params[:id])
+      @order.update(state: "approved")
+      redirect_to request.referrer, notice: 'Approved'
     end
-  end
+
+    def cancel
+      @order = Order.find(params[:id])
+      @order.update(state: "cancelled")
+      redirect_to request.referrer, notice: 'Canceled'
+    end
 
   def destroy
-    if @order.state == "inCart"
-      @orderprod = OrderProduct.find_by(order_id: @order.id)
-      @orderprod.destroy
-      @order.destroy
-      redirect_to mycart_path, notice: 'Removed successfully'
-    else
-      redirect_to orders_url, notice: 'Order didnt destroy.'
-    end
+      @orders = Order.where(user_id: current_user, state: "inCart")
+      @orders.each do |order|
+        @orderprod = OrderProduct.find_by(order_id: order.id)
+        @orderprod.destroy
+        order.destroy
+      end
+      redirect_to request.referrer, notice: 'Deleted successfully'
   end
+
+  def remove
+      @orderprod = OrderProduct.find(params[:id])
+      orderid = @orderprod.order_id
+      @orderprod.destroy
+      if OrderProduct.where(order_id: orderid).empty?
+        Order.find_by(id: orderid, state: "inCart").destroy
+      end
+      redirect_to request.referrer, notice: 'Removed successfully'
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -80,9 +104,12 @@ class OrdersController < ApplicationController
       if @orderprod.nil?
         @order.products << @product
         OrderProduct.find_by(order_id: ord_id, product_id: prd_id).update(quantity: quantity)
-      else
-        @orderprod.update(quantity: @orderprod.quantity+quantity)
+      elsif @orderprod.quantity > 0
+        unless @orderprod.quantity == 1 && quantity == -1
+          @orderprod.update(quantity: @orderprod.quantity+quantity)
+          @product.update(quantity: @product.quantity-quantity)
+        end
       end
-      @product.update(quantity: @product.quantity-quantity)
     end
+
 end

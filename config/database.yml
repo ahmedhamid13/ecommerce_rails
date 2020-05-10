@@ -51,4 +51,5 @@ production:
   <<: *default
   database: ecommerce_rails_production
   username: ecommerce_rails
-  password: <%= ENV['ECOMMERCE_RAILS_DATABASE_PASSWORD'] %>
+  password: mysqladmin variables | grep socket
+

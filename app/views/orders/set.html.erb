@@ -14,8 +14,9 @@
     </tr>
 </thead>
 <tbody>
-    <% if !@order.nil? %>
-        <% @order.order_products.each do |ordprod| %>
+    <% if !@orders.empty? %>
+        <% @orders.each do |order| %>
+        <% order.order_products.each do |ordprod| %>
         <tr>
             <td>
                 <%= ordprod.product.title %>
@@ -34,15 +35,12 @@
             </td>
         </tr>
         <% end %>
-      <tr class="table-warning">
-        <td colspan="2" class="bg-dark text-center text-white h5">State</td>
-        <td colspan="3" class="text-center h5"><%= @order.state %></td>
-      </tr>
+        <% end %>
 
       </tbody>
     </table>
             <div class="text-center h5">
-                <%= link_to 'checkout', inorder_path(@order) , method: :put, class: 'btn btn-outline-primary' %>
+                <%= link_to 'checkout', put_order_path, method: :put, class: 'btn btn-outline-primary' %>
             </div>
     <% else %>
       <tr>

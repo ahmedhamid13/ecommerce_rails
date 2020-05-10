@@ -5,9 +5,10 @@
             <% if current_user %>
                 <li class='nav-item p-1 shadow rounded'><%= link_to 'Home', welcome_index_path, class: 'nav-link text-white btn-outline-primary rounded' %></li>  
                 <li class='nav-item p-1 shadow rounded'><%= link_to 'Products', products_path, class: 'nav-link text-white btn-outline-primary rounded' %></li>  
+                <li class='nav-item p-1 shadow rounded'><%= link_to 'Cart', mycart_path, class: 'nav-link text-white btn-outline-warning rounded' %></li>
+                <li class='nav-item p-1 shadow rounded'><%= link_to 'Orders', myorder_path, class: 'nav-link text-white btn-outline-info rounded' %></li>
+                <li class='nav-item p-1 shadow rounded'><%= link_to 'Store', mystore_path, class: 'nav-link text-white btn-outline-primary rounded' %></li> 
              <% unless current_user.superadmin_role? %>
-                <li class='nav-item p-1 shadow rounded'><%= link_to 'My Cart', mycart_path, class: 'nav-link text-white btn-outline-warning rounded' %></li>
-                <li class='nav-item p-1 shadow rounded'><%= link_to 'My Orders', myorder_path, class: 'nav-link text-white btn-outline-info rounded' %></li> 
             <% end %>
             </ul>
             <ul class="nav navbar-nav ml-auto">

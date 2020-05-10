@@ -81,10 +81,12 @@ ActiveRecord::Schema.define(version: 2020_05_08_135127) do
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "state"
     t.bigint "user_id"
+    t.bigint "store_id"
+    t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
