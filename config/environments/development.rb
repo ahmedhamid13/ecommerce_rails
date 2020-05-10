@@ -84,5 +84,7 @@ config.action_mailer.smtp_settings = {
   authentication: :plain,
   enable_starttls_auto: true
 }
+
+config.action_controller.perform_caching = true 
   
 end

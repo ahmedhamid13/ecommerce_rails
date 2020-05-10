@@ -1,20 +1,40 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
-  get 'welcome/index'
-  get 'mycart', to: 'orders#cart', as: 'mycart'
-  get 'myorders', to: 'orders#order', as: 'myorder'
-  post 'addcart/:id', to: 'orders#addToCart', as: 'add_cart'
-  put 'inorder/:id', to: 'orders#update', as: 'inorder'
-  get 'orders/:id/edit', to: 'orders#edit', as: 'edit_order'
-  delete 'myorder/:id', to: 'orders#destroy', as: 'order'
-  # get 'addtocart/:id', to: 'carts#newAddToCart', as: 'new_add_to_cart'
-  # post 'addtocart/:id', to: 'carts#addToCart', as: 'add_to_cart'
-
-  resources :products
-  # resources :orders
-  # resources :carts
-  get "/fetch_products" => 'products#filter_products', as: 'fetch_products'
-
+  ### Landing Page
   root 'welcome#index'
+  get 'welcome/index'
+  ########################################################################
+
+  ### User Routes
+  devise_for :users
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  ########################################################################
+  
+  ### Prdoduct Routes
+  put "rate.product/:id" => 'products#rate', as: 'rate_product'
+  get "/fetch_products" => 'products#filter_products', as: 'fetch_products'
+  resources :products
+  ########################################################################
+
+  ### Cart Routes
+  get 'carts', to: 'carts#index', as: 'carts'
+  delete 'remove.product/:id', to: 'carts#remove', as: 'remove_product'
+  post 'add.to.cart/:id', to: 'carts#create', as: 'add_to_cart'
+  put 'cart/:id', to: 'carts#update', as: 'cart'
+  ########################################################################
+
+  ### Order Routes
+  get 'orders', to: 'orders#index', as: 'orders'
+  get 'order/:id/edit', to: 'orders#edit', as: 'edit_order'
+  put 'order/:id', to: 'orders#update', as: 'order'
+  ########################################################################
+
+  ### Store_Orders Routes
+  get 'store.orders', to: 'store_orders#index', as: 'store_orders'
+  put 'store.response/:id', to: 'store_orders#update', as: 'store_response'
+  ########################################################################
+  
+  #Product API Routes
+  namespace :api do
+    resources :products
+  end
 end
