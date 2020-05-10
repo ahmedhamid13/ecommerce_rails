@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   ########################################################################
   
   ### Prdoduct Routes
-  put "rate.product/:id" => 'products#rate', as: 'rate_product'
   get "/fetch_products" => 'products#filter_products', as: 'fetch_products'
   resources :products
   ########################################################################
@@ -33,8 +32,13 @@ Rails.application.routes.draw do
   put 'store.response/:id', to: 'store_orders#update', as: 'store_response'
   ########################################################################
   
+  ### Reviews Routes
+  post "rate.product/:id" => 'reviews#rate', as: 'rate_product'
+  ########################################################################
+  
   #Product API Routes
   namespace :api do
     resources :products
   end
+
 end

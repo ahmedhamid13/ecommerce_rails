@@ -4,14 +4,6 @@ class CartsController < ApplicationController
     @cart = Order.find_by(user_id: current_user.id, state: "inCart")
   end
 
-  def show
-    # @cart = Order.find_by(user_id: current_user.id, state: "inCart")
-  end
-
-  def new
-    # @cart = Cart.new
-  end
-
   def create
     if Product.find(params[:id]).quantity == 0
       redirect_to products_path, alert: 'Cannot add it, no available items for your order'

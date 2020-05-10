@@ -37,8 +37,17 @@
 
       </tbody>
     </table>
-            <div class="text-center h5">
-                <%= link_to 'checkout', order_path(@order.id), method: :put, class: 'btn btn-outline-primary' %>
+    <hr >
+            <div class="text-center h5 p-2 m-4 border">
+              <%= form_with(url: order_path(@order.id), method: "put") do |form| %>
+                  <p>
+                    <%= form.label :address %> | <%= form.text_field :address, :required => true %>
+                  </p>  
+                  <p>
+                    <%= form.label :billing %> | <%= form.text_field :billing, :required => true %>
+                  </p>                  
+                  <%= form.submit "CheckOut", :class => 'btn btn-dark shadow' %>
+              <% end %>
             </div>
     <% else %>
       <tr>
@@ -52,6 +61,5 @@
 <div class="text-center mt-5 mb-1">
 <%= link_to 'Order', orders_path , class: 'btn btn-outline-primary' %> |
 <%= link_to 'Back', carts_path , class: 'btn btn-outline-dark' %>
-</div>
 </div>
 </div>
