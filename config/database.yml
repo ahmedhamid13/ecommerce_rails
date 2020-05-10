@@ -49,5 +49,6 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
+  # url: <%= ENV['DATABASE_URL'] %>  
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>  
+  database: ecommerce_rails_production
