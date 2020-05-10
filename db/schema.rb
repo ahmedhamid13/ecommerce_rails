@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_135127) do
+ActiveRecord::Schema.define(version: 2020_05_07_074250) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -39,13 +39,6 @@ ActiveRecord::Schema.define(version: 2020_05_08_135127) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_carts_on_user_id"
-  end
-
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -60,20 +53,12 @@ ActiveRecord::Schema.define(version: 2020_05_08_135127) do
     t.index ["product_id"], name: "index_images_on_product_id"
   end
 
-  create_table "listed_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "quantity", default: 1
-    t.bigint "cart_id", null: false
-    t.bigint "product_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["cart_id"], name: "index_listed_items_on_cart_id"
-    t.index ["product_id"], name: "index_listed_items_on_product_id"
-  end
-
   create_table "order_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "quantity"
+    t.string "state"
     t.bigint "order_id"
     t.bigint "product_id"
+    t.string "store_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_products_on_order_id"
@@ -82,11 +67,9 @@ ActiveRecord::Schema.define(version: 2020_05_08_135127) do
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "store_id"
     t.string "state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -95,6 +78,8 @@ ActiveRecord::Schema.define(version: 2020_05_08_135127) do
     t.text "description"
     t.decimal "price", precision: 30, scale: 2
     t.integer "quantity"
+    t.integer "rate"
+    t.integer "reviewers"
     t.bigint "category_id"
     t.bigint "brand_id"
     t.bigint "store_id"
@@ -133,7 +118,4 @@ ActiveRecord::Schema.define(version: 2020_05_08_135127) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "carts", "users"
-  add_foreign_key "listed_items", "carts"
-  add_foreign_key "listed_items", "products"
 end
