@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   ########################################################################
   
   ### Prdoduct Routes
-  resources :products
+  put "rate.product/:id" => 'products#rate', as: 'rate_product'
   get "/fetch_products" => 'products#filter_products', as: 'fetch_products'
+  resources :products
   ########################################################################
 
   ### Cart Routes

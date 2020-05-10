@@ -17,9 +17,9 @@ class ProductsController < ApplicationController
 
     def create
         @product = Product.new(product_params)
-        @product.store_id = 1
-        # @store = Store.find_by(user_id: current_user.id)
-        # @product.store_id = @store.id
+        @product.store_id = current_user.store.id
+        @product.reviewers = 0
+        @product.rate = 0
  
         if @product.save
             redirect_to @product
@@ -38,12 +38,21 @@ class ProductsController < ApplicationController
 
     def update
         @product = Product.find(params[:id])
- 
+        
         if @product.update(product_params)
             redirect_to @product
         else
             render 'edit'
         end
+    end
+
+    def rate
+        @product = Product.find(params[:id])
+
+        @product.update(reviewers: (@product.reviewers+1) )
+        @product.update(rate: ((@product.rate + params[:rate].to_i)/2))
+
+        redirect_to @product
     end
 
     def destroy
@@ -84,6 +93,6 @@ class ProductsController < ApplicationController
 
     private
         def product_params
-            params.require(:product).permit(:title, :description, :price, :quantity, :category_id, :brand_id, :image)
+            params.require(:product).permit(:title, :rate, :description, :price, :quantity, :category_id, :brand_id, :image)
         end
 end

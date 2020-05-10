@@ -1,6 +1,10 @@
 class StoreOrdersController < ApplicationController
     def index
-      @orders = OrderProduct.where(store_id: current_user.store.id, state: "pending")
+      if !(current_user.store).nil?
+        @orders = OrderProduct.where(store_id: current_user.store.id, state: "pending")
+      else
+        redirect_to orders_path, alert: 'you do not have store!'
+      end
     end
   
     def update

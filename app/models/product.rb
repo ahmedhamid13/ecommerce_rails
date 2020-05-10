@@ -4,7 +4,6 @@ class Product < ApplicationRecord
     belongs_to :store
     has_one_attached :image
     has_many :listed_items
-    has_many :carts, through: :listed_items
     has_many :order_products
     has_many :orders, through: :order_products
 
