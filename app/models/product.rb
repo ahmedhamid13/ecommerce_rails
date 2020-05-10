@@ -3,9 +3,16 @@ class Product < ApplicationRecord
     belongs_to :brand
     belongs_to :store
     has_one_attached :image
-    has_many :listed_items
+    has_many :rates
     has_many :order_products
     has_many :orders, through: :order_products
+
+    validates :title, presence: true,
+                    length: { minimum: 5 }
+
+    validates :price, :quantity, numericality: true
+
+    validates :description, :price, :quantity, :category_id, :brand_id, presence: true
 
     def self.search(search)
         if search
@@ -20,4 +27,5 @@ class Product < ApplicationRecord
             @products = self.all
         end
     end
+
 end

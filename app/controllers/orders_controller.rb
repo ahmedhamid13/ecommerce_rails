@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find_by(id: params[:id], state: "inCart")
     @orderprod = OrderProduct.where(order_id: @order.id)
+    order_address()
       @orderprod.each do |ordprod|
           ordprod.update(state: "pending")
           (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
@@ -31,7 +32,11 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.fetch(:order, {}).permit(:id,:quantity)
+      params.fetch(:order, {}).permit(:id,:quantity,:address, :billing)
+    end
+
+    def order_address
+      Address.create(address: params[:address], billing: params[:billing], user_id: current_user.id, order_id: @order.id)
     end
 
 end

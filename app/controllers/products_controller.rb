@@ -2,15 +2,12 @@ class ProductsController < ApplicationController
     # load_and_authorize_resource
     before_action :authenticate_user!, :except => [:show, :index]
     before_action :filter_parameters
-    self.page_cache_directory = :domain_cache_directory
-    caches_page :show
+    # self.page_cache_directory = :domain_cache_directory
+    # caches_page :show
 
     def index
-        if(params[:filterby])
-            @products = Product.filter(params[:filterValue], params[:filterby])
-        else
-            @products = Product.search(params[:search])
-        end
+        @searched_item = params[:search]
+        @products = Product.search(params[:search])
     end
 
     def new
@@ -32,6 +29,7 @@ class ProductsController < ApplicationController
 
     def show
         @product = Product.find(params[:id])
+        @rate = Rate.new
     end
 
     def edit
@@ -48,15 +46,6 @@ class ProductsController < ApplicationController
         end
     end
 
-    def rate
-        @product = Product.find(params[:id])
-
-        @product.update(reviewers: (@product.reviewers+1) )
-        @product.update(rate: ((@product.rate + params[:rate].to_i)/2))
-
-        redirect_to @product
-    end
-
     def destroy
         @product = Product.find(params[:id])
         @product.destroy
@@ -71,7 +60,13 @@ class ProductsController < ApplicationController
     end
 
     def filter_products
-        if params[:categories].present? || params[:brands].present? || params[:stores].present?
+
+        unless @searched_item.nil? || @searched_item.empty?
+            @products = Product.search(@searched_item)
+        end
+
+        if params[:categories].present? || params[:brands].present? || params[:stores].present? || params[:price_min].present? || params[:price_max].present?
+
             if params[:categories].present?
                 @products = (@products.nil?) ? Product.where(category_id: params[:categories]) : @products.where(category_id: params[:categories])
             end
@@ -83,6 +78,14 @@ class ProductsController < ApplicationController
 
             if params[:stores].present?
                 @products = (@products.nil?) ? Product.where(store_id: params[:stores]) : @products.where(store_id: params[:stores])
+            end
+
+            if params[:price_min].present?
+                @products = (@products.nil?) ? Product.where("price >= ?", params[:price_min]) : @products.where("price >= ?", params[:price_min])
+            end
+
+            if params[:price_max].present?
+                @products = (@products.nil?) ? Product.where("price <= ?", params[:price_max]) : @products.where("price <= ?", params[:price_max])
             end
 
         else

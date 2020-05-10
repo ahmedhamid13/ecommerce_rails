@@ -8,7 +8,7 @@ class Store < ApplicationRecord
       end
 
     def check_remaining #handle that only one user owns one store
-      errors.add(:base, "This user is already own a store")  if self.user.seller_role?
+      errors.add(:base, "Sorry, this user owns a store")  if self.user.seller_role?
     end
 
 end
