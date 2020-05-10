@@ -3,7 +3,6 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <% if current_user %>
                 <li class='nav-item p-1  rounded'><%= link_to 'Home', welcome_index_path, class: 'nav-link text-white btn-outline-primary rounded' %></li>  
@@ -11,11 +10,19 @@
                 <li class='nav-item p-1  rounded'><%= link_to 'Cart', carts_path, class: 'nav-link text-white btn-outline-warning rounded' %></li>
                 <li class='nav-item p-1  rounded'><%= link_to 'Orders', orders_path, class: 'nav-link text-white btn-outline-info rounded' %></li>
                 <li class='nav-item p-1  rounded'><%= link_to 'Store', store_orders_path, class: 'nav-link text-white btn-outline-primary rounded' %></li> 
+                
              <% unless current_user.superadmin_role? %>
             <% end %>
             </ul>
             <ul class="nav navbar-nav ml-auto">
-                    <li class='nav-item p-1  rounded'><%= link_to current_user.name ,welcome_index_path, class: 'nav-link text-white btn-outline-secondary rounded' %></li>
+                    <li class='nav-item p-1  rounded'>  <%= link_to welcome_index_path do %>
+                                                            <% if current_user.avatar.attached?%>
+                                                                <%image_tag current_user.avatar,size: "50x50" ,class: "rounded-circle" %>
+                                                            <%else%>
+                                                                 <%image_tag("noimage.jpg", size: "50x50") %>
+                                                            <%end%>
+                                                    <% end %>
+                </li> 
                 <% if current_user.superadmin_role? %>
                         <li class='nav-item p-1  rounded'><%= link_to 'Manage App', "/admin", class: 'nav-link text-white btn-outline-success rounded' %></li> 
                 <% end %>
