@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
     @orderprod = OrderProduct.where(order_id: @order.id)
       @orderprod.each do |ordprod|
           ordprod.update(state: "pending")
+          (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
       end
       if @order.update(state: "pending")
         redirect_to orders_path, notice: 'in Order'
