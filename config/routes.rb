@@ -32,4 +32,9 @@ Rails.application.routes.draw do
   get 'store.orders', to: 'store_orders#index', as: 'store_orders'
   put 'store.response/:id', to: 'store_orders#update', as: 'store_response'
   ########################################################################
+  
+  #Product API Routes
+  namespace :api do
+    resources :products
+  end
 end
