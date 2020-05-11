@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcommerceRails</title>
     <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="Upq5XNguf3IakrFlzRiLSW7RsLXmXk1g+8rGYO/Zvnp/G+ea9kiQ6N6l/ZM2QXVtzv0J1QrnWdBx9ibNPZH9Gg==" />
+<meta name="csrf-token" content="NONN/WRk+31wUtLhSxw/kc+YSO1gAKT6ZbJMYqM4FpFeR1EGqn4NZykvTwIA1vqsAOYiYOUlTUtYYczh/wUfWw==" />
     
     <link rel="stylesheet" media="all" href="/assets/application.debug-c57134426e8034739f83a88f08ebc1869df958090044087250f2725ce048de37.css" data-turbolinks-track="reload" />
     <link rel="stylesheet" media="all" href="/assets/products.debug-3acb971d3c144022015fbcb28024e6d40cb635c2c1670769d2eb2de72cc30213.css" data-turbolinks-track="reload" />
@@ -23,7 +23,7 @@
         </button>
         
         <span class="d-md-none m-2">
-            <a title="Nouran Samy" href="/welcome/index"><img class="rounded-circle" src="http://localhost:3000/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--554e040eebade4cacfac2e2d4a5cfa8cc7bae660/IMG-20190831-WA0264.jpg" width="50" height="50" /></a>        </span>
+            <a title="Admin" href="/welcome/index"><img class="rounded-circle" src="/assets/admin-6661d2ddf0c3f154a25d2d8731ead41934fcf43bbead1110ae40a3dcc7de018c.png" width="50" height="50" /></a>        </span>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav mr-auto">
                 <li class='nav-item p-1 rounded'>
@@ -46,9 +46,19 @@
                         <i class="fas fa-shipping-fast"></i>
                         <span>Orders</span>
 </a>                </li>
+                    <li class='nav-item p-1 rounded'>
+                        <a class="nav-link text-white btn-outline-primary rounded" href="/store.orders">
+                            <i class="fas fa-store-alt"></i>
+                            <span>Store</span>
+</a>                    </li> 
             </ul>
             <ul class="nav navbar-nav ml-auto">
-                <li class='nav-item p-1 rounded d-none d-md-block'>  <a title="Nouran Samy" href="/welcome/index"><img class="rounded-circle" src="http://localhost:3000/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--554e040eebade4cacfac2e2d4a5cfa8cc7bae660/IMG-20190831-WA0264.jpg" width="50" height="50" /></a>                </li>                 
+                <li class='nav-item p-1 rounded d-none d-md-block'>  <a title="Admin" href="/welcome/index"><img class="rounded-circle" src="/assets/admin-6661d2ddf0c3f154a25d2d8731ead41934fcf43bbead1110ae40a3dcc7de018c.png" width="40" height="40" /></a>                </li>                 
+                        <li class='nav-item p-1 rounded'>
+                            <a class="nav-link text-white btn-outline-success rounded" href="/admin">
+                                <i class="fas fa-user-cog"></i>
+                                <span>Dashboard</span>
+</a>                        </li> 
                         <li class='nav-item p-1 rounded'>
                             <a class="nav-link text-white btn-outline-danger rounded" rel="nofollow" data-method="delete" href="/users/sign_out">
                                 <i class="fas fa-sign-out-alt"></i>
@@ -59,39 +69,60 @@
     </div>
 </nav>
 
-      
+        <div class="container shadow alert alert-notice">
+    Cart Changed successfully
+    <a href="#" data-dismiss="alert" class="close">×</a>
+  </div>
+
     </header>
     <div class="container-fluid">
-      <div class="row justify-content-center">
-<div class="col-md-6 border p-1 m-2">
-<h1 class="text-center mt-3 m-2 bg-primary rounded shadow">Product</h1>
-<div class="m-3 p-1 border text-center">
-    <h2>New Laptop</h2>
-    <img src="http://localhost:3000/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4a30c1db601425742c884cd20a9c37d553002bd2/item_L_102052136_6724a4895395d.jpg" width="220" height="220" />
-    <hr>
-    <p>Price: 2500.0 | AvailableQuantity: 25</p>
-    <p>Category: Laptop | Brand: DELL | Store: Radio Shack</p>
-    <h5>Product Description</h5>
-    <p class="border rounded mt-3 p-1 mb-3">sdasd</p>
-    <hr>
-    <p>Rate: 0 | Reviewers: 0</p>
-    <br>
-        <div class="text-center">
+      <link rel="stylesheet" media="all" href="/assets/product_details.debug-677ebfc144570f63cf2a52e188d443e9c0c10bfc8d88a0b74ae6e570938cd728.css" data-turbolinks-track="reload" />
 
+<div class="row justify-content-center text-center border m-2 p-2">
+        <h4 class="col-md-11 bg-dark rounded p-1 text-white">Product details</h1>
+
+        <div class="col-md-5 ml-2 m-2 p-2">
+                <img src="http://localhost:3000/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4a30c1db601425742c884cd20a9c37d553002bd2/item_L_102052136_6724a4895395d.jpg" width="380" height="400" />
+                <div class="border border-warning rounded p-2 text-center">
+                        <form action="/add.to.cart/1" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="bmjupW0q0o3Uvi10SomMi43bI9ouN0LbcUgu6FlxIOfHTHvrf/yYw9oVzwOuvo79zNe7d7sO7gWAd0YFPuK8Jg==" />
+                            <div class="col-md-8 text-center d-inline-flex">
+                                <input value="1" min="1" max="25" class="form-control d-inline-flex mr-3" type="number" name="quantity" id="quantity" />
+                                <input type="submit" name="commit" value="Add to Cart" class="btn btn btn-warning text-dark shadow" data-disable-with="Add to Cart" />
+                            </div>
+</form>            </div>
+        </div>
+        <div class="col-md-5 bg ml-2 m-2">
+                    <h1 class="mt-3">New Laptop</h1>
+                    <hr>
+                    <p><b>Rate:</b> 0 | <b>Reviewers:</b> 0</p>
+                    <p><b>Price:</b> 2500.0 | <b>AvailableQuantity:</b> 25</p>
+                    <p><b>Store:</b> Radio Shack</p>
+                    <p><b>Category:</b> Laptop | <b>Brand:</b> DELL</p>
+                    <hr>
+                    <h5><b>Product Description</b></h5>
+                    <p class="border rounded mt-3 p-1 mb-3">sdasd</p>
+
+                    <div class="text-center">
+                            <a class="btn btn-primary shadow" href="/products/1/edit">Edit</a>
+                            | <a data-confirm="Are you sure you want to delete this product?" class="btn btn-danger shadow" rel="nofollow" data-method="delete" href="/products/1">Delete</a>
+                    </div>
         </div>
 
-    <div class="border border-primary shadow rounded p-2 m-3 text-center">
+</div>
 
-                <form action="/add.to.cart/1" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="/4s/RvsJz+1mICp38BAgApyhTQ4Xx7K36OFT7IhXDLnI0w1ZgVuVJAUK3sWCwTIKTPRhxyB7hQz+b4PQFfQA/A==" />
-                        <input value="1" min="1" max="25" type="number" name="quantity" id="quantity" />
-                        <input type="submit" name="commit" value="Add to Cart" class="btn btn-sm btn-warning text-dark shadow" data-disable-with="Add to Cart" />
-</form>
+<div class="row justify-content-center text-center border m-2 p-2">
+        <h4 class="col-md-11 bg-dark rounded p-1 text-white">User</h1>
 
+</div>
+
+
+<div class="row justify-content-center text-center border m-2 p-2">
+
+<div class="col-md-12 ml-2 m-2 p-2">
+    <div class="p-3 m-2 text-center">
+        <h4 class="mb-5 bg-dark rounded shadow text-white p-1">Reviews</h4>
+                    <div class="mb-2 border">No Reviews</div>
     </div>
-</div>
-<div class="text-center mt-2 mb-1">
-    <a class="btn btn-outline-primary" href="/products">Products</a>
-</div>
 </div>
 </div>
 
