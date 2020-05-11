@@ -1,10 +1,6 @@
 <div class="p-4 text-center text-white">
   <% if user_signed_in? %>
-        <% if current_user.superadmin_role? %>
-            <h1 class="text-center rounded mb-3">Welcome,Admin!</h1>
-        <% else %>
-            <h1 class="text-center rounded mb-3">Welcome back, <%= current_user.name %></h1>
-        <% end %>
+    <h1 class="text-center rounded mb-3">Welcome, <%= current_user.name %></h1>
     <br>
     <p class="lead">Enjoy The App!</p>
     <br>
@@ -12,7 +8,7 @@
       <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :class => 'btn btn-large btn-danger' %>
     </div>
   <% else %>
-    <h1 class="text-center rounded">Welcome, new user!</h1>
+    <h1 class="text-center rounded">Welcome, Guest</h1>
     <br>
     <p class="lead">
       You must sign in or sign up before you can access our super sweet,

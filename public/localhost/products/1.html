@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcommerceRails</title>
     <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="7Tm7dl4AJ7W2tE8Xg6hpTcJ93xwfJFMUXLKE3aoezx6HnaeNkBrRr+/J0vTIYqxwDQO1kZoBuqVhYQRe9iPG1A==" />
+<meta name="csrf-token" content="KBe1o8gcdLQtzbOaK8nuCKk3vNSNCM1WqH7Rv5MOkTVwmIHxC9XP3RWqHDkhR5TUY6nIMhuZRgUfZ9J75wIgCw==" />
     
     <link rel="stylesheet" media="all" href="/assets/application.debug-c57134426e8034739f83a88f08ebc1869df958090044087250f2725ce048de37.css" data-turbolinks-track="reload" />
     <link rel="stylesheet" media="all" href="/assets/products.debug-3acb971d3c144022015fbcb28024e6d40cb635c2c1670769d2eb2de72cc30213.css" data-turbolinks-track="reload" />
@@ -71,28 +71,32 @@
 
       
     </header>
-    <div class="container-fluid">
+    <div class="">
       <link rel="stylesheet" media="all" href="/assets/product_details.debug-677ebfc144570f63cf2a52e188d443e9c0c10bfc8d88a0b74ae6e570938cd728.css" data-turbolinks-track="reload" />
 
 <div class="row justify-content-center text-center border m-2 p-2">
         <h4 class="col-md-11 bg-dark rounded p-1 text-white">Product details</h1>
 
         <div class="col-md-5 ml-2 m-2 p-2">
-                <img src="http://localhost:3000/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4a30c1db601425742c884cd20a9c37d553002bd2/item_L_102052136_6724a4895395d.jpg" width="380" height="400" />
+                <img src="/assets/noprod-58957dc5a46ae64b956b5d3d568e18006898eaf759c1f1c11abc8bcdd8cdf7e7.svg" width="380" height="400" />
                 <div class="border border-warning rounded p-2 text-center">
-                    <h5 class="bg-secondary m-4">Out of stock</h5>
-            </div>
+                        <form action="/add.to.cart/1" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="977ZR3Yb6bvzr2Rxjp2JHlEOz8lf1YWenzXtMNCMBGi7GUblSe1ZEOehaj34cAQ8e6scJL7zaw3Ojn9ZvD+zGg==" />
+                            <div class="col-md-8 text-center d-inline-flex">
+                                <input value="1" min="1" max="40" class="form-control d-inline-flex mr-3" type="number" name="quantity" id="quantity" />
+                                <input type="submit" name="commit" value="Add to Cart" class="btn btn btn-warning text-dark shadow" data-disable-with="Add to Cart" />
+                            </div>
+</form>            </div>
         </div>
         <div class="col-md-5 bg ml-2 m-2">
-                    <h1 class="mt-3">New Laptop</h1>
+                    <h1 class="mt-3">Notebook</h1>
                     <hr>
                     <p><b>Rate:</b> 0 | <b>Reviewers:</b> 0</p>
-                    <p><b>Price:</b> 2500.0 | <b>AvailableQuantity:</b> -25</p>
+                    <p><b>Price:</b> 45000.0 | <b>AvailableQuantity:</b> 40</p>
                     <p><b>Store:</b> Radio Shack</p>
                     <p><b>Category:</b> Laptop | <b>Brand:</b> DELL</p>
                     <hr>
                     <h5><b>Product Description</b></h5>
-                    <p class="border rounded mt-3 p-1 mb-3">sdasd</p>
+                    <p class="border rounded mt-3 p-1 mb-3">dgfddfgdfgfgdgdf</p>
 
                     <div class="text-center">
                             <a class="btn btn-primary shadow" href="/products/1/edit">Edit</a>
