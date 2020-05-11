@@ -10,14 +10,23 @@
             <% if current_user %>
                 <li class='nav-item p-1  rounded'><%= link_to image_tag("cart.svg", size: "40x40"), carts_path, class: 'nav-link text-white btn-outline-warning rounded' %></li>
                 <li class='nav-item p-1  rounded'><%= link_to image_tag("product2.svg", size: "40x40"), orders_path, class: 'nav-link text-white btn-outline-success rounded' %></li>
-             <% if current_user.seller_role? %>
-                <li class='nav-item p-1  rounded'><%= link_to image_tag("store1.svg", size: "40x40"), store_orders_path, class: 'nav-link text-white btn-outline-primary rounded' %></li> 
-            <% end %>
+                <% if current_user.seller_role? %>
+                    <li class='nav-item p-1  rounded'><%= link_to image_tag("store1.svg", size: "40x40"), store_orders_path, class: 'nav-link text-white btn-outline-primary rounded' %></li> 
+                <% end %>
             <% end %>
             </ul>
             <ul class="nav navbar-nav ml-auto">
             <% if current_user %>
-                    <li class='nav-item p-1  rounded'><%= link_to current_user.name ,welcome_index_path, class: 'nav-link text-white btn-outline-secondary rounded' %></li>
+                <li class='nav-item p-1  rounded'>  <%= link_to welcome_index_path do %>
+                                                            <% if current_user.avatar.attached?%>
+                                                                <%image_tag current_user.avatar,size: "50x50" ,class: "rounded-circle" %>
+                                                            <% elsif current_user.superadmin_role? %>
+                                                                <%image_tag("admin.png", size: "50x50",class: "rounded-circle") %>
+                                                            <%else%>
+                                                                 <%image_tag("noimage.jpg", size: "50x50",class: "rounded-circle") %>
+                                                            <%end%>
+                                                    <% end %>
+                </li>                 
                 <% if current_user.superadmin_role? %>
                         <li class='nav-item p-1  rounded'><%= link_to image_tag("manage2.svg", size: "40x40"), "/admin", class: 'nav-link text-white btn-outline-success rounded' %></li> 
                 <% end %>
