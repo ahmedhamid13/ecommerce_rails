@@ -17,9 +17,7 @@ class ProductsController < ApplicationController
     def create
         @product = Product.new(product_params)
         @product.store_id = current_user.store.id
-        @product.reviewers = 0
-        @product.rate = 0
-        #ImagesUploadJob.perform_later 
+
         if @product.save
             redirect_to @product
         else

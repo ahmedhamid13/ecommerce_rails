@@ -12,14 +12,14 @@
   </head>
 
   <body class="d-flex flex-column justify-content-between">
-    <header class="">
+    <header class="mb-2">
       <%= render 'layouts/navigation' %>
       <%= render 'layouts/messages' %>
     </header>
-    <div class="container border shadow rounded px-2 py-4">
+    <div class="container border shadow rounded px-2 py-4 mb-3">
       <%= yield %>
     </div>
-    <footer class="bg-dark">
+    <footer class="bg-dark mt-2">
       <br>
       <%= render 'layouts/foot' %>
     </footer>
