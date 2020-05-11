@@ -7,8 +7,7 @@ class Product < ApplicationRecord
     has_many :order_products
     has_many :orders, through: :order_products
 
-    validates :title, presence: true,
-                    length: { minimum: 5 }
+    validates :title, presence: true, length: { minimum: 5 }
 
     validates :price, :quantity, numericality: true
 
