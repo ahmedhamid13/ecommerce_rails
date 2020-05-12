@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
     # load_and_authorize_resource
     before_action :authenticate_user!, :except => [:show, :index]
     before_action :filter_parameters
-    # self.page_cache_directory = :domain_cache_directory
-    # caches_page :show
+    self.page_cache_directory = :domain_cache_directory
+    caches_page :show
 
     def index
         @searched_item = params[:search]
@@ -46,10 +46,13 @@ class ProductsController < ApplicationController
     end
 
     def destroy
-        @product = Product.find(params[:id])
-        @product.destroy
-
-        redirect_to products_path
+        if check_orders()
+            @product = Product.find(params[:id])
+            @product.destroy
+            redirect_to products_path
+        else
+            redirect_to products_path, alert: "cannot delete product in order process"
+        end
     end
 
     def filter_parameters
@@ -102,5 +105,9 @@ class ProductsController < ApplicationController
 
         def domain_cache_directory
             Rails.root.join("public", request.domain)
+        end
+
+        def check_orders
+            (OrderProduct.where(state: "pending", product_id: params[:id]).or(OrderProduct.where(state: "confirmed", product_id: params[:id]))).empty?
         end
 end

@@ -12,16 +12,18 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find_by(id: params[:id], state: "inCart")
     @orderprod = OrderProduct.where(order_id: @order.id)
-    order_address()
+    if check_quantity()
+      order_address()
       @orderprod.each do |ordprod|
-          ordprod.update(state: "pending")
-          (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
+            ordprod.update(state: "pending")
+            (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
       end
       if @order.update(state: "pending")
         redirect_to orders_path, notice: 'in Order'
-      else
-        render :edit
       end
+    else
+      redirect_to carts_path, alert: 'Quantity of order didnot match available products'
+    end
   end
 
   private
@@ -37,6 +39,15 @@ class OrdersController < ApplicationController
 
     def order_address
       Address.create(address: params[:address], billing: params[:billing], user_id: current_user.id, order_id: @order.id)
+    end
+
+    def check_quantity
+      @orderprod.each do |ordprod|
+        if ordprod.product.quantity < ordprod.quantity
+          return false
+        end
+      end
+      return true
     end
 
 end

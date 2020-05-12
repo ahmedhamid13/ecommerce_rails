@@ -4,12 +4,12 @@ class Product < ApplicationRecord
     belongs_to :store
     has_one_attached :image
     has_many :rates
+    has_many :reviews
     has_many :order_products
     has_many :orders, through: :order_products
     has_many :coupon
 
-    validates :title, presence: true,
-                    length: { minimum: 5 }
+    validates :title, presence: true, length: { minimum: 5 }
 
     validates :price, :quantity, numericality: true
 

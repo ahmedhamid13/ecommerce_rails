@@ -12,7 +12,7 @@ class Rate < ApplicationRecord
       tot_rate += rate.rate
     end
     if reviewers(prod) > 0
-      return prod_rate = (tot_rate/reviewers(prod))
+      return (prod_rate = (tot_rate/reviewers(prod))).round(1)
     else
       return 0
     end
@@ -23,8 +23,8 @@ class Rate < ApplicationRecord
   end
 
 
-  def check_rate(products, id)
-    (products.rates).where(user_id: id).empty? 
+  def check_rate(product, id)
+    (product.rates).where(user_id: id).empty? 
   end
 
   def get_rate(products, id)

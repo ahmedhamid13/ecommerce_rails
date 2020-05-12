@@ -4,6 +4,7 @@ class Copoun < ApplicationRecord
   enum expiration_type: [ :time, :number_of_usage ]
   enum deduction_type: [ :percentage, :amount_of_money ]
 
+  validates :code, :expiration_type, :deduction_type, presence: true
   validates :expiration_time, presence: true, if: -> {self.expiration_type == "time"}
   validates :expiration_number, presence: true, if: -> {self.expiration_type == "number_of_usage"}
   validates :deduction_percentage, presence: true, if: -> {self.deduction_type == "percentage"}
