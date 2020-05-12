@@ -56,6 +56,11 @@
             </tr>
           </table>
         <% end %>
+        <% if @orders.present? %>
+        <div class="apple_pagination border shadow rounded mt-5 p-1">
+            <%= paginate @orders %>
+        </div>
+        <% end %>
       </div>
     </div>
   </div>

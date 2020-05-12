@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  
+  # paginates_per 2
+
   def index
-    @orders = Order.where(user_id: current_user.id).where.not(state: "inCart").order(created_at: :desc)
+    @orders = Order.where(user_id: current_user.id).where.not(state: "inCart").order(created_at: :desc).page params[:page]
   end
     
   def edit
@@ -38,7 +39,7 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.fetch(:order, {}).permit(:id,:quantity,:address, :billing)
+      params.fetch(:order, {}).permit(:id,:quantity,:address, :billing, :page)
     end
 
     def order_address
