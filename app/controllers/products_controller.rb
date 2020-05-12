@@ -45,15 +45,15 @@ class ProductsController < ApplicationController
         end
     end
 
-    def destroy
-        if check_orders()
-            @product = Product.find(params[:id])
-            @product.destroy
-            redirect_to products_path
-        else
-            redirect_to products_path, alert: "cannot delete product in order process"
-        end
-    end
+    # def destroy
+    #     if check_orders()
+    #         @product = Product.find(params[:id])
+    #         @product.destroy
+    #         redirect_to products_path
+    #     else
+    #         redirect_to products_path, alert: "cannot delete product in order process"
+    #     end
+    # end
 
     def filter_parameters
         @categories = Category.all
