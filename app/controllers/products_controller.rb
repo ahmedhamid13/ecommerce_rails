@@ -1,9 +1,11 @@
 class ProductsController < ApplicationController
     # load_and_authorize_resource
-    before_action :authenticate_user!, :except => [:show, :index]
+    before_action :authenticate_user!, :except => [:show, :index, :filter_products]
     before_action :filter_parameters
     self.page_cache_directory = :domain_cache_directory
     caches_page :show
+
+    @@searched_item = nil
 
     def index
         @searched_item = params[:search]
@@ -62,10 +64,7 @@ class ProductsController < ApplicationController
     end
 
     def filter_products
-
-        unless @searched_item.nil? || @searched_item.empty?
-            @products = Product.search(@searched_item)
-        end
+        @products = Product.search(@@searched_item)
 
         if params[:categories].present? || params[:brands].present? || params[:stores].present? || params[:price_min].present? || params[:price_max].present?
 
@@ -91,7 +90,7 @@ class ProductsController < ApplicationController
             end
 
         else
-            @products = Product.all
+            @products
         end
         respond_to do |format|
             format.js
