@@ -10,9 +10,7 @@ class Product < ApplicationRecord
     has_many :coupon
 
     validates :title, presence: true, length: { minimum: 5 }
-
     validates :price, :quantity, numericality: true
-
     validates :description, :price, :quantity, :category_id, :brand_id, presence: true
     
     def self.search(search)

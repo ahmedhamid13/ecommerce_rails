@@ -1,7 +1,7 @@
-<article class="product">
+<article class="product mb-3 mr-3">
   <header>
     <%= link_to product do %>
-          <%= (product.image.attached?) ? image_tag(product.image, size: "200x150", class: 'card-img-top mt-2 border') : image_tag("noimage.jpg", size: "200x150") %>
+          <%= (product.image.attached?) ? image_tag(product.image, size: "200x150", class: 'card-img-top mt-2 border') : image_tag("noprod.svg", size: "200x150") %>
     <% end %>
       <h4><%= product.title %></h4>
   </header>

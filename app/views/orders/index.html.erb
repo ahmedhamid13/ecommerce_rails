@@ -20,7 +20,7 @@
           <% order.order_products.each do |ordprod| %>
         <tr class="">
             <td>
-                <%= link_to product_path(ordprod.product.id), :class => 'btn btn-sm' do %>
+                <%= link_to product_path(ordprod.product.id), :class => 'text-decoration-none text-dark' do %>
                   <%= ordprod.product.title %>
                 <% end %>            
             </td>

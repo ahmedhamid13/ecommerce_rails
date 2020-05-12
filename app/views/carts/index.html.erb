@@ -18,7 +18,7 @@
         <tbody>
           <% @cart.order_products.each do |ordprod| %>
             <tr>
-                  <td><%= link_to product_path(ordprod.product.id), :class => 'btn btn-sm' do %>
+                  <td><%= link_to product_path(ordprod.product.id), :class => 'text-decoration-none text-dark' do %>
                       <%= ordprod.product.title %>
                   <% end %></td>
                   <td><%= ordprod.quantity %></td>

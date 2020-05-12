@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
   ### Landing Page
   root 'welcome#index'
   get 'welcome/index'
@@ -38,6 +39,10 @@ Rails.application.routes.draw do
   post "comment.product/:id" => 'reviews#comment', as: 'comment_product'
   ########################################################################
   
+  ### Profile Routes
+  get 'profile/:id', to: 'profiles#show', as: 'profile'
+  ########################################################################
+
   #Product API Routes
   namespace :api do
     resources :products

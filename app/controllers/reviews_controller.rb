@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-
+    before_action :authenticate_user! 
+    
     def rate
         if !(Rate.new).check_rate(Product.find(params[:id]), current_user.id)
             rate_update()

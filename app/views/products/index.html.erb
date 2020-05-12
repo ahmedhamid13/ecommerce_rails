@@ -1,15 +1,14 @@
-<div class="products-page container-fluid">
-    <div class="row m-1">
+<div class="products-page container-fluid ">
+    <div class="row m-1 justify-content-center">
         <%= render 'layouts/sidebar'%>
-        <div class="main-content col-md-9">
-            <div class="container">
-                <div class="d-flex flex-wrap justify-content-center mt-5">
+        <div class="main-content col-md-8 ml-3 p-3">
+                <div class="d-flex flex-wrap border p-2 justify-content-center">
                     <span class="px-2 py-1 align-self-center mr-3 d-md-none btn btn-outline-primary" onclick="showSidebar()">
                         <i class="fas fa-filter"></i>
                     </span>
                     <% if current_user && current_user.seller_role? %>
                         <div class="mr-3 align-self-center">
-                            <%= link_to "Add Product", new_product_path, class: 'd-inline btn btn-outline-primary' %>
+                            <%= link_to "Add Product", new_product_path, class: 'd-inline btn-lg btn btn-outline-primary' %>
                         </div>
                     <% end %>
                     <%# Search %>
@@ -18,7 +17,7 @@
                         <%= submit_tag "Search", class: 'btn btn-dark', onclick: 'checkDimensions()' %>
                     <% end %>
                 </div>
-                <hr>
+            <div class="container mt-1 shadow p-2">
                 <div class="products mb-5">
                     <% if @products.present? %>
                         <%= render @products %>
@@ -27,9 +26,12 @@
                     <% end %>
                 </div>
             </div>
-            <div class="apple_pagination">
-                <%= will_paginate @products%>
-             </div>
+            <% if @products.present? %>
+                <div class="apple_pagination border shadow rounded mt-5 p-1">
+                    <%= will_paginate @products%>
+                </div>
+            <% end %>
+
         </div>
     </div>
 </div>

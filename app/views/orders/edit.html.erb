@@ -18,7 +18,7 @@
         <% @order.order_products.each do |ordprod| %>
         <tr>
             <td>
-                <%= link_to product_path(ordprod.product.id), :class => 'btn btn-sm' do %>
+                <%= link_to product_path(ordprod.product.id), :class => 'text-decoration-none text-dark' do %>
                   <%= ordprod.product.title %>
                 <% end %>
             </td>
@@ -37,14 +37,17 @@
       </tbody>
     </table>
       <hr >
-            <div class="text-center h5 p-2 m-4 border">
+            <div class="text-center h5 p-2 m-3 border">
               <%= form_with(url: order_path(@order.id), method: "put") do |form| %>
                   <p>
                     <%= form.label :address %> | <%= form.text_field :address, required: true %>
                   </p>  
                   <p>
                     <%= form.label :billing %> | <%= form.text_field :billing, required: true %>
-                  </p>                  
+                  </p>  
+                  <p>
+                    <%= form.label :copoun %> | <%= form.text_field :copoun %>
+                  </p>                       
                   <%= form.submit "CheckOut", :class => 'btn btn-dark shadow' %>
               <% end %>
             </div>

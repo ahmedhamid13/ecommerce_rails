@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
 <div class="col-10 border p-1 m-5">
-<h1 class="text-center mt-3 m-2 bg-success rounded shadow">Store History</h1>
+<h1 class="text-center mt-3 m-2 bg-success rounded shadow"><%= current_user.store.name%> Store History</h1>
 <hr />
 <div class="m-3">
     <% if ! @orders.empty? %>
@@ -15,7 +15,7 @@
           <tbody>
             <% @orders.each do |order| %>
                   <tr class="">
-                      <td><%= link_to product_path(order.product.id), :class => 'btn btn-sm' do %>
+                      <td><%= link_to product_path(order.product.id), :class => 'text-decoration-none text-dark' do %>
                         <%= order.product.title %>
                       <% end %></td>
                       <td><%= order.created_at %></td>

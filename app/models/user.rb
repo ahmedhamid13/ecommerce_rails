@@ -14,4 +14,8 @@ class User < ApplicationRecord
     def send_admin_mail
       UserMailer.send_welcome_email(self).deliver_later
     end
+
+  def get_orders(user)
+    Order.where(user_id: user.id).size
+  end
 end

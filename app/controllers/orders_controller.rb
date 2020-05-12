@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   def index
     @orders = Order.where(user_id: current_user.id).where.not(state: "inCart").order(created_at: :desc)
   end
@@ -19,7 +20,7 @@ class OrdersController < ApplicationController
             (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
       end
       if @order.update(state: "pending")
-        redirect_to orders_path, notice: 'in Order'
+        redirect_to orders_path, notice: 'put in Order'
       end
     else
       redirect_to carts_path, alert: 'Quantity of order didnot match available products'
