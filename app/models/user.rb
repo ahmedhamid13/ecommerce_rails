@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :addresses
   has_one :store
-  has_one :copoun
+  has_one :coupon
   has_many :rates
   has_many :reviews
   has_one_attached :avatar
