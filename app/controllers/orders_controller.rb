@@ -60,10 +60,14 @@ class OrdersController < ApplicationController
 
     def check_coupon
       @coupon = Coupon.find_by(code: params[:coupon])
-      if !@coupon.is_expire(@coupon)
-        @coupon.deduction(get_total(@order.id), @coupon)
+      if !@coupon.nil?
+        if !@coupon.is_expire(@coupon)
+          @coupon.deduction(get_total(@order.id), @coupon)
+        else
+          false
+        end
       else
-        false
+        true
       end
     end
 
