@@ -40,8 +40,8 @@
       </table>
       <hr >
       <div class="text-center">
-        <%= link_to 'put in Order', edit_order_path(@cart.id), class: 'btn btn-success' %> |
-        <%= link_to 'Remove', cart_path(@cart.id), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></p>
+        <%= link_to 'Put in order', edit_order_path(@cart.id), class: 'btn btn-success' %> |
+        <%= link_to 'Remove', remove_product_path(@cart.id), method: :delete, class: 'btn btn-danger' , data: { confirm: 'Are you sure?' } %></p>
     </div>
   <% else %>
     <table class="table table table-striped shadow rounded text-center mb-4">
