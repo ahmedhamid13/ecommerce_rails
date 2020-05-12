@@ -14,7 +14,9 @@ class Product < ApplicationRecord
     validates :description, :price, :quantity, :category_id, :brand_id, presence: true
     
     def self.search(search)
-        if search
+        if search.empty? || search.nil?
+            @products = self.all  
+        else
             products = self.where("lower(title) LIKE lower(?) or lower(description) LIKE(?)", "%#{search}%", "%#{search}%")
 
             if products.exists?
@@ -22,8 +24,6 @@ class Product < ApplicationRecord
             else
                 @products = []
             end
-        else
-            @products = self.all
         end
     end
 
