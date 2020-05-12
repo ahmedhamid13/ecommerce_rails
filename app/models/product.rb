@@ -39,8 +39,8 @@ class Product < ApplicationRecord
         return false
     end
 
-    self.per_page = 10
+    # self.per_page = 10
 
 end
 
-WillPaginate.per_page =10
+# WillPaginate.per_page =10
