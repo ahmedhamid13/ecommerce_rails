@@ -7,11 +7,10 @@ class Ability
     # Define abilities for the passed in user here. For example:
       user ||= User.new # guest user (not logged in)
       #logged user
-
       #Admin
       if user.superadmin_role?
         # can :manage, :all
-        can :manage, [Brand, Category, Store, Copoun] #admin can manage only these models
+        can :manage, [Brand, Category, Store, Coupon] #admin can manage only these models
         can :access, :rails_admin       # only allow admin users to access Rails Admin
         can :manage, :dashboard         # allow access to dashboard
         can :read, [User,Product] #admin can read these models
