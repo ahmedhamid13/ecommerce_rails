@@ -18,7 +18,7 @@
           <%= link_to "Add To Cart", add_to_cart_path(@product.id), class: 'btn btn-warning text-dark', method: :post %>
         <% end %>
       <% else %>
-        <h5 class="bg-secondary m-4">Out of stock</h5>
+        <h4 class="border p-2 rounded text-danger">Out of stock</h4>
       <% end %>
       <%# END ADD TO CART %>
     </div>

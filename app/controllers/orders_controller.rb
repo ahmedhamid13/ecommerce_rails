@@ -15,9 +15,8 @@ class OrdersController < ApplicationController
 
     @order = Order.find_by(id: params[:id], state: "inCart")
     @orderprod = OrderProduct.where(order_id: @order.id)
-
-    if check_quantity()
-      if !order_address()
+    if !check_quantity()
+      if check_coupon() && !order_address()
         @orderprod.each do |ordprod|
               ordprod.update(state: "pending")
               (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
@@ -29,7 +28,7 @@ class OrdersController < ApplicationController
         redirect_to request.referrer, alert: 'Form inputs not valid please check them'
       end
     else
-      redirect_to carts_path, alert: 'Quantity of order didnot match available products'
+      redirect_to carts_path, alert: 'Quantity of '+ check_quantity() +' didnot match available products'
     end
 
   end
@@ -53,15 +52,30 @@ class OrdersController < ApplicationController
     def check_quantity
       @orderprod.each do |ordprod|
         if ordprod.product.quantity < ordprod.quantity
-          return false
+          return ordprod.product.title
         end
       end
-      return true
+      return false
     end
 
     def check_coupon
       @coupon = Coupon.find_by(code: params[:coupon])
-
+      if !@coupon.nil?
+        if !@coupon.is_expire(@coupon)
+          @coupon.deduction(get_total(@order.id), @coupon)
+        else
+          false
+        end
+      else
+        true
+      end
     end
 
+    def get_total(order_id)
+      @ordprod = OrderProduct.where(order_id: order_id)
+      tot_price = 0
+      @ordprod.each do |ordprod|
+        tot_price += ordprod.quantity*ordprod.product.price
+      end
+    end
 end
