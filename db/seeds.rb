@@ -25,8 +25,8 @@ end
         price: Faker::Number.decimal(l_digits: 4, r_digits: 2),
         quantity: Faker::Number.between(from: 10, to: 50),
         description: Faker::Hacker.say_something_smart,
-        category_id: Faker::Number.between(from: 1, to:7),
-        brand_id: Faker::Number.between(from: 1, to: 7),
+        category_id: (Category.all.sample).id,
+        brand_id: (Brand.all.sample).id,
         store_id: 1,
     )
 
