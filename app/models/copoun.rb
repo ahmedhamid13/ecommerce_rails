@@ -4,7 +4,7 @@ class Copoun < ApplicationRecord
   enum expiration_type: [ :time, :number_of_usage ]
   enum deduction_type: [ :percentage, :amount_of_money ]
 
-  validates :code, :expiration_type, :deduction_type, presence: true
+  validates_presence_of :name, :expiration_type, :deduction_type
   validates :expiration_time, presence: true, if: -> {self.expiration_type == "time"}
   validates :expiration_number, presence: true, if: -> {self.expiration_type == "number_of_usage"}
   validates :deduction_percentage, presence: true, if: -> {self.deduction_type == "percentage"}
@@ -27,5 +27,32 @@ class Copoun < ApplicationRecord
         hide
       end
     end
+  end
+
+  #check if the copoun is expired or not
+  def is_expire(count, copoun_obj) 
+    if copoun_obj.expiration_type == "time" 
+      true if copoun_obj.expiration_time < Date.today
+    else
+      true if copoun_obj.expiration_number < count
+    end
+  end
+
+
+  #the deduction of the order
+  def deduction(price, copoun_obj) 
+    if copoun_obj.deduction_type == "percentage"
+      total_price = price * (copoun_obj.deduction_percentage / 100)
+    else
+      total_price = price - copoun_obj.deduction_amount
+    end
+  end
+
+  #check if the user use the copoun once
+  before_save :check_user
+
+  private
+  def check_user
+    flash[:alert] = "User not found." if self.user?
   end
 end
