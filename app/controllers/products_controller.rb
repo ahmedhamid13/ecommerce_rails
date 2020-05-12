@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
     @@searched_item = nil
 
     def index
-        @searched_item = params[:search]
+        @@searched_item = params[:search]
         @products = Product.search(params[:search]).page params[:page]
     end
 
