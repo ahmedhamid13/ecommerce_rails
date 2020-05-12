@@ -1,3 +1,8 @@
+<%if current_user %>
+<% presenter = ImagePresenter.new(current_user) %>
+<%else%>
+<% presenter = ImagePresenter.new(nil) %>
+<%end%>
 <nav class="navbar navbar-dark navbar-static-top navbar-expand-md bg-dark p-1 mb-3">
     <div class="container-fluid">
         <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,39 +12,39 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav mr-auto">
                 <li class='nav-item p-1 rounded'>
-                    <%= link_to  welcome_index_path, class: 'nav-link text-white btn-outline-primary rounded btn-lg' do %>
+                    <%= link_to  welcome_index_path, class: 'nav-link text-white btn-outline-primary rounded btn-md' do %>
                         <%= fa_icon "home", class: 'text-white' %>
                         <span>Home</span>
                     <%end%>
                 </li>  
                 <li class='nav-item p-1 rounded'>
-                    <%= link_to products_path, class: 'nav-link text-white btn-outline-primary rounded btn-lg' do %>
+                    <%= link_to products_path, class: 'nav-link text-white btn-outline-primary rounded btn-md' do %>
                         <i class="fas fa-boxes"></i>
                         <span>Products</span>
                     <%end%>
                 </li>  
             <% if current_user %>
                 <li class='nav-item p-1 rounded'>
-                    <%= link_to carts_path, class: 'nav-link text-white btn-outline-warning rounded btn-lg' do %>
+                    <%= link_to carts_path, class: 'nav-link text-white btn-outline-warning rounded btn-md' do %>
                         <i class="fab fa-opencart"></i>
                         <span>Cart</span>
                     <%end%>
                 </li>
                 <li class='nav-item p-1 rounded'>
-                    <%= link_to orders_path, class: 'nav-link text-white btn-outline-primary rounded btn-lg' do %>
+                    <%= link_to orders_path, class: 'nav-link text-white btn-outline-primary rounded btn-md' do %>
                         <i class="fas fa-shipping-fast"></i>
                         <span>Orders</span>
                     <%end%>
                 </li>
                 <% if current_user.seller_role? %>
                     <li class='nav-item p-1 rounded'>
-                        <%= link_to store_orders_path, class: 'nav-link text-white btn-outline-primary rounded btn-lg' do %>
+                        <%= link_to store_orders_path, class: 'nav-link text-white btn-outline-primary rounded btn-md' do %>
                             <i class="fas fa-store-alt"></i>
                             <span>Store</span>
                         <%end%>
                     </li> 
                     <li class='nav-item p-1 rounded'>
-                        <%= link_to store_history_path, class: 'nav-link text-white btn-outline-secondary rounded btn-lg' do %>
+                        <%= link_to store_history_path, class: 'nav-link text-white btn-outline-secondary rounded btn-md' do %>
                             <i class="fas fa-history"></i>
                             <span>History</span>
                         <%end%>
@@ -49,39 +54,34 @@
             </ul>
             <ul class="nav navbar-nav ml-auto">
             <% if current_user %>
-                <li class='nav-item p-1 rounded d-none d-md-block'>  <%= link_to profile_path(current_user.id), title: current_user.name do %>
-                                                            <% if current_user.avatar.attached?%>
-                                                                <%image_tag current_user.avatar,size: "40x40" ,class: "rounded-circle ml-2 mt-1" %>
-                                                            <% elsif current_user.superadmin_role? %>
-                                                                <%image_tag("admin.png", size: "40x40",class: "rounded-circle ml-2 mt-1") %>
-                                                            <%else%>
-                                                                 <%image_tag("avatar.svg", size: "40x40",class: "rounded-circle ml-2 mt-1") %>
-                                                            <%end%>
-                                                    <% end %>
+                <li class='nav-item p-1 rounded d-none d-md-block'>
+                    <%= link_to profile_path(current_user.id), title: current_user.name do %>
+                        <%image_tag presenter.image, size: "40x40" ,class: "rounded-circle ml-2 mt-1" %>
+                    <% end %>
                 </li>                 
                 <% if current_user.superadmin_role? %>
                         <li class='nav-item p-1 rounded'>
-                            <%= link_to "/admin", class: 'nav-link text-white btn-outline-success rounded btn-lg' do %>
+                            <%= link_to "/admin", class: 'nav-link text-white btn-outline-success rounded btn-md' do %>
                                 <i class="fas fa-user-cog"></i>
                                 <span>Dashboard</span>
                             <%end%>
                         </li> 
                 <% end %>
                         <li class='nav-item p-1 rounded'>
-                            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-white btn-outline-danger rounded btn-lg' do %>
+                            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-white btn-outline-danger rounded btn-md' do %>
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Sign Out</span>
                             <%end%>
                         </li>
             <%else%>
                 <li class='nav-item p-1 rounded'>
-                    <%= link_to new_user_registration_path, class: 'nav-link text-white btn-outline-primary rounded btn-lg' do %>
+                    <%= link_to new_user_registration_path, class: 'nav-link text-white btn-outline-primary rounded btn-md' do %>
                         <i class="fas fa-user-plus"></i>
                         <span>Sign Up</span>
                     <%end%>
                 </li>
                 <li class='nav-item p-1 rounded'>
-                    <%= link_to new_user_session_path, class: 'nav-link text-white btn-outline-primary rounded btn-lg' do %>
+                    <%= link_to new_user_session_path, class: 'nav-link text-white btn-outline-primary rounded btn-md' do %>
                         <i class="fas fa-sign-in-alt"></i>
                         <span>Sign In</span>
                     <%end%>
