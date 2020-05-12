@@ -1,15 +1,50 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
 
-Category.create(name: "Laptops")
-Brand.create(name: "Dell")
-Store.create(
-    name: "Carrefour",
-    summary: "Hyper Market",
-    user_id: 1
-)
+# 10.times do
+#     User.create(
+#         name: Faker::Name.name , 
+#         email: Faker::Internet.email, 
+#         password: "123456", 
+#         password_confirmation: "123456"
+#     )
+# end
+
+8.times do
+    Category.create(name: Faker::Device.platform)
+    Brand.create(name: Faker::Device.manufacturer)
+end
+        Store.create(
+            name: Faker::Device.manufacturer,
+            summary: Faker::Hacker.say_something_smart,
+            user_id: 1
+        )
+
+40.times do |t|
+    Product.create(
+        title: Faker::Device.platform,
+        price: Faker::Number.decimal(l_digits: 4, r_digits: 2),
+        quantity: Faker::Number.between(from: 10, to: 50),
+        description: Faker::Hacker.say_something_smart,
+        category_id: Faker::Number.between(from: 1, to:7),
+        brand_id: Faker::Number.between(from: 1, to: 7),
+        store_id: 1,
+    )
+
+    4.times do
+        Rate.create(
+            rate: Faker::Number.between(from: 1, to:5),
+            user_id: 1,
+            product_id: t
+        )
+        Review.create(
+            comment: Faker::Hacker.say_something_smart,
+            user_id: 1,
+            product_id: t
+        )
+    end
+
+    # Image.create(
+    #     source: Faker::Avatar.image,
+    #     product_id: t
+    # )
+end

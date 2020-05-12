@@ -1,29 +1,22 @@
 class CartsController < ApplicationController
-  
+  before_action :authenticate_user!
+
   def index
     @cart = Order.find_by(user_id: current_user.id, state: "inCart")
   end
 
-  def show
-    # @cart = Order.find_by(user_id: current_user.id, state: "inCart")
-  end
-
-  def new
-    # @cart = Cart.new
-  end
-
   def create
     if Product.find(params[:id]).quantity == 0
-      redirect_to products_path, alert: 'Cannot add it, no available items for your order'
+      redirect_to products_path, alert: Product.find(params[:id]) + 'Cannot add it, no available items for your order'
     else
       @order = Order.find_by(user_id: current_user.id, state: "inCart")
 
       if @order.nil?
         @order =Order.create(user_id: current_user.id, state: "inCart")
       end
-
       update(@order, params[:id], params[:quantity])
-      redirect_to request.referrer, notice: 'Cart Changed successfully'
+
+      redirect_to request.referrer, notice: Product.find(params[:id]).title + ' added to cart successfully'
     end
   end
 

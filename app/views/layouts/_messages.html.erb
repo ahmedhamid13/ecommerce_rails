@@ -1,6 +1,6 @@
 <% flash.each do |key, value| %>
-  <div class="container shadow alert alert-<%= key %>">
-    <%= value %>
-    <a href="#" data-dismiss="alert" class="close">×</a>
+  <div class="container p-2 text-center shadow rounded alert alert-<%= key %>">
+    <h5 class="d-inline"><%= value %></h5>
+    <a href="#" data-dismiss="alert" class="close text-right text-dark">×</a>
   </div>
 <% end %>
