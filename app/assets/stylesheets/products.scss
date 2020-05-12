@@ -1,14 +1,16 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.container {padding: 0}
+.container {
+  padding: 0;
+}
 #sidebar-wrapper {
-    min-height: 100vh;
-    background-color: #eee;
-    -webkit-transition: margin .25s ease-out;
-    -moz-transition: margin .25s ease-out;
-    -o-transition: margin .25s ease-out;
-    transition: margin .25s ease-out;
+  min-height: 100vh;
+  background-color: #eee;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
 }
 
 .products {
@@ -18,97 +20,92 @@
 .products-page {padding: 0;}
 
 .card-body > a:first-of-type {
-    color: black;
-    text-decoration: none;
-} 
+  color: black;
+  text-decoration: none;
+}
 
-.price-filter input {max-width: 100%;}
+.price-filter input {
+  max-width: 100%;
+}
 
 main section.products-index,
-  .products {
-    display:         flex;
-    flex-direction:  row;
-    flex-wrap:       wrap;
-    justify-content: space-around;
+.products {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
-    .product {
-      // flex:      1;
-      max-width: 280px;
-      // so that footer within can be positioned absolutely
-      position:  relative;
+  .product {
+    // flex:      1;
+    max-width: 280px;
+    // so that footer within can be positioned absolutely
+    position: relative;
 
-      border:        1px solid #ccc;
-      border-radius: 5px;
-      padding:       15px;
-      padding-bottom: 80px;
-      margin-top:    20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    padding-bottom: 80px;
+    margin-top: 20px;
     //   margin-right:    10px;
     //   margin:        10px;
 
-      header img {
-        max-width: 100%;
-        max-height: 140px;
-        margin: auto;
-        display: block;
-      }
+    header img {
+      max-width: 100%;
+      max-height: 140px;
+      margin: auto;
+      display: block;
+    }
 
-      p{
-           
-      }
+    p {
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: #eee;
+      padding: 15px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      width: 100%;
+      opacity: 0.3;
+      transition: all 0.3s;
+    }
+
+    aside.price {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      background-color: #eee;
+      border-top-right-radius: 4px;
+      border-bottom-left-radius: 20px;
+      font-size: 0.8em;
+    }
+
+    aside.soldout {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px;
+      background-color: #ff9b9b;
+      border-top-left-radius: 4px;
+      border-bottom-right-radius: 20px;
+      color: white;
+      font-size: 0.8em;
+    }
+
+    &:hover {
+      border-color: #999;
 
       footer {
-        position: absolute;
-        bottom: 0;
-        left:   0;
-        background-color: #EEE;
-        padding: 15px;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        width: 100%;
-        opacity: 0.3;
-        transition: all 0.3s;
+        opacity: 1;
       }
-
-      aside.price {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 10px;
-        background-color: #eee;
-        border-top-right-radius: 4px;
-        border-bottom-left-radius: 20px;
-        font-size: 0.8em;
-      }
-
-      aside.soldout {
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 10px;
-        background-color: #ff9b9b;
-        border-top-left-radius: 4px;
-        border-bottom-right-radius: 20px;
-        color: white;
-        font-size: 0.8em;
-      }
-
-
-
-      &:hover {
-
-        border-color: #999;
-
-        footer {
-          opacity: 1.0;
-        }
-      }
-
     }
   }
-
+}
 
 main section.products-show {
-
   .product-detail {
     img.main-img {
       max-width: 100%;
@@ -131,4 +128,43 @@ main section.products-show {
   .search-form {
     margin-top: 1rem;
   }
+}
+
+.apple_pagination {
+  background: #f1f1f1;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+  padding: 1em;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+}
+
+.apple_pagination a,
+.apple_pagination span {
+  padding: 0.2em 0.3em;
+}
+.apple_pagination .disabled {
+  color: #aaaaaa;
+}
+.apple_pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  background-color: #bebebe;
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  line-height: 1.5;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px;
+}
+.apple_pagination a {
+  text-decoration: none;
+  color: black;
+}
+.apple_pagination a:hover,
+.apple_pagination a:focus {
+  text-decoration: underline;
 }

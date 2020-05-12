@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
 
     def index
         @searched_item = params[:search]
-        @products = Product.search(params[:search])
+        @products = Product.search(params[:search]).paginate(page: params[:page])
     end
 
     def new
@@ -100,7 +100,7 @@ class ProductsController < ApplicationController
 
     private
         def product_params
-            params.require(:product).permit(:title, :rate, :description, :price, :quantity, :category_id, :brand_id, :image)
+            params.require(:product).permit(:title, :rate, :description, :price, :quantity, :category_id, :brand_id, :image, :page)
         end
 
         def domain_cache_directory
