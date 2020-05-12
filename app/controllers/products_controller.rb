@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
 
     def index
         @@searched_item = params[:search]
+        @filtered = false
         @products = Product.search(params[:search]).page params[:page]
     end
 
@@ -64,9 +65,9 @@ class ProductsController < ApplicationController
     end
 
     def filter_products
-        @products = Product.search(@@searched_item)
-
+        
         if params[:categories].present? || params[:brands].present? || params[:stores].present? || params[:price_min].present? || params[:price_max].present?
+            @products = Product.search(@@searched_item)
 
             if params[:categories].present?
                 @products = (@products.nil?) ? Product.where(category_id: params[:categories]) : @products.where(category_id: params[:categories])
@@ -89,8 +90,12 @@ class ProductsController < ApplicationController
                 @products = (@products.nil?) ? Product.where("price <= ?", params[:price_max]) : @products.where("price <= ?", params[:price_max])
             end
 
-        else
+            @filtered = true
             @products
+
+        else
+            @filtered = false
+            @products = Product.search(@@searched_item).page params[:page]
         end
         respond_to do |format|
             format.js
