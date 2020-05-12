@@ -15,9 +15,8 @@ class OrdersController < ApplicationController
 
     @order = Order.find_by(id: params[:id], state: "inCart")
     @orderprod = OrderProduct.where(order_id: @order.id)
-
     if check_quantity()
-      if !order_address()
+      if check_coupon() && !order_address()
         @orderprod.each do |ordprod|
               ordprod.update(state: "pending")
               (ordprod.product).update(quantity: ordprod.product.quantity-ordprod.quantity)
@@ -61,7 +60,18 @@ class OrdersController < ApplicationController
 
     def check_coupon
       @coupon = Coupon.find_by(code: params[:coupon])
-
+      if !@coupon.is_expire(@coupon)
+        @coupon.deduction(get_total(@order.id), @coupon)
+      else
+        false
+      end
     end
 
+    def get_total(order_id)
+      @ordprod = OrderProduct.where(order_id: order_id)
+      tot_price = 0
+      @ordprod.each do |ordprod|
+        tot_price += ordprod.quantity*ordprod.product.price
+      end
+    end
 end
