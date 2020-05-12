@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-<div class="col-9 border p-1 m-5">
+<div class="col-10 border p-1 m-5">
 <h1 class="text-center mt-3 m-2 bg-success rounded shadow">Store History</h1>
 <hr />
 <div class="m-3">
@@ -15,7 +15,9 @@
           <tbody>
             <% @orders.each do |order| %>
                   <tr class="">
-                      <td><%= order.product.title %></td>
+                      <td><%= link_to product_path(order.product.id), :class => 'btn btn-sm' do %>
+                        <%= order.product.title %>
+                      <% end %></td>
                       <td><%= order.created_at %></td>
                       <td><%= order.quantity %></td>
                   </tr>

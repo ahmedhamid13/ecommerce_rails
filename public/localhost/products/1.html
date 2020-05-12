@@ -4,9 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcommerceRails</title>
     <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="VpVeyiFxLpH6MQrrdnLUB8Xatx4AHXGaiHmeE7SOoAgOGmqY4riV+MJWpUh8/K7bD0TD+JaM+sk/YJ3XwIIRNg==" />
+<meta name="csrf-token" content="/9yDFEqRHy2hCD7lNKSty5gPDZPiErw3b7ylYAaHxCqBbKHYS9XGZ4TowGgA/N7bC18GDf7WTtpG0/EJqRt4nA==" />
     
-    <link rel="stylesheet" media="all" href="/assets/application.debug-c57134426e8034739f83a88f08ebc1869df958090044087250f2725ce048de37.css" data-turbolinks-track="reload" />
+    <link rel="stylesheet" media="all" href="/assets/application.debug-74ddbe06358ac0af1b0f3b9615a7dec11879b0633089703b6806c0a586ae63bd.css" data-turbolinks-track="reload" />
     <link rel="stylesheet" media="all" href="/assets/products.debug-3acb971d3c144022015fbcb28024e6d40cb635c2c1670769d2eb2de72cc30213.css" data-turbolinks-track="reload" />
     <link rel="stylesheet" media="all" href="/assets/welcome.debug-b88ed8664de5ebca3960e9b4ca09f7009d36f706d714c65b645affa69a29e2b8.css" data-turbolinks-track="reload" />
     <script src="/packs/js/application-87b64902c65cf540ef41.js" data-turbolinks-track="reload"></script>
@@ -16,51 +16,41 @@
 
   <body class="d-flex flex-column justify-content-between">
     <header class="">
-      <nav class="navbar navbar-dark navbar-static-top navbar-expand-md bg-dark p-1">
+      <nav class="navbar navbar-dark navbar-static-top navbar-expand-md bg-dark p-1 mb-3">
     <div class="container-fluid">
         <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
         <span class="d-md-none m-2">
-            <a title="Admin" href="/welcome/index"><img class="rounded-circle" src="/assets/admin-6661d2ddf0c3f154a25d2d8731ead41934fcf43bbead1110ae40a3dcc7de018c.png" width="50" height="50" /></a>        </span>
+            <a title="ahmed" href="/welcome/index"><img class="rounded-circle" src="http://localhost:3000/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--03058b0d19a588091e62e6d3ac032bc24466d402/woman-in-black-hijab-taking-selfie-4029925.jpg" width="50" height="50" /></a>        </span>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav mr-auto">
                 <li class='nav-item p-1 rounded'>
-                    <a class="nav-link text-white btn-outline-primary rounded" href="/welcome/index">
+                    <a class="nav-link text-white btn-outline-primary rounded btn-lg" href="/welcome/index">
                         <i class="fa fa-home text-white"></i>
                         <span>Home</span>
 </a>                </li>  
                 <li class='nav-item p-1 rounded'>
-                    <a class="nav-link text-white btn-outline-info rounded" href="/products">
+                    <a class="nav-link text-white btn-outline-primary rounded btn-lg" href="/products">
                         <i class="fas fa-boxes"></i>
                         <span>Products</span>
 </a>                </li>  
                 <li class='nav-item p-1 rounded'>
-                    <a class="nav-link text-white btn-outline-warning rounded" href="/carts">
+                    <a class="nav-link text-white btn-outline-warning rounded btn-lg" href="/carts">
                         <i class="fab fa-opencart"></i>
                         <span>Cart</span>
 </a>                </li>
                 <li class='nav-item p-1 rounded'>
-                    <a class="nav-link text-white btn-outline-success rounded" href="/orders">
+                    <a class="nav-link text-white btn-outline-primary rounded btn-lg" href="/orders">
                         <i class="fas fa-shipping-fast"></i>
                         <span>Orders</span>
 </a>                </li>
-                    <li class='nav-item p-1 rounded'>
-                        <a class="nav-link text-white btn-outline-primary rounded" href="/store.orders">
-                            <i class="fas fa-store-alt"></i>
-                            <span>Store</span>
-</a>                    </li> 
             </ul>
             <ul class="nav navbar-nav ml-auto">
-                <li class='nav-item p-1 rounded d-none d-md-block'>  <a title="Admin" href="/welcome/index"><img class="rounded-circle" src="/assets/admin-6661d2ddf0c3f154a25d2d8731ead41934fcf43bbead1110ae40a3dcc7de018c.png" width="40" height="40" /></a>                </li>                 
+                <li class='nav-item p-1 rounded d-none d-md-block'>  <a title="ahmed" href="/welcome/index"><img class="rounded-circle ml-2 mt-1" src="http://localhost:3000/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--03058b0d19a588091e62e6d3ac032bc24466d402/woman-in-black-hijab-taking-selfie-4029925.jpg" width="40" height="40" /></a>                </li>                 
                         <li class='nav-item p-1 rounded'>
-                            <a class="nav-link text-white btn-outline-success rounded" href="/admin">
-                                <i class="fas fa-user-cog"></i>
-                                <span>Dashboard</span>
-</a>                        </li> 
-                        <li class='nav-item p-1 rounded'>
-                            <a class="nav-link text-white btn-outline-danger rounded" rel="nofollow" data-method="delete" href="/users/sign_out">
+                            <a class="nav-link text-white btn-outline-danger rounded btn-lg" rel="nofollow" data-method="delete" href="/users/sign_out">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Sign Out</span>
 </a>                        </li>
@@ -74,60 +64,92 @@
     <div class="">
       <link rel="stylesheet" media="all" href="/assets/product_details.debug-677ebfc144570f63cf2a52e188d443e9c0c10bfc8d88a0b74ae6e570938cd728.css" data-turbolinks-track="reload" />
 
-<div class="row justify-content-center text-center border m-2 p-2">
-        <h4 class="col-md-11 bg-dark rounded p-1 text-white">Product details</h1>
+<div class="row justify-content-center text-center border m-4 p-2">
+        <h1 class="col-md-11 bg-dark rounded p-2 shadow mb-3 text-white">Product details</h1>
 
         <div class="col-md-5 ml-2 m-2 p-2">
                 <img src="/assets/noprod-58957dc5a46ae64b956b5d3d568e18006898eaf759c1f1c11abc8bcdd8cdf7e7.svg" width="380" height="400" />
                 <div class="border border-warning rounded p-2 text-center">
-                        <form action="/add.to.cart/1" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="AbJaiI1Q/SBehjpJhabYYwLzA7pVL7CzeVpLiJVwC41NFcUqsqZNi0qINAXzS1VBKFbQV7QJXiAo4dnh+cO8/w==" />
+                        <form action="/add.to.cart/1" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="7fSWzYk5iZrvvFAGHgUURow6fGDR8ALuwwXGMXOdePqYc6g01FtQ7x8GuhTpF9z+43g3+Y/oU26pebuyoBq/+g==" />
                             <div class="col-md-8 text-center d-inline-flex">
-                                <input value="1" min="1" max="40" class="form-control d-inline-flex mr-3" type="number" name="quantity" id="quantity" />
+                                <input value="1" min="1" max="21" class="form-control d-inline-flex mr-3" type="number" name="quantity" id="quantity" />
                                 <input type="submit" name="commit" value="Add to Cart" class="btn btn btn-warning text-dark shadow" data-disable-with="Add to Cart" />
                             </div>
 </form>            </div>
         </div>
         <div class="col-md-5 bg ml-2 m-2">
-                    <h1 class="mt-3">Notebook</h1>
+                    <h1 class="mt-3">Android</h1>
                     <hr>
-                    <p><b>Rate:</b> 0 | <b>Reviewers:</b> 0</p>
-                    <p><b>Price:</b> 45000.0 | <b>AvailableQuantity:</b> 40</p>
-                    <p><b>Store:</b> Radio Shack</p>
-                    <p><b>Category:</b> Laptop | <b>Brand:</b> DELL</p>
+                    <p><b>Rate:</b> 3.3 | <b>Reviewers:</b> 3</p>
+                    <p><b>Price:</b> 270.32 | <b>AvailableQuantity:</b> 21</p>
+                    <p><b>Store:</b> Acer</p>
+                    <p><b>Category:</b> iOS | <b>Brand:</b> Dell</p>
                     <hr>
                     <h5><b>Product Description</b></h5>
-                    <p class="border rounded mt-3 p-1 mb-3">dgfddfgdfgfgdgdf</p>
+                    <p class="border rounded mt-3 p-1 mb-3">Navigating the circuit won&#39;t do anything, we need to generate the bluetooth ssl matrix!</p>
 
                     <div class="text-center">
-                            <a class="btn btn-primary shadow" href="/products/1/edit">Edit</a>
-                            | <a data-confirm="Are you sure you want to delete this product?" class="btn btn-danger shadow" rel="nofollow" data-method="delete" href="/products/1">Delete</a>
                     </div>
         </div>
 
 </div>
 
-<div class="row justify-content-center text-center border m-2 p-2">
-        <h4 class="col-md-11 bg-dark rounded p-1 text-white">User</h1>
+<div class="row justify-content-center text-center border m-4 p-2">
+        <h3 class="col-md-11 bg-dark rounded p-2 shadow mb-3 text-white">Your Review</h3>
 
+        <div class="col-md-5 align-self-center">
+            <div class="rounded p-2 m-1 text-center border rounded">
+                        <form action="/rate.product/1" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="NBAKhb+pwjHNzBSPDA+G95KKb6LqWBkIgZABvsjve7ePKPaU1XDdTYrnM8cYa3cCZStUqRMxOf8K4B/BR3IAyA==" />
+                            <div class="rate text-center">
+                                <input type="radio" id="star5" name="rate" value="5" onclick="form.submit()"/>
+                                <label for="star5" title="excellent">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" onclick="form.submit()"/>
+                                <label for="star4" title="very good">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" onclick="form.submit()"/>
+                                <label for="star3" title="good">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" onclick="form.submit()"/>
+                                <label for="star2" title="poor">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" onclick="form.submit()"/>
+                                <label for="star1" title="bad">1 star</label>
+                            </div>
+</form>                
+                        <p class="mt-2"><b>Your Rate: </b>4.0</p>
+                
+        </div>
+        </div>
+        <div class="col-md-5 align-self-center">
+                <div class="rounded p-2 m-1 text-center">
+                    <blockquote class="speech-bubble">Ahmed says tea</p>
+                    <cite class="p-1 text-success"><b>ahmed</b></cite>
+                    </blockquote>
+                        </div>
+        </div>
 </div>
 
 
-<div class="row justify-content-center text-center border m-2 p-2">
+<div class="row justify-content-center text-center border m-4 p-2">
 
+        <h3 class="col-md-11 bg-dark rounded p-2 shadow mb-1 text-white">Reviews</h3>
 <div class="col-md-12 ml-2 m-2 p-2">
     <div class="p-3 m-2 text-center">
-        <h4 class="mb-5 bg-dark rounded shadow text-white p-1">Reviews</h4>
-                    <div class="mb-2 border">No Reviews</div>
+                    <blockquote class="speech-bubble user">Use the virtual THX capacitor, then you can input the haptic protocol!</p>
+                    <cite class="p-1"><b>Admin</b></cite>
+                    </blockquote>
+                    <blockquote class="speech-bubble user">I&#39;ll bypass the bluetooth FTP port, that should interface the SAS panel!</p>
+                    <cite class="p-1"><b>Admin</b></cite>
+                    </blockquote>
+                    <blockquote class="speech-bubble user">Ahmed says tea</p>
+                    <cite class="p-1"><b>ahmed</b></cite>
+                    </blockquote>
     </div>
 </div>
 </div>
 
     </div>
-    <footer class="bg-dark">
-      <br>
+    <footer class="bg-dark mt-5">
       <div class="bg-dark text-center text-white p-1">
-    <h3 class="m-2 mb-3 shadow rounded">Team Members</h3>
-    <div class="mb-4">
+    <h3 class="m-2 shadow rounded">Team Members</h3>
+    <div class="mb-2">
         <a href="https://github.com/Ahmed-Abd-elhamid" class="mr-3 btn btn-outline-primary text-white">Abdelhamid</a>
         <a href="https://github.com/MuAladdinIbrahim" class="mr-3 btn btn-outline-primary text-white">Aladdin</a>
         <a href="https://github.com/Nouran96" class="mr-3 btn btn-outline-primary text-white">Nouran</a>

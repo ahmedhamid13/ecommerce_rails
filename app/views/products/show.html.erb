@@ -1,8 +1,8 @@
 <%= stylesheet_link_tag 'product_details', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <%# PRODUCT %>
-<div class="row justify-content-center text-center border m-2 p-2">
-        <h4 class="col-md-11 bg-dark rounded p-1 text-white">Product details</h1>
+<div class="row justify-content-center text-center border m-4 p-2">
+        <h1 class="col-md-11 bg-dark rounded p-2 shadow mb-3 text-white">Product details</h1>
 
         <div class="col-md-5 ml-2 m-2 p-2">
                 <%= (@product.image.attached?) ? image_tag(@product.image, size: "380x400") : image_tag("noprod.svg", size: "380x400") %>
@@ -52,12 +52,12 @@
 </div>
 <%# END PRODUCT %>
 
+<% if current_user && current_user.id != @product.store.user_id && @product.check_order(@product, current_user.id) %>
 <%# REVIEWS %>
-<div class="row justify-content-center text-center border m-2 p-2">
-        <h4 class="col-md-11 bg-dark rounded p-1 text-white">User</h1>
+<div class="row justify-content-center text-center border m-4 p-2">
+        <h3 class="col-md-11 bg-dark rounded p-2 shadow mb-3 text-white">Your Review</h3>
 
             <%# USER REVIEWS %>
-        <% if current_user && current_user.id != @product.store.user_id && @product.check_order(@product, current_user.id) %>
         <div class="col-md-5 align-self-center">
             <div class="rounded p-2 m-1 text-center border rounded">
                 <%# RATE %>                
@@ -98,17 +98,17 @@
                 <%# END COMMENT %>
                         </div>
         </div>
-            <% end %>
 </div>
 <%# END USER REVIEWS %>
+<% end %>
 
 
 <%# REVIEWS %>
-<div class="row justify-content-center text-center border m-2 p-2">
+<div class="row justify-content-center text-center border m-4 p-2">
 
+        <h3 class="col-md-11 bg-dark rounded p-2 shadow mb-1 text-white">Reviews</h3>
 <div class="col-md-12 ml-2 m-2 p-2">
     <div class="p-3 m-2 text-center">
-        <h4 class="mb-5 bg-dark rounded shadow text-white p-1">Reviews</h4>
         <% if !@reviews.empty? %>
             <% @reviews.each do |review| %>
                     <blockquote class="speech-bubble user"><%= review.comment %></p>

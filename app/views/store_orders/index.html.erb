@@ -1,6 +1,6 @@
 <div class="container">
 <div class="row justify-content-center">
-<div class="col-9 border p-1 m-5">
+<div class="col-10 border p-1 m-5">
 <h1 class="text-center mt-3 m-2 bg-success rounded shadow">Store Orders</h1>
 <hr />
 <div class="m-3">
@@ -18,7 +18,9 @@
           </thead>
           <tbody>
                   <tr class="">
-                      <td><%= order.product.title %></td>
+                      <td><%= link_to product_path(order.product.id), :class => 'btn btn-sm' do %>
+                        <%= order.product.title %>
+                      <% end %></td>
                       <td><%= (order.product.image.attached?) ? image_tag(order.product.image, size: "120x100") : "No Image" %></td>
                       <td><%= order.quantity*order.product.price %></td>
                       <td><%= order.quantity %></td>
