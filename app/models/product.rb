@@ -6,6 +6,7 @@ class Product < ApplicationRecord
     has_many :rates
     has_many :order_products
     has_many :orders, through: :order_products
+    has_many :coupon
 
     validates :title, presence: true,
                     length: { minimum: 5 }

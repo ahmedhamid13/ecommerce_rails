@@ -12,6 +12,7 @@ RailsAdmin.config do |config|
   #   end
   # end
 
+
   config.current_user_method { current_user }
 
   ## == Devise ==
@@ -43,10 +44,10 @@ RailsAdmin.config do |config|
     show
     edit
     delete
-
+    show_in_app
     ## With an audit adapter, you can add:
-    # history_index
-    # history_show
+    history_index
+    history_show
   end
 
 end

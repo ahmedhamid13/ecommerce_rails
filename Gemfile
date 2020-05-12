@@ -73,3 +73,6 @@ gem "actionpack-page_caching"
 #faker 
 gem 'faker'
 
+#byebug
+gem 'byebug'
+

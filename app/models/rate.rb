@@ -1,7 +1,7 @@
 class Rate < ApplicationRecord
   belongs_to :user
   belongs_to :product
-
+ 
   validates :rate, numericality: true
   validates :rate, presence: true
 
