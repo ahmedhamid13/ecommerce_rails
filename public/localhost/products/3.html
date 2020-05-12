@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SouCom</title>
     <meta name="csrf-param" content="authenticity_token" />
-<meta name="csrf-token" content="NCkGhdz50tsc8k2WXH7GH0Lm318FuxrBSKtoKnhfb9C6EQl3KGn8hZmMUnxxKFKvMLM+ehsTMn8rHHUQT2ivag==" />
+<meta name="csrf-token" content="0sGfwskM2Sdl6CDty0bgHqH2A8Y8I8ScRcWSPzHYTkb6oS90EziaT3ZxxAvLDYDohne+8eBVowYzDEtC5qAOiQ==" />
     
     <link rel="shortcut icon" type="image/x-icon" href="/assets/cart-2704b6c85c99104ded959587bca89150eb3884ce083a0e9b4ab1f92768f0a0f0.svg" />
-    <link rel="stylesheet" media="all" href="/assets/application.debug-931938428d89fc9a9a92821e46eb4cfa266134649264a7a8034ff3ab11ec85bf.css" data-turbolinks-track="reload" />
-    <link rel="stylesheet" media="all" href="/assets/products.debug-0275f9c6b7e15e92993e0817c9a0fbce0291e3b87841c0567b8870be8cef2fd7.css" data-turbolinks-track="reload" />
+    <link rel="stylesheet" media="all" href="/assets/application.debug-458016edcbd9e2017a589bf912f52793b86867d3bf424d01b843f7c3564791e7.css" data-turbolinks-track="reload" />
+    <link rel="stylesheet" media="all" href="/assets/products.debug-0631e25f712f1b908422106cb675e8c30bbf54bcf17fd309b3f5e5735b216f0c.css" data-turbolinks-track="reload" />
     <link rel="stylesheet" media="all" href="/assets/welcome.debug-b88ed8664de5ebca3960e9b4ca09f7009d36f706d714c65b645affa69a29e2b8.css" data-turbolinks-track="reload" />
     <script src="/packs/js/application-87b64902c65cf540ef41.js" data-turbolinks-track="reload"></script>
     <script src="/assets/jquery.min.debug-44e1e2dc55a42b0b982436d408970329078bd503afe78dd088596e09188ebbef.js" data-turbolinks-track="true"></script>
@@ -45,10 +45,25 @@
                         <i class="fas fa-shipping-fast"></i>
                         <span>Orders</span>
 </a>                </li>
+                    <li class='nav-item p-1 rounded'>
+                        <a class="nav-link text-white btn-outline-primary rounded btn-md" href="/store.orders">
+                            <i class="fas fa-store-alt"></i>
+                            <span>Store</span>
+</a>                    </li> 
+                    <li class='nav-item p-1 rounded'>
+                        <a class="nav-link text-white btn-outline-secondary rounded btn-md" href="/store.history">
+                            <i class="fas fa-history"></i>
+                            <span>History</span>
+</a>                    </li> 
             </ul>
             <ul class="nav navbar-nav ml-auto">
                 <li class='nav-item p-1 rounded d-none d-md-block'>
-                    <a title="Nouran" href="/profile/2"><img class="rounded-circle ml-2 mt-1" src="/assets/avatar-0f61e5fe2bd0e3c6a7c4ad3bc30315c697e401422b27d11bfa538cc881c94f5d.svg" width="40" height="40" /></a>                </li>                 
+                    <a title="Admin" href="/profile/1"><img class="rounded-circle ml-2 mt-1" src="/assets/admin-6661d2ddf0c3f154a25d2d8731ead41934fcf43bbead1110ae40a3dcc7de018c.png" width="40" height="40" /></a>                </li>                 
+                        <li class='nav-item p-1 rounded'>
+                            <a class="nav-link text-white btn-outline-success rounded btn-md" href="/admin">
+                                <i class="fas fa-user-cog"></i>
+                                <span>Dashboard</span>
+</a>                        </li> 
                         <li class='nav-item p-1 rounded'>
                             <a class="nav-link text-white btn-outline-danger rounded btn-md" rel="nofollow" data-method="delete" href="/users/sign_out">
                                 <i class="fas fa-sign-out-alt"></i>
@@ -65,57 +80,28 @@
       <link rel="stylesheet" media="all" href="/assets/product_details.debug-97387370064ed976b76d70dcae52dcf3c33b871c6bd4afc5b5123ed6a3592993.css" data-turbolinks-track="reload" />
 <div class="row justify-content-center text-center border shadow m-4 p-4">
   <h1 class="col-md-11 bg-dark rounded p-2 shadow text-white">Product details</h1>
-  <div class="col-md-5 ml-2 m-2 p-2">
+  <div class="col-md-8 col-lg-6 m-2 p-2">
     <img src="/assets/noprod-58957dc5a46ae64b956b5d3d568e18006898eaf759c1f1c11abc8bcdd8cdf7e7.svg" />
-    <div class="p-2 text-center">
-          <form action="/add.to.cart/1" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="qR1iCHGJG9jV2vLMoANd5dXh6CqbrWIaCNXGcaBnWUvBeDIHk8K4J4yDmzsmreTglsk1dGYHS+u6lCbdiywSHA==" />
+    <div class="p-2 mr-3 text-center">
+          <form action="/add.to.cart/3" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="wxyHp6Ej8q4bAe2kC7B8DFE+Fm+AwlGEx8gPuOr6UqueCc9STFKgx4B4O2mM3iJ5t6ARY1GGCt2i3MnRNqD9hQ==" />
             <div class="col-md-8 text-center d-inline-flex">
-              <input value="1" min="1" max="35" class="form-control d-inline-flex mr-3" type="number" name="quantity" id="quantity" />
+              <input value="1" min="1" max="43" class="form-control d-inline-flex mr-3" type="number" name="quantity" id="quantity" />
               <input type="submit" name="commit" value="Add to Cart" class="btn btn btn-warning text-dark shadow" data-disable-with="Add to Cart" />
             </div>
 </form>    </div>
   </div>
   <div class="col-md-5 bg ml-2 m-2">
     <br>
-    <h1 class="mt-5">Windows RT</h1>
+    <h1 class="mt-5">Windows Phone</h1>
     <hr>
-    <p><b>Rate:</b> 2.0 | <b>Reviewers:</b> 3</p>
-    <p><b>Price:</b> 450.59 | <b>AvailableQuantity:</b> 35</p>
-    <p><b>Store:</b> Lenovo</p>
-    <p><b>Category:</b> Firefox OS | <b>Brand:</b> Acer</p>
+    <p><b>Rate:</b> 3.0 | <b>Reviewers:</b> 4</p>
+    <p><b>Price:</b> 2992.29 | <b>AvailableQuantity:</b> 43</p>
+    <p><b>Store:</b> OnePlus</p>
+    <p><b>Category:</b> Firefox OS | <b>Brand:</b> Lenovo</p>
     <hr>
     <h5><b>Product Description</b></h5>
-    <p class="border rounded mt-3 p-1 mb-3">Use the primary AI driver, then you can compress the haptic microchip!</p>
+    <p class="border rounded mt-3 p-1 mb-3">You can&#39;t quantify the pixel without calculating the optical GB driver!</p>
     <div class="text-center">
-    </div>
-  </div>
-</div>
-  <div class="row justify-content-center text-center border shadow m-4 p-4">
-    <h3 class="col-md-11 bg-dark rounded p-2 shadow mb-3 text-white">Your Review</h3>
-    <div class="col-md-5 align-self-center">
-      <div class="rounded p-2 m-1 text-center border rounded">
-        <form action="/rate.product/1" accept-charset="UTF-8" data-remote="true" method="post"><input type="hidden" name="authenticity_token" value="iRJh+Ls9YDwpjUHQqCZqPbQoLq/HJ1Sf8YVKVon5GABRKw4oezO63fZIyfQr6leDZljWleSPDBaIy8F59V+FHg==" />
-          <div class="rate text-center">
-            <input type="radio" id="star5" name="rate" value="5" onclick="form.submit()"/>
-            <label for="star5" title="excellent">5 stars</label>
-            <input type="radio" id="star4" name="rate" value="4" onclick="form.submit()"/>
-            <label for="star4" title="very good">4 stars</label>
-            <input type="radio" id="star3" name="rate" value="3" onclick="form.submit()"/>
-            <label for="star3" title="good">3 stars</label>
-            <input type="radio" id="star2" name="rate" value="2" onclick="form.submit()"/>
-            <label for="star2" title="poor">2 stars</label>
-            <input type="radio" id="star1" name="rate" value="1" onclick="form.submit()"/>
-            <label for="star1" title="bad">1 star</label>
-          </div>
-</form>        <p class="mt-2"><b>Your Rate: </b>5.0</p>
-      </div>
-    </div>
-    <div class="col-md-5 align-self-center">
-      <div class="rounded p-2 m-1 text-center">
-          <blockquote class="speech-bubble shadow">Yes it is
-</p>
-          <cite class="p-1 text-success"><b>ahmed</b></cite>
-        </blockquote>
     </div>
   </div>
 </div>
@@ -123,15 +109,19 @@
   <h3 class="col-md-11 bg-dark rounded p-2 shadow text-white">Reviews</h3>
   <div class="col-md-10 ml-2 m-1 p-2">
     <div class="p-3 m-2 text-center">
-          <blockquote class="speech-bubble shadow">Use the back-end AGP panel, then you can copy the back-end bus!</p>
+          <blockquote class="speech-bubble shadow">Use the auxiliary HDD alarm, then you can copy the wireless application!</p>
           <cite class="p-1"><b><a class="text-decoration-none text-dark" href="/profile/1">Admin</a></b></cite>
         </blockquote>
         <hr>
-          <blockquote class="speech-bubble shadow">The GB driver is down, compress the haptic bus so we can back up the COM driver!</p>
+          <blockquote class="speech-bubble shadow">Use the back-end RAM matrix, then you can navigate the optical protocol!</p>
           <cite class="p-1"><b><a class="text-decoration-none text-dark" href="/profile/1">Admin</a></b></cite>
         </blockquote>
         <hr>
-          <blockquote class="speech-bubble shadow">Quantifying the monitor won&#39;t do anything, we need to reboot the digital usb array!</p>
+          <blockquote class="speech-bubble shadow">I&#39;ll hack the mobile PNG firewall, that should pixel the SCSI capacitor!</p>
+          <cite class="p-1"><b><a class="text-decoration-none text-dark" href="/profile/1">Admin</a></b></cite>
+        </blockquote>
+        <hr>
+          <blockquote class="speech-bubble shadow">The GB hard drive is down, synthesize the 1080p driver so we can index the AGP bus!</p>
           <cite class="p-1"><b><a class="text-decoration-none text-dark" href="/profile/1">Admin</a></b></cite>
         </blockquote>
         <hr>

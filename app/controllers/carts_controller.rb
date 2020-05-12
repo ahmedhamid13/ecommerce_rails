@@ -14,8 +14,8 @@ class CartsController < ApplicationController
       if @order.nil?
         @order =Order.create(user_id: current_user.id, state: "inCart")
       end
-
       update(@order, params[:id], params[:quantity])
+
       redirect_to request.referrer, notice: Product.find(params[:id]).title + ' added to cart successfully'
     end
   end

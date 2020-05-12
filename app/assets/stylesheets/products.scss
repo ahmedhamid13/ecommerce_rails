@@ -148,12 +148,11 @@ main section.products-show {
   color: #aaaaaa;
 }
 .apple_pagination .current {
-  font-style: normal;
   font-weight: bold;
-  background-color: #bebebe;
+  background-color: #8c96cf;
   display: inline-block;
   width: 1.4em;
-  height: 1.4em;
+  height: 1.8em;
   line-height: 1.5;
   -moz-border-radius: 1em;
   -webkit-border-radius: 1em;
@@ -166,5 +165,9 @@ main section.products-show {
 }
 .apple_pagination a:hover,
 .apple_pagination a:focus {
-  text-decoration: underline;
+  background-color: #a0a0a0;
+  line-height: 1.5;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
 }

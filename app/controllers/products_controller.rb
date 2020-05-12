@@ -8,9 +8,8 @@ class ProductsController < ApplicationController
     @@searched_item = nil
 
     def index
-        @@searched_item = params[:search]
-        @products = Product.search(params[:search])
-        # @products = Product.paginate(page: params[:page], per_page: 9).search(params[:search])
+        @searched_item = params[:search]
+        @products = Product.search(params[:search]).page params[:page]
     end
 
     def new
@@ -48,15 +47,15 @@ class ProductsController < ApplicationController
         end
     end
 
-    def destroy
-        if check_orders()
-            @product = Product.find(params[:id])
-            @product.destroy
-            redirect_to products_path
-        else
-            redirect_to products_path, alert: "cannot delete product in order process"
-        end
-    end
+    # def destroy
+    #     if check_orders()
+    #         @product = Product.find(params[:id])
+    #         @product.destroy
+    #         redirect_to products_path
+    #     else
+    #         redirect_to products_path, alert: "cannot delete product in order process"
+    #     end
+    # end
 
     def filter_parameters
         @categories = Category.all

@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  
+  # paginates_per 2
+
   def index
-    @orders = Order.where(user_id: current_user.id).where.not(state: "inCart").order(created_at: :desc)
+    @orders = Order.where(user_id: current_user.id).where.not(state: "inCart").order(created_at: :desc).page params[:page]
   end
     
   def edit
@@ -11,8 +12,10 @@ class OrdersController < ApplicationController
   end
     
   def update
+
     @order = Order.find_by(id: params[:id], state: "inCart")
     @orderprod = OrderProduct.where(order_id: @order.id)
+
     if check_quantity()
       if !order_address()
         @orderprod.each do |ordprod|
@@ -28,6 +31,7 @@ class OrdersController < ApplicationController
     else
       redirect_to carts_path, alert: 'Quantity of order didnot match available products'
     end
+
   end
 
   private
@@ -38,7 +42,7 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.fetch(:order, {}).permit(:id,:quantity,:address, :billing)
+      params.fetch(:order, {}).permit(:id,:quantity,:address, :billing, :coupon, :page)
     end
 
     def order_address
@@ -53,6 +57,11 @@ class OrdersController < ApplicationController
         end
       end
       return true
+    end
+
+    def check_coupon
+      @coupon = Coupon.find_by(code: params[:coupon])
+
     end
 
 end
