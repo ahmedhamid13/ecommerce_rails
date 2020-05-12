@@ -30,11 +30,15 @@ class Coupon < ApplicationRecord
   end
 
   #check if the copoun is expired or not
-  def is_expire(count, copoun_obj) 
+  def is_expire(copoun_obj) 
     if copoun_obj.expiration_type == "time" 
       true if copoun_obj.expiration_time < Date.today
     else
-      true if copoun_obj.expiration_number < count
+      if copoun_obj.expiration_number < 1
+        true
+      else
+        copoun_obj.update(expiration_number: copoun_obj.expiration_number-1)
+      end
     end
   end
 
@@ -48,12 +52,12 @@ class Coupon < ApplicationRecord
     end
   end
 
-  #check if the user use the copoun once
-  before_save :check_user
+  # #check if the user use the copoun once
+  # before_save :check_user
 
-  private
-  def check_user
-    flash[:alert] = "User not found." if self.user?
-  end
+  # private
+  # def check_user
+  #   flash[:alert] = "User not found." if self.user?
+  # end
   
 end

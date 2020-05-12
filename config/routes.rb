@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   post 'add.to.cart/:id', to: 'carts#create', as: 'add_to_cart'
   put 'cart/:id', to: 'carts#update', as: 'cart'
   delete 'remove.product/:id', to: 'carts#remove', as: 'remove_product'
-  delete 'remove.cart/:id', to: 'carts#remove', as: 'remove_cart'
+  delete 'remove.cart/:id', to: 'carts#destroy', as: 'remove_cart'
   ########################################################################
 
   ### Order Routes
