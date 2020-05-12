@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_211005) do
+ActiveRecord::Schema.define(version: 2020_05_12_173010) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_211005) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "copouns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "coupons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "code"
     t.integer "expiration_type"
     t.date "expiration_time"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2020_05_11_211005) do
     t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_copouns_on_product_id"
-    t.index ["user_id"], name: "index_copouns_on_user_id"
+    t.index ["product_id"], name: "index_coupons_on_product_id"
+    t.index ["user_id"], name: "index_coupons_on_user_id"
   end
 
   create_table "order_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -147,6 +147,10 @@ ActiveRecord::Schema.define(version: 2020_05_11_211005) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.boolean "superadmin_role", default: false
     t.boolean "seller_role", default: false
     t.boolean "buyer_role", default: true
@@ -157,8 +161,8 @@ ActiveRecord::Schema.define(version: 2020_05_11_211005) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "orders"
   add_foreign_key "addresses", "users"
-  add_foreign_key "copouns", "products"
-  add_foreign_key "copouns", "users"
+  add_foreign_key "coupons", "products"
+  add_foreign_key "coupons", "users"
   add_foreign_key "rates", "products"
   add_foreign_key "rates", "users"
   add_foreign_key "reviews", "products"

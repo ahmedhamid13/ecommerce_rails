@@ -1,6 +1,6 @@
-class CreateCopouns < ActiveRecord::Migration[6.0]
+class CreateCoupons < ActiveRecord::Migration[6.0]
   def change
-    create_table :copouns do |t|
+    create_table :coupons do |t|
       t.string :code
       t.integer :expiration_type
       t.date :expiration_time
