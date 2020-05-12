@@ -12,7 +12,7 @@ class Product < ApplicationRecord
     validates :price, :quantity, numericality: true
 
     validates :description, :price, :quantity, :category_id, :brand_id, presence: true
-
+    
     def self.search(search)
         if search
             products = self.where("lower(title) LIKE lower(?) or lower(description) LIKE(?)", "%#{search}%", "%#{search}%")
@@ -39,4 +39,8 @@ class Product < ApplicationRecord
         return false
     end
 
+    self.per_page = 10
+
 end
+
+WillPaginate.per_page =10
