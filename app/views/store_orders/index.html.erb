@@ -1,63 +1,62 @@
 <div class="container">
-<div class="row justify-content-center">
-<div class="col-10 border p-1 m-5">
-<h1 class="text-center mt-3 m-2 bg-success rounded shadow"><%= current_user.store.name%> Store Orders</h1>
-<hr />
-<div class="m-3">
-    <% if ! @orders.empty? %>
-        <% @orders.each do |order| %>
-          <table class="table table-sm table-striped shadow rounded text-center">
-            <thead class="thead-dark">
-              <tr>
+  <div class="row justify-content-center">
+    <div class="col-10 border p-1 m-5">
+      <h1 class="text-center mt-3 m-2 bg-success rounded shadow"><%= current_user.store.name%> Store Orders</h1>
+      <hr />
+      <div class="m-3">
+        <% if ! @orders.empty? %>
+          <% @orders.each do |order| %>
+            <table class="table table-sm table-striped shadow rounded text-center">
+              <thead class="thead-dark">
+                <tr>
                   <th>Product</th>
                   <th>Image</th>
                   <th>Total Price</th>
                   <th>Quantity</th>
                   <th>Available Quantity</th>
-              </tr>
-          </thead>
-          <tbody>
-                  <tr class="">
-                      <td><%= link_to product_path(order.product.id), :class => 'text-decoration-none text-dark' do %>
-                        <%= order.product.title %>
-                      <% end %></td>
-                      <td><%= (order.product.image.attached?) ? image_tag(order.product.image, size: "120x100") : "No Image" %></td>
-                      <td><%= order.quantity*order.product.price %></td>
-                      <td><%= order.quantity %></td>
-                      <td><%= order.product.quantity %></td>
-                  </tr>
-                  <tr>
-                    <th colspan="2" class="bg-dark text-center text-white h6">Order Address</th>
-                    <th colspan="2" class="bg-dark text-center text-white h6">State</th>
-                    <th colspan="1" class="bg-dark text-center text-white h6">Action</th>
-                  </tr>
-                  <tr class="table-info text-dark">
-                    <td colspan="2"><%= order.order.address.address %></td> 
-                    <td colspan="2" class="text-center h5"><%= order.state %></td>
-                    <td colspan="1" class="text-center h5">
-                      <% if order.state == 'pending' %>
-                        <%= link_to "confirm", store_response_path(order.id), class: 'btn btn-success shadow', method: :put %>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td><%= link_to product_path(order.product.id), :class => 'text-decoration-none text-dark' do %>
+                      <%= order.product.title %>
+                    <% end %></td>
+                  <td><%= (order.product.image.attached?) ? image_tag(order.product.image, size: "120x100") : "No Image" %></td>
+                  <td><%= order.quantity*order.product.price %></td>
+                  <td><%= order.quantity %></td>
+                  <td><%= order.product.quantity %></td>
+                </tr>
+                <tr>
+                  <th colspan="2" class="bg-dark text-center text-white h6">Order Address</th>
+                  <th colspan="2" class="bg-dark text-center text-white h6">State</th>
+                  <th colspan="1" class="bg-dark text-center text-white h6">Action</th>
+                </tr>
+                <tr class="table-info text-dark">
+                  <td colspan="2"><%= order.order.address.address %></td>
+                  <td colspan="2" class="text-center h5"><%= order.state %></td>
+                  <td colspan="1" class="text-center h5">
+                    <% if order.state == 'pending' %>
+                      <%= link_to "confirm", store_response_path(order.id), class: 'btn btn-success shadow', method: :put %>
+                    <% else %>
+                      <% if order.order.state == 'confirmed' %>
+                        <%= link_to "deliver", store_response_path(order.id), class: 'btn btn-warning shadow', method: :put %>
                       <% else %>
-                          <% if order.order.state == 'confirmed' %>
-                            <%= link_to "deliver", store_response_path(order.id), class: 'btn btn-warning shadow', method: :put %>
-                          <% else %>
-                            <p>Waiting..</p>
-                          <% end %>
+                        <p>Waiting..</p>
                       <% end %>
-                    </td>
-                  </tr>
+                    <% end %>
+                  </td>
+                </tr>
               </tbody>
             </table>
-      <% end %>
-    <% else %>
-      <table class="table table table-striped shadow rounded text-center mb-4">
-          <tr>
-            <td colspan="6" class="text-center h4">No Orders</td>
-          </tr>
-      </table>
-    <% end %>
-
-</div>
-</div>
-</div>
+          <% end %>
+        <% else %>
+          <table class="table table table-striped shadow rounded text-center mb-4">
+            <tr>
+              <td colspan="6" class="text-center h4">No Orders</td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

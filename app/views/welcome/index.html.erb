@@ -1,6 +1,5 @@
 <div class="p-4 text-center text-white">
-    <h1 class="text-center rounded mb-5 font-weight-bold display-1">SouCom</h1>
-
+  <h1 class="text-center rounded mb-5 font-weight-bold display-1">SouCom</h1>
   <% if user_signed_in? %>
     <h1 class="text-center rounded mb-5 display-4">Welcome, <%= current_user.name %></h1>
     <br>
@@ -18,7 +17,7 @@
     </h5>
     <br>
     <div class="row-fluid text-center mb-3 mt-5">
-        <%= link_to "Sign In", new_user_session_path, :class => "btn-lg btn btn-primary shadow mr-5" %> <%= link_to "Sign Up", new_user_registration_path, :class => "btn-lg btn btn-success shadow" %>
+      <%= link_to "Sign In", new_user_session_path, :class => "btn-lg btn btn-primary shadow mr-5" %> <%= link_to "Sign Up", new_user_registration_path, :class => "btn-lg btn btn-success shadow" %>
     </div>
   <% end %>
 </div>

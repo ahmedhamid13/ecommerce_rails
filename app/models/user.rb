@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :addresses
   has_one :store
   has_one :copoun
+  has_many :rates
+  has_many :reviews
   has_one_attached :avatar
   after_create :send_admin_mail
     def send_admin_mail
