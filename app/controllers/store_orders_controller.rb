@@ -1,5 +1,6 @@
 class StoreOrdersController < ApplicationController
-
+  before_action :authenticate_user!
+  
     def index
       if !(current_user.store).nil?
         @store_orders = OrderProduct.where(store_id: current_user.store.id)
@@ -23,11 +24,11 @@ class StoreOrdersController < ApplicationController
         if @order.state == "pending" || @order.state == "confirmed"
           if @order.order.state == "pending"
             update_orders("confirmed")
-            redirect_to request.referrer, notice: 'confirmed'
+            redirect_to request.referrer
           end
           if @order.order.state == "confirmed"
             update_orders("delivered")
-            redirect_to request.referrer, notice: 'delieverd'
+            redirect_to request.referrer
           end
         end
     end

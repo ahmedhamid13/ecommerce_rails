@@ -4,6 +4,4 @@ class Address < ApplicationRecord
 
   validates :address, :billing, presence: true,
               length: { minimum: 5 }
-              
-  validates :address, :billing, presence: true
 end

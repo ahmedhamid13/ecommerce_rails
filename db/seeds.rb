@@ -19,7 +19,7 @@ end
             user_id: 1
         )
 
-20.times do |t|
+25.times do |t|
     Product.create(
         title: Faker::Device.platform,
         price: Faker::Number.decimal(l_digits: 3, r_digits: 2),
@@ -30,7 +30,7 @@ end
         store_id: 1,
     )
 
-    2.times do
+    3.times do
         Rate.create(
             rate: Faker::Number.between(from: 1, to:5),
             user_id: 1,
