@@ -1,59 +1,9 @@
-<div class="m-2 p-3 border">
-<%= form_with scope: :product, url: products_path, local: true do |form| %>
-
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@product.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @product.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="container">
+  <div class="row flex-column align-items-center">
+    <div class="m-2 p-4 border shadow col-md-6">
+      <h2 class="text-center mb-5 bg-dark text-white rounded">Add Product</h2>
+      <%= render 'form'%>
     </div>
-  <% end %>
-
-  <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
- 
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
-  </p>
-
-  <p>
-    <%= form.label :price %><br>
-    <%= form.number_field :price, step: :any %>
-  </p>
-
-  <p>
-    <%= form.label :quantity %><br>
-    <%= form.number_field :quantity %>
-  </p>
-
-  <p>
-    <%= form.label :category %><br>
-    <%= form.collection_select(:category_id, Category.all, :id, :name) %>
-  </p>
-
-  <p>
-    <%= form.label :image %><br>
-    <%= form.file_field :image %>
-  </p>
-
-  <p>
-    <%= form.label :brand %><br>
-    <%= form.collection_select(:brand_id, Brand.all, :id, :name) %>
-  </p>
- 
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+  </div>
+  <%= link_to "Back to Products", products_path, class: 'btn btn-dark my-4 text-center' %>
 </div>
-
-<%= link_to "Back to Products", products_path %>

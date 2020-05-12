@@ -1,39 +1,43 @@
-<div class="row justify-content-center">
-<div class="col-9 border p-1 m-5">
-<h1 class="text-center mt-3 m-2 bg-success rounded shadow">My Orders</h1>
-<hr />
-<div class="m-3">
-    <% if ! @orders.empty? %>
-      <% @orders.each do |order| %>
-<table class="table table-sm table-striped shadow rounded text-center">
-  <thead class="thead-dark">
-    <tr><th colspan="4" class="text-warning h4">Order #<%= order.id %></th></tr>
-    <tr>
-        <th>Product</th>
-        <th>Image</th>
-        <th>Total Price</th>
-        <th>quantity</th>
-    </tr>
-</thead>
-<tbody>
-          <% order.order_products.each do |ordprod| %>
-        <tr class="">
-            <td>
-                <%= ordprod.product.title %>
-            </td>
-            <td>
-                  <%= (ordprod.product.image.attached?) ? image_tag(ordprod.product.image, size: "120x100") : "No Image" %>
-            </td>
-            <td>
-              <%= ordprod.quantity*ordprod.product.price %>
-            </td>
-            <td>
-              <%= ordprod.quantity %>
-            </td>
-        </tr>
-        <% end %>
-        
-        <tr class="
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10 border p-1 m-5">
+      <h1 class="text-center mt-3 m-2 bg-success rounded shadow">My Orders</h1>
+      <hr />
+      <div class="m-3">
+        <% if ! @orders.empty? %>
+          <% @orders.each do |order| %>
+            <table class="table table-sm table-striped shadow rounded text-center">
+              <thead class="thead-dark">
+                <tr>
+                  <th colspan="4" class="text-warning h4">Order #<%= order.id %></th>
+                </tr>
+                <tr>
+                  <th>Product</th>
+                  <th>Image</th>
+                  <th>Total Price</th>
+                  <th>quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% order.order_products.each do |ordprod| %>
+                  <tr class="">
+                    <td>
+                      <%= link_to product_path(ordprod.product.id), :class => 'text-decoration-none text-dark' do %>
+                        <%= ordprod.product.title %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= (ordprod.product.image.attached?) ? image_tag(ordprod.product.image, size: "120x100") : "No Image" %>
+                    </td>
+                    <td>
+                      <%= ordprod.quantity*ordprod.product.price %>
+                    </td>
+                    <td>
+                      <%= ordprod.quantity %>
+                    </td>
+                  </tr>
+                <% end %>
+                <tr class="
                     <% if order.state == "approved"%>
                         table-success
                     <% elsif order.state == "cancelled"%>
@@ -42,20 +46,25 @@
                         table-info
                     <% end %>
         ">
-          <td class="text-center h5">State</td>
-          <td colspan="3" class="text-center h5"><%= order.state %></td>
-        </tr> 
-        </tbody>
-      </table>
-      <% end %>
-    <% else %>
-      <table class="table table table-striped shadow rounded text-center mb-4">
-          <tr>
-            <td colspan="6" class="text-center h4">No Orders</td>
-          </tr>
-      </table>
-    <% end %>
-
-</div>
-</div>
+                  <td class="text-center h5">State</td>
+                  <td colspan="3" class="text-center h5"><%= order.state %></td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        <% else %>
+          <table class="table table table-striped shadow rounded text-center mb-4">
+            <tr>
+              <td colspan="6" class="text-center h4">No Orders</td>
+            </tr>
+          </table>
+        <% end %>
+        <% if @orders.present? %>
+        <div class="apple_pagination border shadow rounded mt-5 p-1">
+            <%= paginate @orders %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

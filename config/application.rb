@@ -26,7 +26,7 @@ module EcommerceRails
       end if File.exists?(env_file)
     end
 
-    config.active_job.queue_adapter = :sidekiq
+    # config.active_job.queue_adapter = :sidekiq
 
   end
 end

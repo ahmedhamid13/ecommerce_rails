@@ -17,5 +17,23 @@
 //forms style
  @import "forms";
 
+ body {
+     min-height: 100vh;
+     background-color: #F0F8FF
+ }
+
+ .founders {
+     max-width: 100%;
+ }
+
+ .app-name {
+     font-size: 6rem;
+ }
+
+ @media (max-width: 450px) {
+     .app-name {
+         font-size: 4rem;
+     }
+ }
 
  

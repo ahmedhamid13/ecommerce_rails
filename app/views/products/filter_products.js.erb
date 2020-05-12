@@ -3,3 +3,9 @@
 <% else %>
     $(".products").html("<p style='text-align: center'>No Products Found</p>")
 <% end %>
+
+<% if @filtered %>
+    $('.apple_pagination').hide()
+<%else%>
+    $('.apple_pagination').show()
+<%end%>
