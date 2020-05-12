@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
 
     def index
         @searched_item = params[:search]
-        @products = Product.paginate(page: params[:page], per_page: 9).search(params[:search])
+        # @products = Product.paginate(page: params[:page], per_page: 9).search(params[:search])
     end
 
     def new
