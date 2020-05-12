@@ -7,20 +7,21 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'products', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'welcome', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'jquery.min', 'data-turbolinks-track'=> true %>
+    <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js' %>
   </head>
 
   <body class="d-flex flex-column justify-content-between">
-    <header class="mb-2">
+    <header class="">
       <%= render 'layouts/navigation' %>
       <%= render 'layouts/messages' %>
     </header>
-    <div class="container border shadow rounded px-2 py-4 mb-3">
+    <div class="">
       <%= yield %>
     </div>
-    <footer class="bg-dark mt-2">
-      <br>
+    <footer class="bg-dark mt-5">
       <%= render 'layouts/foot' %>
     </footer>
   </body>
@@ -31,6 +32,12 @@
 
   <script>
     var x = window.matchMedia("(max-width: 767px)")
+
+    var path = window.location.pathname
+
+    if(path.includes("welcome") || path == '/') {
+      $('body').addClass("welcome");
+    }
     
     function showSidebar(){
       $('#sidebar-wrapper').removeClass('d-none')

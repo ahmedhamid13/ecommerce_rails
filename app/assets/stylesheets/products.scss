@@ -13,9 +13,11 @@
   transition: margin 0.25s ease-out;
 }
 
-.products-page {
-  padding: 0;
+.products {
+  min-height: 300px;
 }
+
+.products-page {padding: 0;}
 
 .card-body > a:first-of-type {
   color: black;

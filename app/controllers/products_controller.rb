@@ -46,10 +46,13 @@ class ProductsController < ApplicationController
     end
 
     def destroy
-        @product = Product.find(params[:id])
-        @product.destroy
-
-        redirect_to products_path
+        if check_orders()
+            @product = Product.find(params[:id])
+            @product.destroy
+            redirect_to products_path
+        else
+            redirect_to products_path, alert: "cannot delete product in order process"
+        end
     end
 
     def filter_parameters
@@ -102,5 +105,9 @@ class ProductsController < ApplicationController
 
         def domain_cache_directory
             Rails.root.join("public", request.domain)
+        end
+
+        def check_orders
+            (OrderProduct.where(state: "pending", product_id: params[:id]).or(OrderProduct.where(state: "confirmed", product_id: params[:id]))).empty?
         end
 end
