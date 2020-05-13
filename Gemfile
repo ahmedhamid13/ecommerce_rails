@@ -79,3 +79,15 @@ gem 'byebug'
 # page pagination
 # gem 'will_paginate', '3.0.2'
 gem 'kaminari'
+
+gem 'pay', '~> 2.0'
+
+# To use Stripe, also include:
+gem 'stripe', '< 6.0', '>= 2.8'
+gem 'stripe_event', '~> 2.3'
+
+# To use Braintree + PayPal, also include:
+gem 'braintree', '< 3.0', '>= 2.92.0'
+
+# To use Receipts
+gem 'receipts', '~> 1.0.0'

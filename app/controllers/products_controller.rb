@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
     # load_and_authorize_resource
     before_action :authenticate_user!, :except => [:show, :index, :filter_products]
     before_action :filter_parameters
-    self.page_cache_directory = :domain_cache_directory
+    # self.page_cache_directory = :domain_cache_directory
     caches_page :show
 
     @@searched_item = nil

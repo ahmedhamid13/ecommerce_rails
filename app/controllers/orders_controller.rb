@@ -78,4 +78,5 @@ class OrdersController < ApplicationController
         tot_price += ordprod.quantity*ordprod.product.price
       end
     end
+
 end
