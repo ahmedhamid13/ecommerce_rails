@@ -45,10 +45,12 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
-production:
-  # url: <%= ENV['DATABASE_URL'] %>  
-  <<: *default
-  database: ecommerce_rails_production
+  production:
+    url: <%= ENV['DATABASE_URL'] %>
+
+# production:
+#   <<: *default
+#   database: ecommerce_rails_production
+#   username: ecommerce_rails
+#   password: mysqladmin variables | grep socket
+
