@@ -4,7 +4,7 @@ class StoreOrdersController < ApplicationController
     def index
       if !(current_user.store).nil?
         @store_orders = OrderProduct.where(store_id: current_user.store.id)
-        @orders = @store_orders.where(state: "pending").or(@store_orders.where(state: "confirmed"))
+        @orders = @store_orders.where(state: "pending").or(@store_orders.where(state: "confirmed")).page params[:page]
       else
         redirect_to orders_path, alert: 'you do not have store!'
       end
@@ -13,7 +13,7 @@ class StoreOrdersController < ApplicationController
     def history
       if !(current_user.store).nil?
         @store_orders = OrderProduct.where(store_id: current_user.store.id)
-        @orders = @store_orders.where(state: "delivered").order(created_at: :desc)
+        @orders = @store_orders.where(state: "delivered").order(created_at: :desc).page params[:page]
       else
         redirect_to orders_path, alert: 'you do not have store!'
       end
@@ -36,7 +36,7 @@ class StoreOrdersController < ApplicationController
     private
 
     def store_orders_params
-        params.permit(:id, :state)
+        params.permit(:id, :state, :page)
     end
 
     def update_orders(stat)

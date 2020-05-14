@@ -9,7 +9,7 @@ require 'faker'
 #     )
 # end
 
-6.times do
+8.times do
     Category.create(name: Faker::Device.platform)
     Brand.create(name: Faker::Device.manufacturer)
 end
@@ -19,18 +19,18 @@ end
             user_id: 1
         )
 
-25.times do |t|
+40.times do |t|
     Product.create(
         title: Faker::Device.platform,
-        price: Faker::Number.decimal(l_digits: 3, r_digits: 2),
+        price: Faker::Number.decimal(l_digits: 4, r_digits: 2),
         quantity: Faker::Number.between(from: 10, to: 50),
         description: Faker::Hacker.say_something_smart,
-        category_id: Faker::Number.between(from: 1, to:6),
-        brand_id: Faker::Number.between(from: 1, to: 6),
+        category_id: Faker::Number.between(from: 1, to:7),
+        brand_id: Faker::Number.between(from: 1, to: 7),
         store_id: 1,
     )
 
-    3.times do
+    4.times do
         Rate.create(
             rate: Faker::Number.between(from: 1, to:5),
             user_id: 1,

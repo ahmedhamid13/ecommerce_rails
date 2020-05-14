@@ -1,13 +1,16 @@
 class ProductsController < ApplicationController
     # load_and_authorize_resource
-    before_action :authenticate_user!, :except => [:show, :index]
+    before_action :authenticate_user!, :except => [:show, :index, :filter_products]
     before_action :filter_parameters
-    self.page_cache_directory = :domain_cache_directory
+    # self.page_cache_directory = :domain_cache_directory
     caches_page :show
 
+    @@searched_item = nil
+
     def index
-        @searched_item = params[:search]
-        # @products = Product.paginate(page: params[:page], per_page: 9).search(params[:search])
+        @@searched_item = params[:search]
+        @filtered = false
+        @products = Product.search(params[:search]).page params[:page]
     end
 
     def new
@@ -45,15 +48,15 @@ class ProductsController < ApplicationController
         end
     end
 
-    def destroy
-        if check_orders()
-            @product = Product.find(params[:id])
-            @product.destroy
-            redirect_to products_path
-        else
-            redirect_to products_path, alert: "cannot delete product in order process"
-        end
-    end
+    # def destroy
+    #     if check_orders()
+    #         @product = Product.find(params[:id])
+    #         @product.destroy
+    #         redirect_to products_path
+    #     else
+    #         redirect_to products_path, alert: "cannot delete product in order process"
+    #     end
+    # end
 
     def filter_parameters
         @categories = Category.all
@@ -62,12 +65,9 @@ class ProductsController < ApplicationController
     end
 
     def filter_products
-
-        unless @searched_item.nil? || @searched_item.empty?
-            @products = Product.search(@searched_item)
-        end
-
+        
         if params[:categories].present? || params[:brands].present? || params[:stores].present? || params[:price_min].present? || params[:price_max].present?
+            @products = Product.search(@@searched_item)
 
             if params[:categories].present?
                 @products = (@products.nil?) ? Product.where(category_id: params[:categories]) : @products.where(category_id: params[:categories])
@@ -90,8 +90,12 @@ class ProductsController < ApplicationController
                 @products = (@products.nil?) ? Product.where("price <= ?", params[:price_max]) : @products.where("price <= ?", params[:price_max])
             end
 
+            @filtered = true
+            @products
+
         else
-            @products = Product.all
+            @filtered = false
+            @products = Product.search(@@searched_item).page params[:page]
         end
         respond_to do |format|
             format.js
