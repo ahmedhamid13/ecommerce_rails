@@ -5,7 +5,7 @@
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
    <%= f.label :email %><br />
     <%= f.email_field :email, :placeholder => 'Email address', :autofocus => true %>
-     <%= f.label :email %><br />
+     <%= f.label :password %><br />
     <%= f.password_field :password, :placeholder => 'Password' %>
      <% if devise_mapping.rememberable? %>
     <div class="field">
@@ -16,5 +16,5 @@
     <hr> 
     <%= f.submit "Sign in", :class=>'btn btn-primary mb-2 ' %>
   <% end %>
-  <p class="mb-4 text-center"> Not a member?<%= render "devise/shared/links" %></p>
+  <p class="mb-4"> Not a member?<%= render "devise/shared/links" %></p>
 </div>
