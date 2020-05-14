@@ -16,30 +16,30 @@ end
         Store.create(
             name: Faker::Device.manufacturer,
             summary: Faker::Hacker.say_something_smart,
-            user_id: 1
+            user_id: (User.all.sample).id
         )
 
-40.times do |t|
+25.times do |t|
     Product.create(
         title: Faker::Device.platform,
         price: Faker::Number.decimal(l_digits: 4, r_digits: 2),
         quantity: Faker::Number.between(from: 10, to: 50),
         description: Faker::Hacker.say_something_smart,
-        category_id: Faker::Number.between(from: 1, to:7),
-        brand_id: Faker::Number.between(from: 1, to: 7),
-        store_id: 1,
+        category_id: (Category.all.sample).id,
+        brand_id: (Brand.all.sample).id,
+        store_id: (Store.all.sample).id,
     )
 
     4.times do
         Rate.create(
             rate: Faker::Number.between(from: 1, to:5),
-            user_id: 1,
-            product_id: t
+            user_id: (User.all.sample).id,
+            product_id: (Product.all.sample).id
         )
         Review.create(
             comment: Faker::Hacker.say_something_smart,
-            user_id: 1,
-            product_id: t
+            user_id: (User.all.sample).id,
+            product_id: (Product.all.sample).id
         )
     end
 

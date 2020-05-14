@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
     # load_and_authorize_resource
     before_action :authenticate_user!, :except => [:show, :index, :filter_products]
     before_action :filter_parameters
-    self.page_cache_directory = :domain_cache_directory
-    caches_page :show
+    # self.page_cache_directory = :domain_cache_directory
+    # caches_page :show
 
     @@searched_item = nil
 
@@ -20,7 +20,6 @@ class ProductsController < ApplicationController
     def create
         @product = Product.new(product_params)
         @product.store_id = current_user.store.id
-
         if @product.save
             redirect_to @product
         else
