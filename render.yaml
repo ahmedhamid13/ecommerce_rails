@@ -1,0 +1,9 @@
+services:
+  # Let's create our background worker
+  - type: worker
+    name: sidekiq-worker
+    env: ruby
+    region: frankfurt
+    buildCommand: bundle install
+    startCommand: bundle exec sidekiq -C ./config/sidekiq.yml
+    autoDeploy: false

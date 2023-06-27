@@ -6,7 +6,9 @@ ruby "3.1.2"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.1.4", ">= 6.1.4.1"
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.4.4'
+# gem 'mysql2', '>= 0.4.4'
+
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -73,7 +75,7 @@ gem "font-awesome-rails"
 
 #page caching
 gem "actionpack-page_caching"
-#faker 
+#faker
 gem 'faker'
 
 #byebug
