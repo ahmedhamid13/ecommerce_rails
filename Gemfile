@@ -8,7 +8,7 @@ gem "rails", "~> 6.1.4", ">= 6.1.4.1"
 # Use mysql as the database for Active Record
 # gem 'mysql2', '>= 0.4.4'
 
-gem 'pg'
+gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
